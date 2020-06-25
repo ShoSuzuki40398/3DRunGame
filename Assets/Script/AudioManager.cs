@@ -213,8 +213,11 @@ public class AudioManager : SingletonMonoBehaviour<AudioManager>
     {
         foreach(var source in seSources)
         {
-            source.Stop();
-            Destroy(source);
+            if(source != null)
+            {
+                source.Stop();
+                Destroy(source);
+            }
         }
         seSources.Clear();
     }
