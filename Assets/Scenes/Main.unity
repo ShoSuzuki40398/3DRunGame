@@ -355,7 +355,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxAreaCount: 3
-  areaRootPrefab: {fileID: 0}
+  areaRootPrefab: {fileID: 1316935726493634787, guid: c214fcf6fcf45894e99cba6a798df857,
+    type: 3}
 --- !u!1 &1002833196
 GameObject:
   m_ObjectHideFlags: 0
