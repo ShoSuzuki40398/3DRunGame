@@ -2,20 +2,18 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using System;
 
 /// <summary>
 /// エリア情報
 /// </summary>
 public class Area : MonoBehaviour
 {
-    // 長さ
-    //private float areaLength
-
     // 先頭位置
-    private Vector3 leadPosition;
+    public Vector3 leadPosition { get { return GetLeadPositionFromLines(); } }
 
     // 末尾位置
-    private Vector3 endPosition;
+    public Vector3 endPosition { get { return GetEndPositionFromLines(); } }
 
     // ライン情報
     private List<AreaLine> areaLines;
@@ -24,10 +22,6 @@ public class Area : MonoBehaviour
     {
         // ライン取得
         areaLines = new List<AreaLine>(transform.GetComponentsInChildren<AreaLine>());
-
-        // 先頭・末尾位置取得
-        leadPosition = GetLeadPositionFromLines();
-        endPosition = GetEndPositionFromLines();
     }
 
     /// <summary>
