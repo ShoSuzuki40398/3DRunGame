@@ -64,6 +64,9 @@ public class SceneController : MonoBehaviour
             owner.followCamera.SetTarget(owner.player.transform);
             owner.followCamera.EnableFollow();
 
+            // エリア初期化
+            owner.areaController.Initialize();
+
             owner.stateMachine.ChangeState(MAIN_SCENE_STATE.STANBY);
         }
 

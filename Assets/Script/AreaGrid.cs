@@ -6,5 +6,5 @@ public class AreaGrid : MonoBehaviour
 {
     public Vector3 gridPosition { get { return transform.position; } private set { } }
     
-    public Vector3 gridSize { get { return transform.localScale; } private set { } }
+    public Vector3 gridSize { get { return GetComponent<Renderer>().bounds.size; } private set { } }
 }

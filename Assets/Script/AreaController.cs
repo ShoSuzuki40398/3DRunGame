@@ -8,15 +8,15 @@ using UnityEngine;
 public class AreaController : MonoBehaviour
 {
     // 最大表示エリア数
-    [SerializeField, Range(3, 10)]
-    private int maxAreaCount = 3;
+    [SerializeField, Range(1, 10)]
+    private int maxAreaCount = 1;
 
     // エリアオブジェクト
     [SerializeField]
     private List<GameObject> areaPrefabs;
 
     // エリア管理リスト
-    private List<Area> areaList;
+    private List<Area> areaList = new List<Area>();
 
     // スタートエリア
     [SerializeField]
@@ -47,27 +47,61 @@ public class AreaController : MonoBehaviour
     }
 
     /// <summary>
+    /// エリア初期化
+    /// スタートエリアに設定した数のエリアを作成して連結
+    /// </summary>
+    public void Initialize()
+    {
+        // 全てのエリアを削除
+        AllRemoveArea();
+
+        // スタートエリア初期化
+        startArea.Initialize();
+
+        // エリアを作成
+        for(int i = 0;i < maxAreaCount; ++i)
+        {
+            AddArea();
+        }
+    }
+
+    /// <summary>
     /// エリアオブジェクト作成
     /// </summary>
     /// <returns>Areaコンポーネント</returns>
     private Area CreateArea()
     {
         int index = Random.Range(0, areaPrefabs.Count);
-        return Instantiate(areaPrefabs[index]).GetComponent<Area>();
+        var area = Instantiate(areaPrefabs[index]).GetComponent<Area>();
+        return area;
     }
 
+    int count = 1;
     /// <summary>
     /// エリアオブジェクト追加
     /// </summary>
     public void AddArea()
     {
+        // エリア作成前に最後尾のエリアをあらかじめ取得
+        // ※エリアの新規作成とListへの追加を同時に行っているため
+        //   Listを検索すると新規作成したエリアを最後尾として
+        //   取得してしまうので、新規作成前に最後尾を取得しておく。
+        var latestArea = GetLatestArea();
+
         // 作成
         var area = CreateArea();
+        area.name = count.ToString();
+        count++;
+        area.Initialize();
         areaList.Add(area);
         area.transform.parent = transform;
-        
+
         // 連結
-        ConnectArea(area);
+        ConnectArea(latestArea, area);
+
+        // マス目座標を再計算
+        // ※エリアの座標が変更される度にマス目の座標を再計算する必要があります。
+        area.CalcGridPosition();
     }
 
     /// <summary>
@@ -80,13 +114,34 @@ public class AreaController : MonoBehaviour
     }
 
     /// <summary>
-    /// エリアを最後尾に繫げる
+    /// // 全てのエリア削除
     /// </summary>
-    /// <param name="area"></param>
-    private void ConnectArea(Area area)
+    public void AllRemoveArea()
     {
-        var latestArea = areaList.Count == 0 ? startArea : areaList[areaList.Count - 1];
+        for (int i = 0; i < areaList.Count; ++i)
+        {
+            Destroy(areaList[i].gameObject);
+        }
+        areaList.Clear();
+    }
 
-        area.transform.position = latestArea.endPosition;
+    /// <summary>
+    /// 最後尾のエリアを取得
+    /// </summary>
+    /// <returns></returns>
+    private Area GetLatestArea()
+    {
+        return areaList.Count == 0 ? startArea : areaList[areaList.Count - 1];
+    }
+    
+    /// <summary>
+    /// エリアを繫げる
+    /// firstに指定したエリアの後ろにsecondに指定したエリアを繫げる
+    /// </summary>
+    /// <param name="first">末尾を繫げるエリア</param>
+    /// <param name="second">先端を繫げるエリア</param>
+    private void ConnectArea(Area first, Area second)
+    {
+        second.transform.position = first.marginEndPosition;
     }
 }
