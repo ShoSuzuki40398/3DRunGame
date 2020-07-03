@@ -7,6 +7,8 @@ public class Player : MonoBehaviour
     [Range(1,10)]
     public float speed = 1;
 
+    private AreaController areaController;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -31,6 +33,25 @@ public class Player : MonoBehaviour
         else if (Input.GetKey(KeyCode.D))
         {
             transform.position += new Vector3(speed * Time.deltaTime, 0, 0);
+        }
+    }
+
+    /// <summary>
+    /// エリア制御設定
+    /// </summary>
+    public void SetAreaController(AreaController controller)
+    {
+        areaController = controller;
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        switch (other.tag)
+        {
+            case "AreaEntrance":
+                areaController.RemoveLeadArea();
+                areaController.AddArea();
+                break;
         }
     }
 }

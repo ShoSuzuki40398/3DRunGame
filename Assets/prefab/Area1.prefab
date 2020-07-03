@@ -2772,7 +2772,7 @@ GameObject:
   - component: {fileID: 2104773293}
   m_Layer: 0
   m_Name: AreaEntrance
-  m_TagString: Untagged
+  m_TagString: AreaEntrance
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3587,8 +3587,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 601f78ea9c4ee034186a8d86dcdcab81, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  areaEntrance: {fileID: 2104773291}
   leadPosition: {x: 0, y: 0, z: 0}
+  marginLeadPosition: {x: 0, y: 0, z: 0}
   endPosition: {x: 0, y: 0, z: 0}
+  marginEndPosition: {x: 0, y: 0, z: 0}
 --- !u!1 &1316935726529707396
 GameObject:
   m_ObjectHideFlags: 0

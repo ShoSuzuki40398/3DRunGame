@@ -27,23 +27,69 @@ public class AreaController : MonoBehaviour
     private Transform playerSpawnPoint;
 
     /// <summary>
+    /// エリアオブジェクト作成
+    /// </summary>
+    /// <returns>Areaコンポーネント</returns>
+    private Area CreateArea()
+    {
+        int index = Random.Range(0, areaPrefabs.Count);
+        var area = Instantiate(areaPrefabs[index]).GetComponent<Area>();
+        return area;
+    }
+
+    /// <summary>
+    /// 最後尾のエリアを取得
+    /// ない場合はスタートエリアを取得
+    /// </summary>
+    /// <returns></returns>
+    private Area GetLatestArea()
+    {
+        return areaList.Count == 0 ? startArea : areaList[areaList.Count - 1];
+    }
+
+    /// <summary>
+    /// 先頭のエリアを取得
+    /// ない場合はスタートエリアを取得
+    /// </summary>
+    /// <returns></returns>
+    private Area GetLeadArea()
+    {
+        return areaList.Count == 0 ? startArea : areaList[0];
+    }
+
+    /// <summary>
+    /// エリアを繫げる
+    /// firstに指定したエリアの後ろにsecondに指定したエリアを繫げる
+    /// </summary>
+    /// <param name="first">末尾を繫げるエリア</param>
+    /// <param name="second">先端を繫げるエリア</param>
+    private void ConnectArea(Area first, Area second)
+    {
+        second.transform.position = first.marginEndPosition;
+    }
+
+    /// <summary>
     /// プレイヤー作成
     /// </summary>
     public Player CreatePlayer(GameObject prefab)
     {
-        var obj = Instantiate(prefab, playerSpawnPoint.position,Quaternion.identity);
+        var obj = Instantiate(prefab, playerSpawnPoint.position, Quaternion.identity);
 
         // スタート地点の上に立たせる
         // レイでスタート地点の面の位置を取得
         // オブジェクトの高さで位置調整
         var ray = new Ray(playerSpawnPoint.position, -Vector3.up);
         RaycastHit hit;
-        if(Physics.Raycast(ray,out hit, 10.0f))
+        if (Physics.Raycast(ray, out hit, 10.0f))
         {
             var halfObjHeight = obj.GetComponent<Renderer>().bounds.size.y * 0.5f;
             obj.transform.position = new Vector3(hit.point.x, hit.point.y + halfObjHeight, hit.point.z);
         }
-        return obj.ForceGetComponent<Player>();
+
+        // 自身をプレイヤーに設定
+        var player = obj.ForceGetComponent<Player>();
+        player.SetAreaController(this);
+        return player;
     }
 
     /// <summary>
@@ -59,24 +105,17 @@ public class AreaController : MonoBehaviour
         startArea.Initialize();
 
         // エリアを作成
-        for(int i = 0;i < maxAreaCount; ++i)
+        for (int i = 0; i < maxAreaCount; ++i)
         {
             AddArea();
         }
+
+        // エリア一つ目の入り口判定は無効化する
+        // ※プレイヤーが侵入したときに2つ目以降の
+        //   エリアから判定させたいため。
+        areaList[0].DisableEntrance();
     }
 
-    /// <summary>
-    /// エリアオブジェクト作成
-    /// </summary>
-    /// <returns>Areaコンポーネント</returns>
-    private Area CreateArea()
-    {
-        int index = Random.Range(0, areaPrefabs.Count);
-        var area = Instantiate(areaPrefabs[index]).GetComponent<Area>();
-        return area;
-    }
-
-    int count = 1;
     /// <summary>
     /// エリアオブジェクト追加
     /// </summary>
@@ -90,8 +129,6 @@ public class AreaController : MonoBehaviour
 
         // 作成
         var area = CreateArea();
-        area.name = count.ToString();
-        count++;
         area.Initialize();
         areaList.Add(area);
         area.transform.parent = transform;
@@ -114,7 +151,7 @@ public class AreaController : MonoBehaviour
     }
 
     /// <summary>
-    /// // 全てのエリア削除
+    /// 全てのエリア削除
     /// </summary>
     public void AllRemoveArea()
     {
@@ -126,22 +163,10 @@ public class AreaController : MonoBehaviour
     }
 
     /// <summary>
-    /// 最後尾のエリアを取得
+    /// 先頭のエリアを削除
     /// </summary>
-    /// <returns></returns>
-    private Area GetLatestArea()
+    public void RemoveLeadArea()
     {
-        return areaList.Count == 0 ? startArea : areaList[areaList.Count - 1];
-    }
-    
-    /// <summary>
-    /// エリアを繫げる
-    /// firstに指定したエリアの後ろにsecondに指定したエリアを繫げる
-    /// </summary>
-    /// <param name="first">末尾を繫げるエリア</param>
-    /// <param name="second">先端を繫げるエリア</param>
-    private void ConnectArea(Area first, Area second)
-    {
-        second.transform.position = first.marginEndPosition;
+        RemoveArea(GetLeadArea());
     }
 }

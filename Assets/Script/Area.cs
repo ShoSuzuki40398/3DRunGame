@@ -9,6 +9,10 @@ using System;
 /// </summary>
 public class Area : MonoBehaviour
 {
+    // エリア入り口
+    [SerializeField]
+    private GameObject areaEntrance;
+
     // 先頭位置
     public Vector3 leadPosition;
     // 先頭位置からマス目一つ分手前にずれた座標
@@ -21,41 +25,6 @@ public class Area : MonoBehaviour
 
     // ライン情報
     private List<AreaLine> areaLines;
-
-    /// <summary>
-    /// 初期化
-    /// </summary>
-    public void Initialize()
-    {
-        // ライン取得
-        areaLines = new List<AreaLine>(transform.GetComponentsInChildren<AreaLine>());
-
-        // ライン初期化
-        for(int i = 0; i < areaLines.Count; ++i)
-        {
-            areaLines[i].Initialize();
-        }
-
-        // マス目座標計算
-        CalcGridPosition();
-    }
-
-    /// <summary>
-    /// マス目座標を計算
-    /// </summary>
-    public void CalcGridPosition()
-    {
-        // 中央のラインで計算
-        var centerLine = GetCenterLine();
-
-        // 先頭座標
-        leadPosition = GetLeadGridPosition(centerLine);
-        marginLeadPosition = GetMarginLeadGridPosition(centerLine);
-
-        // 末尾座標
-        endPosition = GetEndGridPosition(centerLine);
-        marginEndPosition = GetMarginEndGridPosition(centerLine);
-    }
 
     /// <summary>
     /// エリアの中で中央にあるラインを取得
@@ -97,7 +66,7 @@ public class Area : MonoBehaviour
     private Vector3 GetMarginLeadGridPosition(AreaLine line)
     {
         var gridPosition = line.leadGrid.gridPosition;
-        var result = new Vector3(gridPosition.x,gridPosition.y,gridPosition.z - line.leadGrid.gridSize.z);
+        var result = new Vector3(gridPosition.x, gridPosition.y, gridPosition.z - line.leadGrid.gridSize.z);
         return result;
     }
 
@@ -120,7 +89,7 @@ public class Area : MonoBehaviour
     private Vector3 GetLeadPositionFromLines()
     {
         List<AreaGrid> leadGrids = new List<AreaGrid>();
-        for(int i = 0; i < areaLines.Count; ++i)
+        for (int i = 0; i < areaLines.Count; ++i)
         {
             leadGrids.Add(areaLines[i].leadGrid);
         }
@@ -131,7 +100,7 @@ public class Area : MonoBehaviour
         }
 
         var result = leadGrids.OrderBy(grid => grid.gridPosition.z).FirstOrDefault();
-        
+
         return result.gridPosition;
     }
 
@@ -155,5 +124,62 @@ public class Area : MonoBehaviour
         var result = endGrids.OrderByDescending(grid => grid.gridPosition.z).FirstOrDefault();
 
         return result.gridPosition;
+    }
+
+    /// <summary>
+    /// 初期化
+    /// </summary>
+    public void Initialize()
+    {
+        // ライン取得
+        areaLines = new List<AreaLine>(transform.GetComponentsInChildren<AreaLine>());
+
+        // ライン初期化
+        for(int i = 0; i < areaLines.Count; ++i)
+        {
+            areaLines[i].Initialize();
+        }
+
+        // マス目座標計算
+        CalcGridPosition();
+    }
+
+    /// <summary>
+    /// マス目座標を計算
+    /// </summary>
+    public void CalcGridPosition()
+    {
+        // 中央のラインで計算
+        var centerLine = GetCenterLine();
+
+        // 先頭座標
+        leadPosition = GetLeadGridPosition(centerLine);
+        marginLeadPosition = GetMarginLeadGridPosition(centerLine);
+
+        // 末尾座標
+        endPosition = GetEndGridPosition(centerLine);
+        marginEndPosition = GetMarginEndGridPosition(centerLine);
+    }
+
+    /// <summary>
+    /// エリア入り口有効化
+    /// </summary>
+    public void EnableEntrance()
+    {
+        if(areaEntrance != null)
+        {
+            areaEntrance.SetActive(true);
+        }
+    }
+
+    /// <summary>
+    /// エリア入り口無効化
+    /// </summary>
+    public void DisableEntrance()
+    {
+        if (areaEntrance != null)
+        {
+            areaEntrance.SetActive(false);
+        }
     }
 }
