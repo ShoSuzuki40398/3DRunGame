@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - AreaEntrance
+  - StartAreaExit
   layers:
   - Default
   - TransparentFX

@@ -43,6 +43,10 @@ public class SceneController : MonoBehaviour
         stateMachine.ChangeState(MAIN_SCENE_STATE.AWAKE);
     }
 
+    //----------------------------------------------------------------------------------
+    //  ↓状態クラス↓
+    //----------------------------------------------------------------------------------
+
     /// <summary>
     /// 起動状態
     /// </summary>
@@ -100,6 +104,49 @@ public class SceneController : MonoBehaviour
         /// </summary>
         public override void Enter()
         {
+            // プレイヤーのラン開始
+            if(owner.player != null)
+            {
+                owner.player.StartWalkOut();
+            }
+        }
+
+        /// <summary>
+        /// 状態更新
+        /// </summary>
+        public override void Execute()
+        {
+            // プレイヤーがスタート位置を出たら走行状態へ移行
+            if(owner.player != null && owner.player.IsRunning())
+            {
+                // 走行状態へ遷移
+                owner.stateMachine.ChangeState(MAIN_SCENE_STATE.RUNNING);
+            }
+        }
+
+        /// <summary>
+        /// 状態終了時
+        /// </summary>
+        public override void Exit()
+        {
+        }
+    }
+
+    /// <summary>
+    /// 走行状態
+    /// </summary>
+    private class RunningState : State<SceneController>
+    {
+        public RunningState(SceneController owner) : base(owner)
+        {
+
+        }
+
+        /// <summary>
+        /// 状態開始時
+        /// </summary>
+        public override void Enter()
+        {
         }
 
         /// <summary>
@@ -116,5 +163,4 @@ public class SceneController : MonoBehaviour
         {
         }
     }
-
 }

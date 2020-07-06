@@ -3827,10 +3827,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxAreaCount: 3
+  maxAreaWidth: 3
   areaPrefabs:
   - {fileID: 1316935726493634787, guid: c214fcf6fcf45894e99cba6a798df857, type: 3}
   startArea: {fileID: 630905499018846354}
   playerSpawnPoint: {fileID: 1199053963}
+  playerSpawnLineIdx: 2
 --- !u!4 &1364656264
 Transform:
   m_ObjectHideFlags: 0
@@ -5396,6 +5398,50 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!1 &1856482998
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1856482999}
+  - component: {fileID: 1856483000}
+  m_Layer: 0
+  m_Name: StartAreaExit
+  m_TagString: StartAreaExit
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1856482999
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1856482998}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1, z: 19}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4029397178710351420}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &1856483000
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1856482998}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 3, y: 10, z: 1}
+  m_Center: {x: 0, y: 4.5, z: 0}
 --- !u!1 &1860855740
 GameObject:
   m_ObjectHideFlags: 0
@@ -6280,6 +6326,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 601f78ea9c4ee034186a8d86dcdcab81, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  areaEntrance: {fileID: 0}
   leadPosition: {x: 0, y: 0, z: 0}
   marginLeadPosition: {x: 0, y: 0, z: 0}
   endPosition: {x: 0, y: 0, z: 0}
@@ -6844,6 +6891,7 @@ Transform:
   - {fileID: 4029397178053337033}
   - {fileID: 1399201370}
   - {fileID: 565443713}
+  - {fileID: 1856482999}
   m_Father: {fileID: 1364656264}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

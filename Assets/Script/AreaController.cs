@@ -11,6 +11,10 @@ public class AreaController : MonoBehaviour
     [SerializeField, Range(1, 10)]
     private int maxAreaCount = 1;
 
+    // エリアの最大幅
+    [SerializeField]
+    private int maxAreaWidth = 3;
+
     // エリアオブジェクト
     [SerializeField]
     private List<GameObject> areaPrefabs;
@@ -25,6 +29,11 @@ public class AreaController : MonoBehaviour
     // プレイヤー生成位置
     [SerializeField]
     private Transform playerSpawnPoint;
+
+    // プレイヤーが生成されるエリアラインのインデックス
+    // 左端のラインを１として、右に行くたびに1加算した値にする
+    [SerializeField]
+    private int playerSpawnLineIdx = 2;
 
     /// <summary>
     /// エリアオブジェクト作成
@@ -89,6 +98,7 @@ public class AreaController : MonoBehaviour
         // 自身をプレイヤーに設定
         var player = obj.ForceGetComponent<Player>();
         player.SetAreaController(this);
+        player.SetCurrentAreaLineIndex(playerSpawnLineIdx);
         return player;
     }
 
@@ -168,5 +178,14 @@ public class AreaController : MonoBehaviour
     public void RemoveLeadArea()
     {
         RemoveArea(GetLeadArea());
+    }
+
+    /// <summary>
+    /// エリア最大幅取得
+    /// </summary>
+    /// <returns></returns>
+    public int GetMaxAreaWidth()
+    {
+        return maxAreaWidth;
     }
 }

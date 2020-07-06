@@ -33,17 +33,29 @@ public static class Define
 #endif
     }
 
+    // BGMパス
     public const string bgmPath = "Sound/bgm/";
+    // SEパス
     public const string sePath = "Sound/se/";
-
+    
+    // BGM定義
     public enum BGM
     {
         BGM_1
     }
 
+    // SE定義
     public enum SE
     {
         SE_1,
         SE_2
     }
+
+    // マウスボタン定義
+    public const int leftButton = 0;
+    public const int rightButton = 1;
+
+    // タグ
+    public const string AreaEntrance = "AreaEntrance";
+    public const string StartAreaExit = "StartAreaExit";
 }
