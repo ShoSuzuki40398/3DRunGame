@@ -19,12 +19,17 @@ public class AreaLine : MonoBehaviour
     /// <summary>
     /// 初期化
     /// </summary>
-    public void Initialize()
+    public void Initialize(Transform enemyRoot)
     {
         // マス目取得
         grids = new List<AreaGrid>(GetComponentsInChildren<AreaGrid>());
 
         leadGrid = grids[0];
         endGrid = grids[grids.Count - 1];
+
+        for(int i = 0; i < gridCount; ++i)
+        {
+            grids[i].Initialize(enemyRoot);
+        }
     }
 }

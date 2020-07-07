@@ -10,7 +10,8 @@ public class Player : MonoBehaviour
         WALK_OUT,   // 走り出し
         RUN,        // 走る
         SHIFT,      // 横移動
-        STOP        // 停止
+        STOP,       // 停止
+        DEAD        // やられ
     }
 
     // 横移動方向定義
@@ -28,6 +29,17 @@ public class Player : MonoBehaviour
     // 横移動量
     [SerializeField]
     private float shiftValue = 1;
+
+    // 横移動にかける時間
+    [SerializeField]
+    private float shiftTime = 0.05f;
+
+    // 横移動状態を保つフレーム数
+    // 値が小さいと敵への攻撃タイミングがシビアになる。
+    // 値が大きすぎると攻撃状態が長く続いてしまうため
+    // 簡単になるので注意。
+    [SerializeField]
+    private int shiftFrameOffset = 10;
 
     // 現在走っているエリアラインのインデックス
     // 左端のラインを１として、右に行くたびに1加算した値にする
@@ -48,6 +60,7 @@ public class Player : MonoBehaviour
         stateMachine.AddState(PLAYER_STATE.RUN, new RunState(this));
         stateMachine.AddState(PLAYER_STATE.SHIFT, new ShiftState(this));
         stateMachine.AddState(PLAYER_STATE.STOP, new StopState(this));
+        stateMachine.AddState(PLAYER_STATE.DEAD, new DeadState(this));
     }
 
     // Update is called once per frame
@@ -64,19 +77,39 @@ public class Player : MonoBehaviour
         transform.position += new Vector3(0, 0, speed * Time.deltaTime);
     }
 
+    /// <summary>
+    /// やられた
+    /// </summary>
+    private void Dead()
+    {
+        MyDebug.Log("Player Dead");
+        stateMachine.ChangeState(PLAYER_STATE.DEAD);
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         switch (other.tag)
         {
             // スタートエリア出口通過
-            case Define.StartAreaExit:
+            case Define.TagStartAreaExit:
                 stateMachine.ChangeState(PLAYER_STATE.RUN);
                 break;
 
             // エリア入り口通過
-            case Define.AreaEntrance:
+            case Define.TagAreaEntrance:
                 areaController.RemoveLeadArea();
                 areaController.AddArea();
+                break;
+            case Define.TagEnemy:
+                if(stateMachine.IsCurrentState(PLAYER_STATE.SHIFT))
+                {
+                    other.gameObject.GetComponent<Enemy>().Dead();
+                }
+                else
+                {
+                    Dead();
+                }
+                
                 break;
         }
     }
@@ -114,9 +147,22 @@ public class Player : MonoBehaviour
         return stateMachine.IsCurrentState(PLAYER_STATE.RUN);
     }
 
+    /// <summary>
+    /// やられたか
+    /// </summary>
+    /// <returns></returns>
+    public bool IsDead()
+    {
+        return stateMachine.IsCurrentState(PLAYER_STATE.DEAD);
+    }
+
+    /// <summary>
+    /// 横移動終了時コールバック
+    /// </summary>
     private void ShiftEnd()
     {
-        stateMachine.ChangeState(PLAYER_STATE.RUN);
+        //MonoBehaviourExtention.DelayMethod(0.3f, () => { Debug.Log("ディレイ"); stateMachine.ChangeState(PLAYER_STATE.RUN); });
+        this.Delay(shiftFrameOffset, ()=>stateMachine.ChangeState(PLAYER_STATE.RUN));
     }
 
     //----------------------------------------------------------------------------------
@@ -138,7 +184,6 @@ public class Player : MonoBehaviour
         /// </summary>
         public override void Enter()
         {
-            MyDebug.Log("Enter WalkOut");
         }
 
         /// <summary>
@@ -173,7 +218,6 @@ public class Player : MonoBehaviour
         /// </summary>
         public override void Enter()
         {
-            MyDebug.Log("Enter Run");
         }
 
         /// <summary>
@@ -185,11 +229,11 @@ public class Player : MonoBehaviour
             owner.Front();
 
             // 横移動方向の決定
-            if (Input.GetMouseButtonUp(Define.leftButton))
+            if (Input.GetMouseButtonDown(Define.leftButton))
             {
                 owner.shiftDir = SHIFT_DIR.LEFT;
             }
-            else if (Input.GetMouseButtonUp(Define.rightButton))
+            else if (Input.GetMouseButtonDown(Define.rightButton))
             {
                 owner.shiftDir = SHIFT_DIR.RIGHT;
             }
@@ -257,7 +301,6 @@ public class Player : MonoBehaviour
         /// </summary>
         public override void Enter()
         {
-            MyDebug.Log("Enter Shift");
             Shift(owner.shiftDir);
         }
 
@@ -285,8 +328,8 @@ public class Player : MonoBehaviour
         private void Shift(SHIFT_DIR dir)
         {
             var moveHash = new Hashtable();
-            moveHash.Add("time", 0.3f);
-            moveHash.Add("easeType", iTween.EaseType.linear);
+            moveHash.Add("time", owner.shiftTime);
+            moveHash.Add("easeType", iTween.EaseType.easeInBack);
             moveHash.Add("oncomplete", "ShiftEnd");
             moveHash.Add("oncompletetarget", owner.gameObject);
 
@@ -298,6 +341,7 @@ public class Player : MonoBehaviour
                     {
                         owner.currentAreaLIneIdx -= 1;
                         moveHash.Add("x", -owner.shiftValue);
+                        //moveHash.Add("z", owner.shiftValue * 2);
                     }
                     break;
                 case SHIFT_DIR.RIGHT:
@@ -305,6 +349,7 @@ public class Player : MonoBehaviour
                     {
                         owner.currentAreaLIneIdx += 1;
                         moveHash.Add("x", owner.shiftValue);
+                        //moveHash.Add("z", owner.shiftValue * 2);
                     }
                     break;
             }
@@ -328,7 +373,6 @@ public class Player : MonoBehaviour
         /// </summary>
         public override void Enter()
         {
-            MyDebug.Log("Enter Stop");
         }
 
         /// <summary>
@@ -346,5 +390,35 @@ public class Player : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// やられ状態
+    /// </summary>
+    private class DeadState : State<Player>
+    {
+        public DeadState(Player owner) : base(owner)
+        {
 
+        }
+
+        /// <summary>
+        /// 状態開始
+        /// </summary>
+        public override void Enter()
+        {
+        }
+
+        /// <summary>
+        /// 状態更新
+        /// </summary>
+        public override void Execute()
+        {
+        }
+
+        /// <summary>
+        /// 状態終了
+        /// </summary>
+        public override void Exit()
+        {
+        }
+    }
 }

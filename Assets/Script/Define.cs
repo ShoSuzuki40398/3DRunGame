@@ -56,6 +56,10 @@ public static class Define
     public const int rightButton = 1;
 
     // タグ
-    public const string AreaEntrance = "AreaEntrance";
-    public const string StartAreaExit = "StartAreaExit";
+    public const string TagAreaEntrance = "AreaEntrance";
+    public const string TagStartAreaExit = "StartAreaExit";
+    public const string TagEnemy = "Enemy";
+
+    // 敵パス
+    public const string enemyPath = "Enemy/";
 }

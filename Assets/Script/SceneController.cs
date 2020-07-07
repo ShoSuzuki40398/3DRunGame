@@ -11,7 +11,8 @@ public class SceneController : MonoBehaviour
         STANBY,
         RUNNING,
         GOAL,
-        FAIL
+        FAIL,
+        RESET
     }
 
     // エリア制御
@@ -140,6 +141,79 @@ public class SceneController : MonoBehaviour
         public RunningState(SceneController owner) : base(owner)
         {
 
+        }
+
+        /// <summary>
+        /// 状態開始時
+        /// </summary>
+        public override void Enter()
+        {
+        }
+
+        /// <summary>
+        /// 状態更新
+        /// </summary>
+        public override void Execute()
+        {
+            // プレイヤーを監視
+            // やられていたら失敗状態に遷移
+            if (owner.player.IsDead())
+            {
+                owner.stateMachine.ChangeState(MAIN_SCENE_STATE.FAIL);
+            }
+        }
+
+        /// <summary>
+        /// 状態終了時
+        /// </summary>
+        public override void Exit()
+        {
+        }
+    }
+
+
+    /// <summary>
+    /// 失敗状態
+    /// </summary>
+    private class FailState : State<SceneController>
+    {
+        public FailState(SceneController owner) : base(owner)
+        {
+
+        }
+
+        /// <summary>
+        /// 状態開始時
+        /// </summary>
+        public override void Enter()
+        {
+            // ステージをリセットする
+            owner.stateMachine.ChangeState(MAIN_SCENE_STATE.RESET);
+        }
+
+        /// <summary>
+        /// 状態更新
+        /// </summary>
+        public override void Execute()
+        {
+        }
+
+        /// <summary>
+        /// 状態終了時
+        /// </summary>
+        public override void Exit()
+        {
+        }
+    }
+
+
+    /// <summary>
+    /// リセット状態
+    /// </summary>
+    private class ResetState : State<SceneController>
+    {
+        public ResetState(SceneController owner) : base(owner)
+        {
         }
 
         /// <summary>

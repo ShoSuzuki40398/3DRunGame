@@ -6,6 +6,7 @@ TagManager:
   tags:
   - AreaEntrance
   - StartAreaExit
+  - Enemy
   layers:
   - Default
   - TransparentFX

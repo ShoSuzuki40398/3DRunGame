@@ -137,7 +137,7 @@ public class Area : MonoBehaviour
         // ライン初期化
         for(int i = 0; i < areaLines.Count; ++i)
         {
-            areaLines[i].Initialize();
+            areaLines[i].Initialize(transform);
         }
 
         // マス目座標計算
