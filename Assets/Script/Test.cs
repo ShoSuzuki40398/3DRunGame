@@ -9,16 +9,17 @@ public class Test : MonoBehaviour
     {
         //if (Input.GetKeyUp(KeyCode.Space))
         //{
-        //    AudioManager.Instance.PlayBGM(Define.BGM.BGM_1);
+        //    FadeController.Instance.FadeOut(1.0f);
+        //    //AudioManager.Instance.PlayBGM(Define.BGM.BGM_1);
         //}
-        //else if (Input.GetKeyUp(KeyCode.RightShift))
-        //{
-        //    AudioManager.Instance.StopBGM();
-        //}
-        //else if(Input.GetKeyUp(KeyCode.LeftShift))
-        //{
-        //    AudioManager.Instance.PauseBGM();
-        //}
+        if (Input.GetKeyUp(KeyCode.RightShift))
+        {
+            FadeController.Instance.FadeOut(1.0f);
+        }
+        else if (Input.GetKeyUp(KeyCode.LeftShift))
+        {
+            FadeController.Instance.FadeIn(1.0f);
+        }
         //else if (Input.GetKeyUp(KeyCode.LeftControl))
         //{
         //    AudioManager.Instance.UnPause();

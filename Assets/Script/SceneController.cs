@@ -37,11 +37,19 @@ public class SceneController : MonoBehaviour
     {
         stateMachine.AddState(MAIN_SCENE_STATE.AWAKE, new AwakeState(this));
         stateMachine.AddState(MAIN_SCENE_STATE.STANBY, new StanbyState(this));
+        stateMachine.AddState(MAIN_SCENE_STATE.RUNNING, new RunningState(this));
+        stateMachine.AddState(MAIN_SCENE_STATE.FAIL, new FailState(this));
+        stateMachine.AddState(MAIN_SCENE_STATE.RESET, new ResetState(this));
     }
 
     private void Start()
     {
         stateMachine.ChangeState(MAIN_SCENE_STATE.AWAKE);
+    }
+
+    private void Update()
+    {
+        stateMachine.Update();
     }
 
     //----------------------------------------------------------------------------------
@@ -72,7 +80,8 @@ public class SceneController : MonoBehaviour
             // エリア初期化
             owner.areaController.Initialize();
 
-            owner.stateMachine.ChangeState(MAIN_SCENE_STATE.STANBY);
+            // フェード後に準備状態へ遷移
+            FadeController.Instance.FadeIn(1.0f,()=> owner.stateMachine.ChangeState(MAIN_SCENE_STATE.STANBY));
         }
 
         /// <summary>
@@ -106,7 +115,7 @@ public class SceneController : MonoBehaviour
         public override void Enter()
         {
             // プレイヤーのラン開始
-            if(owner.player != null)
+            if (owner.player != null)
             {
                 owner.player.StartWalkOut();
             }
@@ -118,7 +127,7 @@ public class SceneController : MonoBehaviour
         public override void Execute()
         {
             // プレイヤーがスタート位置を出たら走行状態へ移行
-            if(owner.player != null && owner.player.IsRunning())
+            if (owner.player != null && owner.player.IsRunning())
             {
                 // 走行状態へ遷移
                 owner.stateMachine.ChangeState(MAIN_SCENE_STATE.RUNNING);
@@ -206,7 +215,6 @@ public class SceneController : MonoBehaviour
         }
     }
 
-
     /// <summary>
     /// リセット状態
     /// </summary>
@@ -214,6 +222,7 @@ public class SceneController : MonoBehaviour
     {
         public ResetState(SceneController owner) : base(owner)
         {
+
         }
 
         /// <summary>
@@ -221,6 +230,16 @@ public class SceneController : MonoBehaviour
         /// </summary>
         public override void Enter()
         {
+            if (owner.player != null)
+            {
+                Destroy(owner.player.gameObject);
+            }
+
+            // エリア終了処理
+            owner.areaController.Finalized();
+
+            // フェード後ステージをリセットする
+            FadeController.Instance.FadeOut(0.5f, () => owner.stateMachine.ChangeState(MAIN_SCENE_STATE.AWAKE));
         }
 
         /// <summary>

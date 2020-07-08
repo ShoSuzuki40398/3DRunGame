@@ -63,6 +63,7 @@ public class Player : MonoBehaviour
         stateMachine.AddState(PLAYER_STATE.DEAD, new DeadState(this));
     }
 
+
     // Update is called once per frame
     void Update()
     {
@@ -115,6 +116,14 @@ public class Player : MonoBehaviour
     }
 
     /// <summary>
+    /// 初期化
+    /// </summary>
+    public void Initialize()
+    {
+        stateMachine.ChangeState(PLAYER_STATE.STOP);
+    }
+
+    /// <summary>
     /// エリア制御設定
     /// </summary>
     public void SetAreaController(AreaController controller)
@@ -161,7 +170,6 @@ public class Player : MonoBehaviour
     /// </summary>
     private void ShiftEnd()
     {
-        //MonoBehaviourExtention.DelayMethod(0.3f, () => { Debug.Log("ディレイ"); stateMachine.ChangeState(PLAYER_STATE.RUN); });
         this.Delay(shiftFrameOffset, ()=>stateMachine.ChangeState(PLAYER_STATE.RUN));
     }
 

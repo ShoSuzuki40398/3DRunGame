@@ -108,9 +108,6 @@ public class AreaController : MonoBehaviour
     /// </summary>
     public void Initialize()
     {
-        // 全てのエリアを削除
-        AllRemoveArea();
-
         // スタートエリア初期化
         startArea.Initialize();
 
@@ -124,6 +121,15 @@ public class AreaController : MonoBehaviour
         // ※プレイヤーが侵入したときに2つ目以降の
         //   エリアから判定させたいため。
         areaList[0].DisableEntrance();
+    }
+
+    /// <summary>
+    /// 終了処理
+    /// </summary>
+    public void Finalized()
+    {
+        // 全てのエリアを削除
+        AllRemoveArea();
     }
 
     /// <summary>

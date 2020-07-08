@@ -69,7 +69,7 @@ public class AudioManager : SingletonMonoBehaviour<AudioManager>
         }
     }
 
-    public void Awake()
+    private void Awake()
     {
         RegistBGM(Define.BGM.BGM_1, "bgm_maoudamashii_piano41");
         bgmSource = gameObject.ForceGetComponent<AudioSource>();
