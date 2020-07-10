@@ -1,18 +1,22 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
-public class SceneController : MonoBehaviour
+public class MainSceneController : MonoBehaviour
 {
     // シーン状態定義
     public enum MAIN_SCENE_STATE
     {
+        NONE,
         AWAKE,
         STANBY,
         RUNNING,
         GOAL,
         FAIL,
-        RESET
+        RESET,
+        PAUSE
     }
 
     // エリア制御
@@ -20,7 +24,7 @@ public class SceneController : MonoBehaviour
     private AreaController areaController;
 
     // 状態制御
-    public StateMachine<SceneController, MAIN_SCENE_STATE> stateMachine = new StateMachine<SceneController, MAIN_SCENE_STATE>();
+    public StateMachine<MainSceneController, MAIN_SCENE_STATE> stateMachine = new StateMachine<MainSceneController, MAIN_SCENE_STATE>();
 
     // プレイヤープレハブ
     [SerializeField]
@@ -33,6 +37,17 @@ public class SceneController : MonoBehaviour
     [SerializeField]
     private FollowCamera followCamera;
 
+    // コンフィグボタン
+    [SerializeField]
+    private Button configButton;
+
+    // ポーズメニュー
+    [SerializeField]
+    private GameObject pauseUI;
+
+    // ポーズ前の状態
+    private MAIN_SCENE_STATE latestState = MAIN_SCENE_STATE.NONE;
+
     private void Awake()
     {
         stateMachine.AddState(MAIN_SCENE_STATE.AWAKE, new AwakeState(this));
@@ -40,16 +55,49 @@ public class SceneController : MonoBehaviour
         stateMachine.AddState(MAIN_SCENE_STATE.RUNNING, new RunningState(this));
         stateMachine.AddState(MAIN_SCENE_STATE.FAIL, new FailState(this));
         stateMachine.AddState(MAIN_SCENE_STATE.RESET, new ResetState(this));
+        stateMachine.AddState(MAIN_SCENE_STATE.PAUSE, new PauseState(this));
+
+        MyDebug.Log("Scene Awake");
+
+        Pauser.Instance.Resume();
+        configButton.gameObject.SetActive(true);
+        pauseUI.SetActive(false);
     }
 
     private void Start()
     {
+        MyDebug.Log("Scene Start");
         stateMachine.ChangeState(MAIN_SCENE_STATE.AWAKE);
     }
 
     private void Update()
     {
         stateMachine.Update();
+    }
+
+    /// <summary>
+    /// ポーズ
+    /// </summary>
+    public void Pause()
+    {
+        latestState = stateMachine.GetCurrentStateKey();
+        stateMachine.ChangeState(MAIN_SCENE_STATE.PAUSE);
+    }
+
+    /// <summary>
+    /// ポーズ解除
+    /// </summary>
+    public void Resume()
+    {
+        stateMachine.ChangeState(latestState);
+    }
+
+    /// <summary>
+    /// タイトルに戻る
+    /// </summary>
+    public void TitleBack()
+    {
+        FadeController.Instance.FadeOut(0.5f, () => SceneManager.LoadScene(Define.GetSceneName(Define.SCENE_NAME.TITLE)));
     }
 
     //----------------------------------------------------------------------------------
@@ -59,9 +107,9 @@ public class SceneController : MonoBehaviour
     /// <summary>
     /// 起動状態
     /// </summary>
-    private class AwakeState : State<SceneController>
+    private class AwakeState : State<MainSceneController>
     {
-        public AwakeState(SceneController owner) : base(owner)
+        public AwakeState(MainSceneController owner) : base(owner)
         {
         }
 
@@ -70,6 +118,7 @@ public class SceneController : MonoBehaviour
         /// </summary>
         public override void Enter()
         {
+            MyDebug.Log("Scene AwakeState Enter");
             // プレイヤーをスタート位置に作成
             owner.player = owner.areaController.CreatePlayer(owner.playerPrefab);
 
@@ -81,7 +130,7 @@ public class SceneController : MonoBehaviour
             owner.areaController.Initialize();
 
             // フェード後に準備状態へ遷移
-            FadeController.Instance.FadeIn(1.0f,()=> owner.stateMachine.ChangeState(MAIN_SCENE_STATE.STANBY));
+            FadeController.Instance.FadeIn(1.0f, () => owner.stateMachine.ChangeState(MAIN_SCENE_STATE.STANBY));
         }
 
         /// <summary>
@@ -102,9 +151,9 @@ public class SceneController : MonoBehaviour
     /// <summary>
     /// 準備状態
     /// </summary>
-    private class StanbyState : State<SceneController>
+    private class StanbyState : State<MainSceneController>
     {
-        public StanbyState(SceneController owner) : base(owner)
+        public StanbyState(MainSceneController owner) : base(owner)
         {
 
         }
@@ -114,6 +163,7 @@ public class SceneController : MonoBehaviour
         /// </summary>
         public override void Enter()
         {
+            MyDebug.Log("Scene StanbyState Enter");
             // プレイヤーのラン開始
             if (owner.player != null)
             {
@@ -145,9 +195,9 @@ public class SceneController : MonoBehaviour
     /// <summary>
     /// 走行状態
     /// </summary>
-    private class RunningState : State<SceneController>
+    private class RunningState : State<MainSceneController>
     {
-        public RunningState(SceneController owner) : base(owner)
+        public RunningState(MainSceneController owner) : base(owner)
         {
 
         }
@@ -157,6 +207,7 @@ public class SceneController : MonoBehaviour
         /// </summary>
         public override void Enter()
         {
+            MyDebug.Log("Scene RunningState Enter");
         }
 
         /// <summary>
@@ -184,9 +235,9 @@ public class SceneController : MonoBehaviour
     /// <summary>
     /// 失敗状態
     /// </summary>
-    private class FailState : State<SceneController>
+    private class FailState : State<MainSceneController>
     {
-        public FailState(SceneController owner) : base(owner)
+        public FailState(MainSceneController owner) : base(owner)
         {
 
         }
@@ -218,9 +269,9 @@ public class SceneController : MonoBehaviour
     /// <summary>
     /// リセット状態
     /// </summary>
-    private class ResetState : State<SceneController>
+    private class ResetState : State<MainSceneController>
     {
-        public ResetState(SceneController owner) : base(owner)
+        public ResetState(MainSceneController owner) : base(owner)
         {
 
         }
@@ -239,7 +290,8 @@ public class SceneController : MonoBehaviour
             owner.areaController.Finalized();
 
             // フェード後ステージをリセットする
-            FadeController.Instance.FadeOut(0.5f, () => owner.stateMachine.ChangeState(MAIN_SCENE_STATE.AWAKE));
+            // フェード後のコールバックの中にフェード処理が入っているとフェード出来ない不具合があるので、遅延をかけています。
+            FadeController.Instance.FadeOut(0.5f, () => owner.Delay(0.5f,()=> owner.stateMachine.ChangeState(MAIN_SCENE_STATE.AWAKE)) );
         }
 
         /// <summary>
@@ -256,4 +308,51 @@ public class SceneController : MonoBehaviour
         {
         }
     }
+
+    /// <summary>
+    /// ポーズ状態
+    /// </summary>
+    private class PauseState : State<MainSceneController>
+    {
+        public PauseState(MainSceneController owner) : base(owner)
+        {
+
+        }
+
+        /// <summary>
+        /// 状態開始時
+        /// </summary>
+        public override void Enter()
+        {
+            // コンフィグボタン非表示
+            owner.configButton.enabled = false;
+            // ポーズメニュー表示
+            owner.pauseUI.SetActive(true);
+
+            // ポーズ
+            Pauser.Instance.Pause();
+        }
+
+        /// <summary>
+        /// 状態更新
+        /// </summary>
+        public override void Execute()
+        {
+        }
+
+        /// <summary>
+        /// 状態終了時
+        /// </summary>
+        public override void Exit()
+        {
+            // コンフィグボタン非表示
+            owner.configButton.enabled = true;
+            // ポーズメニュー表示
+            owner.pauseUI.SetActive(false);
+
+            // ポーズ解除
+            Pauser.Instance.Resume();
+        }
+    }
+
 }

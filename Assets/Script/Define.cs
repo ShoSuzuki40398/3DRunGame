@@ -5,10 +5,10 @@ public static class Define
     /// <summary>
     /// シーン名定義
     /// </summary>
-    public enum SceneName
+    public enum SCENE_NAME
     {
-        Title,
-        Main
+        TITLE,
+        MAIN
     }
 
     /// <summary>
@@ -16,9 +16,9 @@ public static class Define
     /// </summary>
     /// <param name="name"></param>
     /// <returns></returns>
-    public static string GetSceneName(SceneName name)
+    public static string GetSceneName(SCENE_NAME name)
     {
-        return Enum.GetName(typeof(SceneName), name);
+        return Enum.GetName(typeof(SCENE_NAME), name);
     }
 
     //　ゲーム終了ボタンを押したら実行する

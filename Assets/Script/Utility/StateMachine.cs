@@ -36,6 +36,7 @@ public class StateMachine<T,TEnum>
             currentState.Exit();
         }
 
+        currentStateKey = key;
         currentState = stateList[key];
         currentState.Enter();
     }
@@ -51,5 +52,10 @@ public class StateMachine<T,TEnum>
     public bool IsCurrentState(TEnum key)
     {
         return currentState == stateList[key];
+    }
+
+    public TEnum GetCurrentStateKey()
+    {
+        return currentStateKey;
     }
 }

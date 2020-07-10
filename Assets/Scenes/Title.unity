@@ -482,7 +482,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1774447491}
+      - m_Target: {fileID: 1774447492}
         m_MethodName: OnClickStart
         m_Mode: 1
         m_Arguments:
@@ -1065,7 +1065,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1774447491}
+      - m_Target: {fileID: 1774447492}
         m_MethodName: OnClickExit
         m_Mode: 1
         m_Arguments:
@@ -1123,7 +1123,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1774447493}
   - component: {fileID: 1774447492}
-  - component: {fileID: 1774447491}
   m_Layer: 0
   m_Name: SceneController
   m_TagString: Untagged
@@ -1131,18 +1130,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1774447491
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1774447490}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 96015e9525d6bd14b9c2d89fee42a1b7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1774447492
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1152,7 +1139,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1774447490}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 244c3af28698a5440a63d568dc90c431, type: 3}
+  m_Script: {fileID: 11500000, guid: 0603edbcadbc7d44f90d9066928a3fe0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!4 &1774447493

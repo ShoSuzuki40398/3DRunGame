@@ -17,7 +17,10 @@ public class FadeController : SingletonMonoBehaviour<FadeController>
     // フェード用パネル
     private Image fadePanel;
 
-    private void Awake()
+    /// <summary>
+    /// フェード用パネル作成
+    /// </summary>
+    private void CreateFadePanel()
     {
         var canvas = GameObject.Find("Canvas");
 
@@ -33,47 +36,7 @@ public class FadeController : SingletonMonoBehaviour<FadeController>
 
         SetAlpha(0.0f);
     }
-
-    /// <summary>
-    /// フェードイン開始
-    /// </summary>
-    /// <param name="time"></param>
-    public void FadeIn(float time,Action action = null)
-    {
-        if(fadePanel == null)
-        {
-            return;
-        }
-
-        // フェード中は無効
-        if(state != FADE_STATE.IDLE)
-        {
-            return;
-        }
-        
-        StartCoroutine(Fade(time, 1.0f, 0.0f, action));
-    }
-
-    /// <summary>
-    /// フェードアウト開始
-    /// </summary>
-    /// <param name="time"></param>
-    public void FadeOut(float time,Action action = null)
-    {
-        if (fadePanel == null)
-        {
-            return;
-        }
-
-        // フェード中は無効
-        if (state != FADE_STATE.IDLE)
-        {
-            return;
-        }
-
-        StartCoroutine(Fade(time, 0.0f, 1.0f,action));
-    }
-
+       
     /// <summary>
     /// フェード
     /// </summary>
@@ -84,10 +47,13 @@ public class FadeController : SingletonMonoBehaviour<FadeController>
     /// <returns></returns>
     private IEnumerator Fade(float fadeTime, float startAlpha, float endAlpha, Action action = null)
     {
+        fadePanel.gameObject.SetActive(true);
+
         float elapsedTime = 0.0f;
+
         while (elapsedTime < fadeTime)
         {
-            elapsedTime += Time.deltaTime;
+            elapsedTime += Time.unscaledDeltaTime;
             var currentAlpha = Mathf.Lerp(startAlpha, endAlpha, Mathf.Clamp01(elapsedTime / fadeTime));
             SetAlpha(currentAlpha);
             yield return new WaitForEndOfFrame();
@@ -97,6 +63,13 @@ public class FadeController : SingletonMonoBehaviour<FadeController>
         {
             action();
         }
+
+        if(state == FADE_STATE.FADEIN)
+        {
+            fadePanel.gameObject.SetActive(false);
+        }
+
+        state = FADE_STATE.IDLE;
     }
 
     /// <summary>
@@ -108,5 +81,49 @@ public class FadeController : SingletonMonoBehaviour<FadeController>
         var color = fadePanel.color;
         color.a = a;
         fadePanel.color = color;
+    }
+
+    /// <summary>
+    /// フェードイン開始
+    /// </summary>
+    /// <param name="time"></param>
+    public void FadeIn(float time, Action action = null)
+    {
+        // フェード中は無効
+        if (state != FADE_STATE.IDLE)
+        {
+            return;
+        }
+
+        if (fadePanel == null)
+        {
+            CreateFadePanel();
+        }
+
+        state = FADE_STATE.FADEIN;
+
+        StartCoroutine(Fade(time, 1.0f, 0.0f, action));
+    }
+
+    /// <summary>
+    /// フェードアウト開始
+    /// </summary>
+    /// <param name="time"></param>
+    public void FadeOut(float time, Action action = null)
+    {
+        // フェード中は無効
+        if (state != FADE_STATE.IDLE)
+        {
+            return;
+        }
+
+        if (fadePanel == null)
+        {
+            CreateFadePanel();
+        }
+
+        state = FADE_STATE.FADEOUT;
+
+        StartCoroutine(Fade(time, 0.0f, 1.0f, action));
     }
 }

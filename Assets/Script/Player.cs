@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class Player : MonoBehaviour
 {
@@ -67,7 +68,10 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        stateMachine.Update();
+        if(Pauser.Instance.GetState() == Pauser.STATE.RESUME)
+        {
+            stateMachine.Update();
+        }
     }
 
         /// <summary>
@@ -83,7 +87,6 @@ public class Player : MonoBehaviour
     /// </summary>
     private void Dead()
     {
-        MyDebug.Log("Player Dead");
         stateMachine.ChangeState(PLAYER_STATE.DEAD);
     }
 
@@ -113,6 +116,14 @@ public class Player : MonoBehaviour
                 
                 break;
         }
+    }
+
+    /// <summary>
+    /// 横移動終了時コールバック
+    /// </summary>
+    private void ShiftEnd()
+    {
+        this.Delay(shiftFrameOffset, () => stateMachine.ChangeState(PLAYER_STATE.RUN));
     }
 
     /// <summary>
@@ -165,14 +176,6 @@ public class Player : MonoBehaviour
         return stateMachine.IsCurrentState(PLAYER_STATE.DEAD);
     }
 
-    /// <summary>
-    /// 横移動終了時コールバック
-    /// </summary>
-    private void ShiftEnd()
-    {
-        this.Delay(shiftFrameOffset, ()=>stateMachine.ChangeState(PLAYER_STATE.RUN));
-    }
-
     //----------------------------------------------------------------------------------
     //  ↓状態クラス↓
     //----------------------------------------------------------------------------------
@@ -192,6 +195,7 @@ public class Player : MonoBehaviour
         /// </summary>
         public override void Enter()
         {
+            MyDebug.Log("Player WalkOutState Enter");
         }
 
         /// <summary>
@@ -235,6 +239,11 @@ public class Player : MonoBehaviour
         {
             // 前進
             owner.Front();
+
+            if (EventSystem.current.IsPointerOverGameObject())
+            {
+                return;
+            }
 
             // 横移動方向の決定
             if (Input.GetMouseButtonDown(Define.leftButton))

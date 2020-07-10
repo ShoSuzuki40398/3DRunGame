@@ -14,11 +14,13 @@ public class Test : MonoBehaviour
         //}
         if (Input.GetKeyUp(KeyCode.RightShift))
         {
-            FadeController.Instance.FadeOut(1.0f);
+            Pauser.Instance.Pause();
+            //FadeController.Instance.FadeOut(1.0f);
         }
         else if (Input.GetKeyUp(KeyCode.LeftShift))
         {
-            FadeController.Instance.FadeIn(1.0f);
+            Pauser.Instance.Resume();
+            //FadeController.Instance.FadeIn(1.0f);
         }
         //else if (Input.GetKeyUp(KeyCode.LeftControl))
         //{
