@@ -23,12 +23,20 @@ public class Enemy : MonoBehaviour
     [SerializeField]
     private ENEMY_TYPE type = ENEMY_TYPE.PAWN;
 
+    // やられ時のエフェクト
+    [SerializeField]
+    private GameObject deadEffect;
+
+    // アニメーター
+    private Animator animator;
+
     // 状態制御
     private StateMachine<Enemy, ENEMY_STATE> stateMachine = new StateMachine<Enemy, ENEMY_STATE>();
 
     // Start is called before the first frame update
     void Start()
     {
+        animator = GetComponent<Animator>();
         stateMachine.AddState(ENEMY_STATE.ALIVE, new AliveState(this));
         stateMachine.AddState(ENEMY_STATE.DEAD, new DeadState(this));
         stateMachine.ChangeState(ENEMY_STATE.ALIVE);
@@ -45,7 +53,6 @@ public class Enemy : MonoBehaviour
     /// </summary>
     public void Dead()
     {
-        MyDebug.Log("Enemy Dead");
         stateMachine.ChangeState(ENEMY_STATE.DEAD);
     }
 
@@ -89,6 +96,9 @@ public class Enemy : MonoBehaviour
     /// </summary>
     private class DeadState : State<Enemy>
     {
+        // やられ状態のアニメーション
+        private AnimatorStateInfo animInfo;
+
         public DeadState(Enemy owner) : base(owner)
         {
         }
@@ -98,6 +108,8 @@ public class Enemy : MonoBehaviour
         /// </summary>
         public override void Enter()
         {
+            owner.animator.SetTrigger("Dead");
+            animInfo = owner.animator.GetCurrentAnimatorStateInfo(0);
         }
 
         /// <summary>
@@ -105,6 +117,16 @@ public class Enemy : MonoBehaviour
         /// </summary>
         public override void Execute()
         {
+            if(owner.animator.GetCurrentAnimatorStateInfo(0).nameHash == Animator.StringToHash("Base Layer.EnemyDead"))
+            {
+                if (owner.animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1.0f)
+                {
+                    MyDebug.Log(owner.animator.GetCurrentAnimatorStateInfo(0).nameHash == Animator.StringToHash("Base Layer.EnemyDead"));
+                    GameObject eff = Instantiate(owner.deadEffect);
+                    eff.transform.position = owner.transform.position;
+                    Destroy(owner.gameObject);
+                }
+            }            
         }
 
         /// <summary>
