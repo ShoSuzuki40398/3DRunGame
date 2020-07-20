@@ -45,6 +45,17 @@ public class MainSceneController : MonoBehaviour
     [SerializeField]
     private GameObject pauseUI;
 
+    // スコアテキスト
+    [SerializeField]
+    private ScoreView scoreView;
+
+    // スコア
+    private Score score = new Score();
+
+    // 一定時間経過毎に加算される点数
+    [SerializeField]
+    private float timeScoreValue = 1;
+
     // ポーズ前の状態
     private MAIN_SCENE_STATE latestState = MAIN_SCENE_STATE.NONE;
 
@@ -57,8 +68,6 @@ public class MainSceneController : MonoBehaviour
         stateMachine.AddState(MAIN_SCENE_STATE.RESET, new ResetState(this));
         stateMachine.AddState(MAIN_SCENE_STATE.PAUSE, new PauseState(this));
 
-        MyDebug.Log("Scene Awake");
-
         Pauser.Instance.Resume();
         configButton.gameObject.SetActive(true);
         pauseUI.SetActive(false);
@@ -66,7 +75,6 @@ public class MainSceneController : MonoBehaviour
 
     private void Start()
     {
-        MyDebug.Log("Scene Start");
         stateMachine.ChangeState(MAIN_SCENE_STATE.AWAKE);
     }
 
@@ -118,9 +126,9 @@ public class MainSceneController : MonoBehaviour
         /// </summary>
         public override void Enter()
         {
-            MyDebug.Log("Scene AwakeState Enter");
             // プレイヤーをスタート位置に作成
             owner.player = owner.areaController.CreatePlayer(owner.playerPrefab);
+            owner.player.Initialize(owner.score);
 
             // カメラでプレイヤーの追従開始
             owner.followCamera.SetTarget(owner.player.transform);
@@ -128,6 +136,10 @@ public class MainSceneController : MonoBehaviour
 
             // エリア初期化
             owner.areaController.Initialize();
+
+            // スコア初期化
+            owner.score.Reset();
+            owner.scoreView.ResetScore();
 
             // フェード後に準備状態へ遷移
             FadeController.Instance.FadeIn(1.0f, () => owner.stateMachine.ChangeState(MAIN_SCENE_STATE.STANBY));
@@ -163,7 +175,6 @@ public class MainSceneController : MonoBehaviour
         /// </summary>
         public override void Enter()
         {
-            MyDebug.Log("Scene StanbyState Enter");
             // プレイヤーのラン開始
             if (owner.player != null)
             {
@@ -197,6 +208,11 @@ public class MainSceneController : MonoBehaviour
     /// </summary>
     private class RunningState : State<MainSceneController>
     {
+        // スコア算出用の経過時間
+        private float currentTime = 0.0f;
+        private const float intervalTime = 1.0f;
+        
+
         public RunningState(MainSceneController owner) : base(owner)
         {
 
@@ -215,6 +231,16 @@ public class MainSceneController : MonoBehaviour
         /// </summary>
         public override void Execute()
         {
+            currentTime += Time.deltaTime;
+            if(currentTime >= intervalTime)
+            {
+                currentTime = 0;
+                owner.score.Add(owner.timeScoreValue);
+            }
+
+            // スコア更新
+            owner.scoreView.UpdateScore(owner.score.GetScore());
+
             // プレイヤーを監視
             // やられていたら失敗状態に遷移
             if (owner.player.IsDead())

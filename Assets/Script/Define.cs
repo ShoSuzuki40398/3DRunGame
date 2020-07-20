@@ -62,4 +62,9 @@ public static class Define
 
     // 敵パス
     public const string enemyPath = "Enemy/";
+
+    // 敵の点数
+    public const float pawnScore = 100;
+    public const float rookScore = 200;
+    public const float bishopScore = 400;
 }

@@ -56,6 +56,15 @@ public class Enemy : MonoBehaviour
         stateMachine.ChangeState(ENEMY_STATE.DEAD);
     }
 
+    /// <summary>
+    /// 敵種類取得
+    /// </summary>
+    /// <returns></returns>
+    public ENEMY_TYPE GetEnemyType()
+    {
+        return type;
+    }
+
     //----------------------------------------------------------------------------------
     //  ↓状態クラス↓
     //----------------------------------------------------------------------------------

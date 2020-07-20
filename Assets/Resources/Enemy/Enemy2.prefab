@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 6512301638317739542}
   - component: {fileID: 6512301638317739541}
   - component: {fileID: -1726506805487102790}
+  - component: {fileID: 8958532864176214179}
   m_Layer: 0
   m_Name: Enemy2
   m_TagString: Enemy
@@ -107,3 +108,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 1
+  deadEffect: {fileID: 4745841721140147271, guid: 636552ecd8187ee41aa1d0913ee3a7ed,
+    type: 3}
+--- !u!95 &8958532864176214179
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6512301638317739540}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 0858c3b7256e0aa4ab5f2beaf84e31c5, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 1
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0

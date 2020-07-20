@@ -44,7 +44,7 @@ public class Player : MonoBehaviour
 
     // 現在走っているエリアラインのインデックス
     // 左端のラインを１として、右に行くたびに1加算した値にする
-    private int currentAreaLIneIdx = 1;
+    private int currentAreaLineIdx = 1;
 
     // 横移動方向
     private SHIFT_DIR shiftDir = SHIFT_DIR.NONE;
@@ -52,9 +52,13 @@ public class Player : MonoBehaviour
     // エリア制御
     private AreaController areaController;
 
+    // スコア
+    // シーン制御から取得したものを使う
+    private Score score;
+
     // 状態制御
     private StateMachine<Player, PLAYER_STATE> stateMachine = new StateMachine<Player, PLAYER_STATE>();
-    
+        
     private void Awake()
     {
         stateMachine.AddState(PLAYER_STATE.WALK_OUT, new WalkOutState(this));
@@ -107,7 +111,9 @@ public class Player : MonoBehaviour
             case Define.TagEnemy:
                 if(stateMachine.IsCurrentState(PLAYER_STATE.SHIFT))
                 {
-                    other.gameObject.GetComponent<Enemy>().Dead();
+                    Enemy enemy = other.gameObject.GetComponent<Enemy>();
+                    enemy.Dead();
+                    AddScore(CalcScore(enemy.GetEnemyType()));
                 }
                 else
                 {
@@ -127,10 +133,36 @@ public class Player : MonoBehaviour
     }
 
     /// <summary>
+    /// スコア計算
+    /// </summary>
+    /// <returns></returns>
+    private float CalcScore(Enemy.ENEMY_TYPE enemyType)
+    {
+        float result = 0;
+        switch (enemyType)
+        {
+            case Enemy.ENEMY_TYPE.PAWN:result = Define.pawnScore;  break;
+            case Enemy.ENEMY_TYPE.ROOK: result = Define.rookScore; break;
+            case Enemy.ENEMY_TYPE.BISHOP: result = Define.bishopScore; break;
+        }
+
+        return result;
+    }
+
+    /// <summary>
+    /// スコア加算
+    /// </summary>
+    private void AddScore(float value)
+    {
+        score.Add(value);
+    }
+
+    /// <summary>
     /// 初期化
     /// </summary>
-    public void Initialize()
+    public void Initialize(Score score)
     {
+        this.score = score;
         stateMachine.ChangeState(PLAYER_STATE.STOP);
     }
 
@@ -147,7 +179,7 @@ public class Player : MonoBehaviour
     /// </summary>
     public void SetCurrentAreaLineIndex(int index)
     {
-        currentAreaLIneIdx = index;
+        currentAreaLineIdx = index;
     }
 
     /// <summary>
@@ -285,14 +317,14 @@ public class Player : MonoBehaviour
                     break;
                 case SHIFT_DIR.LEFT:
 
-                    if (owner.currentAreaLIneIdx > 1)
+                    if (owner.currentAreaLineIdx > 1)
                     {
                         result = true;
                     }
                     break;
 
                 case SHIFT_DIR.RIGHT:
-                    if (owner.currentAreaLIneIdx < owner.areaController.GetMaxAreaWidth())
+                    if (owner.currentAreaLineIdx < owner.areaController.GetMaxAreaWidth())
                     {
                         result = true;
                     }
@@ -354,17 +386,17 @@ public class Player : MonoBehaviour
             {
                 case SHIFT_DIR.LEFT:
 
-                    if (owner.currentAreaLIneIdx > 1)
+                    if (owner.currentAreaLineIdx > 1)
                     {
-                        owner.currentAreaLIneIdx -= 1;
+                        owner.currentAreaLineIdx -= 1;
                         moveHash.Add("x", -owner.shiftValue);
                         //moveHash.Add("z", owner.shiftValue * 2);
                     }
                     break;
                 case SHIFT_DIR.RIGHT:
-                    if (owner.currentAreaLIneIdx < owner.areaController.GetMaxAreaWidth())
+                    if (owner.currentAreaLineIdx < owner.areaController.GetMaxAreaWidth())
                     {
-                        owner.currentAreaLIneIdx += 1;
+                        owner.currentAreaLineIdx += 1;
                         moveHash.Add("x", owner.shiftValue);
                         //moveHash.Add("z", owner.shiftValue * 2);
                     }
