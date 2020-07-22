@@ -15,6 +15,7 @@ public class MainSceneController : MonoBehaviour
         RUNNING,
         GOAL,
         FAIL,
+        RESULT,
         RESET,
         PAUSE
     }
@@ -48,13 +49,14 @@ public class MainSceneController : MonoBehaviour
     // スコアテキスト
     [SerializeField]
     private ScoreView scoreView;
-
-    // スコア
-    private Score score = new Score();
-
+    
     // 一定時間経過毎に加算される点数
     [SerializeField]
     private float timeScoreValue = 1;
+
+    // リザルトスコアUI
+    [SerializeField]
+    private ResultScoreView resultScoreView;
 
     // ポーズ前の状態
     private MAIN_SCENE_STATE latestState = MAIN_SCENE_STATE.NONE;
@@ -65,12 +67,14 @@ public class MainSceneController : MonoBehaviour
         stateMachine.AddState(MAIN_SCENE_STATE.STANBY, new StanbyState(this));
         stateMachine.AddState(MAIN_SCENE_STATE.RUNNING, new RunningState(this));
         stateMachine.AddState(MAIN_SCENE_STATE.FAIL, new FailState(this));
+        stateMachine.AddState(MAIN_SCENE_STATE.RESULT, new ResultState(this));
         stateMachine.AddState(MAIN_SCENE_STATE.RESET, new ResetState(this));
         stateMachine.AddState(MAIN_SCENE_STATE.PAUSE, new PauseState(this));
 
         Pauser.Instance.Resume();
         configButton.gameObject.SetActive(true);
         pauseUI.SetActive(false);
+        resultScoreView.gameObject.SetActive(false);
     }
 
     private void Start()
@@ -108,6 +112,14 @@ public class MainSceneController : MonoBehaviour
         FadeController.Instance.FadeOut(0.5f, () => SceneManager.LoadScene(Define.GetSceneName(Define.SCENE_NAME.TITLE)));
     }
 
+    /// <summary>
+    /// リトライ
+    /// </summary>
+    public void Retry()
+    {
+        stateMachine.ChangeState(MAIN_SCENE_STATE.RESET);
+    }
+
     //----------------------------------------------------------------------------------
     //  ↓状態クラス↓
     //----------------------------------------------------------------------------------
@@ -128,7 +140,7 @@ public class MainSceneController : MonoBehaviour
         {
             // プレイヤーをスタート位置に作成
             owner.player = owner.areaController.CreatePlayer(owner.playerPrefab);
-            owner.player.Initialize(owner.score);
+            owner.player.Initialize();
 
             // カメラでプレイヤーの追従開始
             owner.followCamera.SetTarget(owner.player.transform);
@@ -138,7 +150,8 @@ public class MainSceneController : MonoBehaviour
             owner.areaController.Initialize();
 
             // スコア初期化
-            owner.score.Reset();
+            //owner.score.Reset();
+            ScorePool.Instance.ResetScore();
             owner.scoreView.ResetScore();
 
             // フェード後に準備状態へ遷移
@@ -211,7 +224,8 @@ public class MainSceneController : MonoBehaviour
         // スコア算出用の経過時間
         private float currentTime = 0.0f;
         private const float intervalTime = 1.0f;
-        
+
+        private Score score;
 
         public RunningState(MainSceneController owner) : base(owner)
         {
@@ -224,6 +238,7 @@ public class MainSceneController : MonoBehaviour
         public override void Enter()
         {
             MyDebug.Log("Scene RunningState Enter");
+            score = ScorePool.Instance.score;
         }
 
         /// <summary>
@@ -235,11 +250,11 @@ public class MainSceneController : MonoBehaviour
             if(currentTime >= intervalTime)
             {
                 currentTime = 0;
-                owner.score.Add(owner.timeScoreValue);
+                score.Add(owner.timeScoreValue);
             }
 
             // スコア更新
-            owner.scoreView.UpdateScore(owner.score.GetScore());
+            owner.scoreView.UpdateScore(score.GetScore());
 
             // プレイヤーを監視
             // やられていたら失敗状態に遷移
@@ -273,8 +288,7 @@ public class MainSceneController : MonoBehaviour
         /// </summary>
         public override void Enter()
         {
-            // ステージをリセットする
-            owner.stateMachine.ChangeState(MAIN_SCENE_STATE.RESET);
+            owner.stateMachine.ChangeState(MAIN_SCENE_STATE.RESULT);
         }
 
         /// <summary>
@@ -289,6 +303,52 @@ public class MainSceneController : MonoBehaviour
         /// </summary>
         public override void Exit()
         {
+        }
+    }
+
+    /// <summary>
+    /// 最終スコア表示状態
+    /// </summary>
+    private class ResultState : State<MainSceneController>
+    {
+        public ResultState(MainSceneController owner) : base(owner)
+        {
+
+        }
+
+        /// <summary>
+        /// 状態開始時
+        /// </summary>
+        public override void Enter()
+        {
+            // コンフィグボタン非表示
+            owner.configButton.enabled = false;
+
+            // ポーズ
+            //Pauser.Instance.Pause();
+
+            // スコア表示
+            owner.resultScoreView.gameObject.SetActive(true);
+            owner.resultScoreView.DisplayScore();
+        }
+
+        /// <summary>
+        /// 状態更新
+        /// </summary>
+        public override void Execute()
+        {
+        }
+
+        /// <summary>
+        /// 状態終了時
+        /// </summary>
+        public override void Exit()
+        {
+            // コンフィグボタン非表示
+            owner.configButton.enabled = true;
+
+            // ポーズ解除
+            //Pauser.Instance.Resume();
         }
     }
 
@@ -314,6 +374,8 @@ public class MainSceneController : MonoBehaviour
 
             // エリア終了処理
             owner.areaController.Finalized();
+
+            owner.resultScoreView.gameObject.SetActive(false);
 
             // フェード後ステージをリセットする
             // フェード後のコールバックの中にフェード処理が入っているとフェード出来ない不具合があるので、遅延をかけています。

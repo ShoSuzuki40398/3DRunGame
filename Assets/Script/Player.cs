@@ -52,10 +52,6 @@ public class Player : MonoBehaviour
     // エリア制御
     private AreaController areaController;
 
-    // スコア
-    // シーン制御から取得したものを使う
-    private Score score;
-
     // 状態制御
     private StateMachine<Player, PLAYER_STATE> stateMachine = new StateMachine<Player, PLAYER_STATE>();
         
@@ -113,7 +109,7 @@ public class Player : MonoBehaviour
                 {
                     Enemy enemy = other.gameObject.GetComponent<Enemy>();
                     enemy.Dead();
-                    AddScore(CalcScore(enemy.GetEnemyType()));
+                    ScorePool.Instance.AddDefeatedEnemy(enemy.GetEnemyType());
                 }
                 else
                 {
@@ -150,19 +146,10 @@ public class Player : MonoBehaviour
     }
 
     /// <summary>
-    /// スコア加算
-    /// </summary>
-    private void AddScore(float value)
-    {
-        score.Add(value);
-    }
-
-    /// <summary>
     /// 初期化
     /// </summary>
-    public void Initialize(Score score)
+    public void Initialize()
     {
-        this.score = score;
         stateMachine.ChangeState(PLAYER_STATE.STOP);
     }
 
@@ -454,6 +441,11 @@ public class Player : MonoBehaviour
         /// </summary>
         public override void Enter()
         {
+            var components = owner.gameObject.GetComponents<MonoBehaviour>();
+            foreach(var comp in components)
+            {
+                comp.enabled = false;
+            }
         }
 
         /// <summary>

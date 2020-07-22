@@ -10,7 +10,7 @@ public class Score
     private float max;
     private float min;
 
-    public Score(float min = 0,float max = 9999)
+    public Score(float min = 0,float max = 99999)
     {
         this.min = min;
         this.max = max;
