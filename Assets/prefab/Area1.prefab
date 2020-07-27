@@ -94,6 +94,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemySpawn: 0
   enemyType: 0
+  navPoint: []
 --- !u!1 &104881136
 GameObject:
   m_ObjectHideFlags: 0
@@ -188,6 +189,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemySpawn: 0
   enemyType: 0
+  navPoint: []
 --- !u!1 &420953490
 GameObject:
   m_ObjectHideFlags: 0
@@ -282,6 +284,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemySpawn: 0
   enemyType: 0
+  navPoint: []
 --- !u!1 &498378888
 GameObject:
   m_ObjectHideFlags: 0
@@ -376,6 +379,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemySpawn: 0
   enemyType: 0
+  navPoint: []
 --- !u!1 &530872656
 GameObject:
   m_ObjectHideFlags: 0
@@ -470,6 +474,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemySpawn: 0
   enemyType: 0
+  navPoint: []
 --- !u!1 &554402332
 GameObject:
   m_ObjectHideFlags: 0
@@ -564,6 +569,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemySpawn: 0
   enemyType: 0
+  navPoint: []
 --- !u!1 &655220123
 GameObject:
   m_ObjectHideFlags: 0
@@ -658,6 +664,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemySpawn: 0
   enemyType: 0
+  navPoint: []
 --- !u!1 &669544760
 GameObject:
   m_ObjectHideFlags: 0
@@ -752,6 +759,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemySpawn: 0
   enemyType: 0
+  navPoint: []
 --- !u!1 &693443510
 GameObject:
   m_ObjectHideFlags: 0
@@ -846,6 +854,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemySpawn: 0
   enemyType: 0
+  navPoint: []
 --- !u!1 &887045223
 GameObject:
   m_ObjectHideFlags: 0
@@ -940,6 +949,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemySpawn: 0
   enemyType: 0
+  navPoint: []
 --- !u!1 &954924021
 GameObject:
   m_ObjectHideFlags: 0
@@ -1034,6 +1044,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemySpawn: 0
   enemyType: 0
+  navPoint: []
 --- !u!1 &1025597336
 GameObject:
   m_ObjectHideFlags: 0
@@ -1126,8 +1137,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de90d1f12301fe7499a2fc9d5b75645b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemySpawn: 0
-  enemyType: 0
+  enemySpawn: 1
+  enemyType: 1
+  navPoint:
+  - {fileID: 498378889}
 --- !u!1 &1097673255
 GameObject:
   m_ObjectHideFlags: 0
@@ -1222,6 +1235,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemySpawn: 0
   enemyType: 0
+  navPoint: []
 --- !u!1 &1223808241
 GameObject:
   m_ObjectHideFlags: 0
@@ -1316,6 +1330,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemySpawn: 0
   enemyType: 0
+  navPoint: []
 --- !u!1 &1231589918
 GameObject:
   m_ObjectHideFlags: 0
@@ -1408,8 +1423,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de90d1f12301fe7499a2fc9d5b75645b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemySpawn: 0
-  enemyType: 0
+  enemySpawn: 1
+  enemyType: 2
+  navPoint:
+  - {fileID: 498378889}
 --- !u!1 &1281401300
 GameObject:
   m_ObjectHideFlags: 0
@@ -1504,6 +1521,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemySpawn: 0
   enemyType: 0
+  navPoint: []
 --- !u!1 &1304514465
 GameObject:
   m_ObjectHideFlags: 0
@@ -1598,6 +1616,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemySpawn: 0
   enemyType: 0
+  navPoint: []
 --- !u!1 &1371099869
 GameObject:
   m_ObjectHideFlags: 0
@@ -1692,6 +1711,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemySpawn: 0
   enemyType: 0
+  navPoint: []
 --- !u!1 &1409584971
 GameObject:
   m_ObjectHideFlags: 0
@@ -1786,6 +1806,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemySpawn: 0
   enemyType: 0
+  navPoint: []
 --- !u!1 &1419913148
 GameObject:
   m_ObjectHideFlags: 0
@@ -1878,8 +1899,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de90d1f12301fe7499a2fc9d5b75645b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemySpawn: 1
+  enemySpawn: 0
   enemyType: 0
+  navPoint: []
 --- !u!1 &1469352506
 GameObject:
   m_ObjectHideFlags: 0
@@ -1974,6 +1996,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemySpawn: 0
   enemyType: 0
+  navPoint: []
 --- !u!1 &1687828604
 GameObject:
   m_ObjectHideFlags: 0
@@ -2068,6 +2091,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemySpawn: 0
   enemyType: 0
+  navPoint: []
 --- !u!1 &1722539966
 GameObject:
   m_ObjectHideFlags: 0
@@ -2162,6 +2186,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemySpawn: 0
   enemyType: 0
+  navPoint: []
 --- !u!1 &1738878365
 GameObject:
   m_ObjectHideFlags: 0
@@ -2256,6 +2281,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemySpawn: 0
   enemyType: 0
+  navPoint: []
 --- !u!1 &1758020274
 GameObject:
   m_ObjectHideFlags: 0
@@ -2350,6 +2376,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemySpawn: 0
   enemyType: 0
+  navPoint: []
 --- !u!1 &1762581347
 GameObject:
   m_ObjectHideFlags: 0
@@ -2444,6 +2471,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemySpawn: 0
   enemyType: 0
+  navPoint: []
 --- !u!1 &1807607021
 GameObject:
   m_ObjectHideFlags: 0
@@ -2536,8 +2564,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de90d1f12301fe7499a2fc9d5b75645b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemySpawn: 1
+  enemySpawn: 0
   enemyType: 0
+  navPoint: []
 --- !u!1 &1813779680
 GameObject:
   m_ObjectHideFlags: 0
@@ -2632,6 +2661,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemySpawn: 0
   enemyType: 0
+  navPoint: []
 --- !u!1 &1966632522
 GameObject:
   m_ObjectHideFlags: 0
@@ -2726,6 +2756,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemySpawn: 0
   enemyType: 0
+  navPoint: []
 --- !u!1 &2083857344
 GameObject:
   m_ObjectHideFlags: 0
@@ -2820,6 +2851,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemySpawn: 0
   enemyType: 0
+  navPoint: []
 --- !u!1 &2104773291
 GameObject:
   m_ObjectHideFlags: 0
@@ -2958,6 +2990,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemySpawn: 0
   enemyType: 0
+  navPoint: []
 --- !u!1 &606968883721149909
 GameObject:
   m_ObjectHideFlags: 0
@@ -3052,6 +3085,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemySpawn: 0
   enemyType: 0
+  navPoint: []
 --- !u!1 &704804065230417457
 GameObject:
   m_ObjectHideFlags: 0
@@ -3146,6 +3180,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemySpawn: 0
   enemyType: 0
+  navPoint: []
 --- !u!1 &1316935725287317094
 GameObject:
   m_ObjectHideFlags: 0
@@ -3240,6 +3275,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemySpawn: 0
   enemyType: 0
+  navPoint: []
 --- !u!1 &1316935725446292031
 GameObject:
   m_ObjectHideFlags: 0
@@ -3334,6 +3370,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemySpawn: 0
   enemyType: 0
+  navPoint: []
 --- !u!1 &1316935725697836130
 GameObject:
   m_ObjectHideFlags: 0
@@ -3428,6 +3465,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemySpawn: 0
   enemyType: 0
+  navPoint: []
 --- !u!1 &1316935725719448273
 GameObject:
   m_ObjectHideFlags: 0
@@ -3522,6 +3560,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemySpawn: 0
   enemyType: 0
+  navPoint: []
 --- !u!1 &1316935726279651981
 GameObject:
   m_ObjectHideFlags: 0
@@ -3616,6 +3655,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemySpawn: 0
   enemyType: 0
+  navPoint: []
 --- !u!1 &1316935726493634787
 GameObject:
   m_ObjectHideFlags: 0
@@ -3762,6 +3802,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemySpawn: 0
   enemyType: 0
+  navPoint: []
 --- !u!1 &1316935726580306446
 GameObject:
   m_ObjectHideFlags: 0
@@ -3856,6 +3897,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemySpawn: 0
   enemyType: 0
+  navPoint: []
 --- !u!1 &1316935726599611861
 GameObject:
   m_ObjectHideFlags: 0
@@ -3950,6 +3992,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemySpawn: 0
   enemyType: 0
+  navPoint: []
 --- !u!1 &1316935726791186559
 GameObject:
   m_ObjectHideFlags: 0
@@ -4044,6 +4087,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemySpawn: 1
   enemyType: 0
+  navPoint: []
 --- !u!1 &1316935726833944835
 GameObject:
   m_ObjectHideFlags: 0
@@ -4138,6 +4182,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemySpawn: 0
   enemyType: 0
+  navPoint: []
 --- !u!1 &1316935727111852308
 GameObject:
   m_ObjectHideFlags: 0
@@ -4298,6 +4343,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemySpawn: 0
   enemyType: 0
+  navPoint: []
 --- !u!1 &1596963441524223034
 GameObject:
   m_ObjectHideFlags: 0
@@ -4392,6 +4438,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemySpawn: 0
   enemyType: 0
+  navPoint: []
 --- !u!1 &2116529979412884566
 GameObject:
   m_ObjectHideFlags: 0
@@ -4486,6 +4533,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemySpawn: 0
   enemyType: 0
+  navPoint: []
 --- !u!1 &2662410423627879852
 GameObject:
   m_ObjectHideFlags: 0
@@ -4580,6 +4628,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemySpawn: 0
   enemyType: 0
+  navPoint: []
 --- !u!1 &2727213073689303611
 GameObject:
   m_ObjectHideFlags: 0
@@ -4674,6 +4723,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemySpawn: 0
   enemyType: 0
+  navPoint: []
 --- !u!1 &3048962977018516103
 GameObject:
   m_ObjectHideFlags: 0
@@ -4768,6 +4818,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemySpawn: 0
   enemyType: 0
+  navPoint: []
 --- !u!1 &3307145541906481886
 GameObject:
   m_ObjectHideFlags: 0
@@ -4928,6 +4979,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemySpawn: 0
   enemyType: 0
+  navPoint: []
 --- !u!1 &5936789260000301671
 GameObject:
   m_ObjectHideFlags: 0
@@ -5022,6 +5074,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemySpawn: 0
   enemyType: 0
+  navPoint: []
 --- !u!1 &6567709117676048855
 GameObject:
   m_ObjectHideFlags: 0
@@ -5116,6 +5169,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemySpawn: 0
   enemyType: 0
+  navPoint: []
 --- !u!1 &7037940339710592020
 GameObject:
   m_ObjectHideFlags: 0
@@ -5276,6 +5330,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemySpawn: 0
   enemyType: 0
+  navPoint: []
 --- !u!1 &7230425997651053734
 GameObject:
   m_ObjectHideFlags: 0
@@ -5370,6 +5425,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemySpawn: 0
   enemyType: 0
+  navPoint: []
 --- !u!1 &7329490062497296076
 GameObject:
   m_ObjectHideFlags: 0
@@ -5464,6 +5520,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemySpawn: 0
   enemyType: 0
+  navPoint: []
 --- !u!1 &7626732439663209340
 GameObject:
   m_ObjectHideFlags: 0
@@ -5558,6 +5615,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemySpawn: 0
   enemyType: 0
+  navPoint: []
 --- !u!1 &8157215425846279228
 GameObject:
   m_ObjectHideFlags: 0
@@ -5652,6 +5710,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemySpawn: 0
   enemyType: 0
+  navPoint: []
 --- !u!1 &8585206735086004354
 GameObject:
   m_ObjectHideFlags: 0
@@ -5746,6 +5805,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemySpawn: 0
   enemyType: 0
+  navPoint: []
 --- !u!1 &8595386555944509557
 GameObject:
   m_ObjectHideFlags: 0
@@ -5840,6 +5900,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemySpawn: 0
   enemyType: 0
+  navPoint: []
 --- !u!1 &9095414695517090648
 GameObject:
   m_ObjectHideFlags: 0
@@ -5934,3 +5995,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemySpawn: 0
   enemyType: 0
+  navPoint: []

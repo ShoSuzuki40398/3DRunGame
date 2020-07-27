@@ -33,6 +33,12 @@ public class Enemy : MonoBehaviour
     // 状態制御
     private StateMachine<Enemy, ENEMY_STATE> stateMachine = new StateMachine<Enemy, ENEMY_STATE>();
 
+    // 巡回先
+    private List<Transform> navPoint = new List<Transform>();
+
+    // 移動速度
+    private float moveSpeed = 3.0f;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -46,6 +52,14 @@ public class Enemy : MonoBehaviour
     void Update()
     {
         stateMachine.Update();
+    }
+
+    /// <summary>
+    /// 巡回先設定
+    /// </summary>
+    public void SetNavPoint(List<Transform> points)
+    {
+        navPoint = points;
     }
 
     /// <summary>
@@ -74,6 +88,15 @@ public class Enemy : MonoBehaviour
     /// </summary>
     private class AliveState : State<Enemy>
     {
+        // 巡回地点まで近づく距離
+        private float remainingDistance = 0.1f;
+
+        // 次の移動先
+        private Vector3 destination;
+
+        // 現在の巡回地点インデックス
+        private int destPointIndex = 0;
+
         public AliveState(Enemy owner) : base(owner)
         {
         }
@@ -83,6 +106,7 @@ public class Enemy : MonoBehaviour
         /// </summary>
         public override void Enter()
         {
+            destination = GetNextPoint();
         }
 
         /// <summary>
@@ -90,6 +114,19 @@ public class Enemy : MonoBehaviour
         /// </summary>
         public override void Execute()
         {
+            // 移動先が初期位置しかない場合は移動しない
+            if(owner.navPoint.Count <= 1)
+            {
+                return;
+            }
+
+            float step = owner.moveSpeed * Time.unscaledDeltaTime;
+            owner.transform.position = Vector3.MoveTowards(owner.transform.position, destination, step);
+
+            if(Vector3.Distance(owner.transform.position, destination) < remainingDistance)
+            {
+                destination = GetNextPoint();
+            }
         }
 
         /// <summary>
@@ -97,6 +134,19 @@ public class Enemy : MonoBehaviour
         /// </summary>
         public override void Exit()
         {
+        }
+
+        /// <summary>
+        /// 次の移動先を取得
+        /// </summary>
+        /// <returns></returns>
+        private Vector3 GetNextPoint()
+        {
+            Vector3 result = owner.navPoint[destPointIndex].position;
+            destPointIndex = (destPointIndex + 1) % owner.navPoint.Count;
+            var enemyHeight = owner.GetComponent<Renderer>().bounds.size.y;
+            result += new Vector3(0, result.y + enemyHeight * 0.75f, 0);
+            return result;
         }
     }
 

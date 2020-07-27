@@ -14,13 +14,17 @@ public class Area : MonoBehaviour
     private GameObject areaEntrance;
 
     // 先頭位置
+    [HideInInspector]
     public Vector3 leadPosition;
     // 先頭位置からマス目一つ分手前にずれた座標
+    [HideInInspector]
     public Vector3 marginLeadPosition;
 
     // 末尾位置
+    [HideInInspector]
     public Vector3 endPosition;
     // 末尾位置からマス目一つ分奥にずれた座標
+    [HideInInspector]
     public Vector3 marginEndPosition;
 
     // ライン情報

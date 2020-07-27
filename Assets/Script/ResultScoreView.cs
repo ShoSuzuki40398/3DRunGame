@@ -69,9 +69,9 @@ public class ResultScoreView : MonoBehaviour
 
     private void ResetView()
     {
-        pawnScoreText.text = "× 0";
-        rookScoreText.text = "× 0";
-        bishopScoreText.text = "× 0";
-        resultScoreText.text = "0";
+        pawnScoreText.text = "×";
+        rookScoreText.text = "×";
+        bishopScoreText.text = "×";
+        resultScoreText.text = "";
     }
 }

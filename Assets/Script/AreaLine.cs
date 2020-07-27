@@ -9,8 +9,10 @@ public class AreaLine : MonoBehaviour
     public List<AreaGrid> grids;
 
     // 先頭マス
+    [HideInInspector]
     public AreaGrid leadGrid;
     // 末尾マス
+    [HideInInspector]
     public AreaGrid endGrid;
 
     // マス目の数
