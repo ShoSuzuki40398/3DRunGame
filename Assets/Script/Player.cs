@@ -103,6 +103,7 @@ public class Player : MonoBehaviour
             case Define.TagAreaEntrance:
                 areaController.RemoveLeadArea();
                 areaController.AddArea();
+                areaController.CountUpRunningArea();
                 break;
             case Define.TagEnemy:
                 if(stateMachine.IsCurrentState(PLAYER_STATE.SHIFT))
@@ -259,6 +260,7 @@ public class Player : MonoBehaviour
             // 前進
             owner.Front();
 
+            // UIクリック判定
             if (EventSystem.current.IsPointerOverGameObject())
             {
                 return;

@@ -17,7 +17,11 @@ public class AreaController : MonoBehaviour
 
     // エリアオブジェクト
     [SerializeField]
-    private List<GameObject> areaPrefabs;
+    private List<GameObject> easyAreaPrefabs = new List<GameObject>();
+    [SerializeField]
+    private List<GameObject> normalAreaPrefabs = new List<GameObject>();
+    [SerializeField]
+    private List<GameObject> hardAreaPrefabs = new List<GameObject>();
 
     // エリア管理リスト
     private List<Area> areaList = new List<Area>();
@@ -35,14 +39,64 @@ public class AreaController : MonoBehaviour
     [SerializeField]
     private int playerSpawnLineIdx = 2;
 
+    // エリアの難易度が変わるエリア数
+    // プレイヤーが指定数走破した後でエリアの難易度を変える
+    [SerializeField]
+    private const int levelChangeInterval = 2;
+
+    // プレイヤーが走破したエリア数
+    private int currentLevelChangeAreaCount = 0;
+
+    // エリア難易度
+    enum AREA_LEVEL
+    {
+        EASY,
+        NORAML,
+        HARD
+    }
+    private AREA_LEVEL currentAreaLevel = AREA_LEVEL.EASY;
+
+    // スカイボックス制御
+    [SerializeField]
+    private SkyboxController skyboxController;
+
+    [SerializeField]
+    private Color easySkyColor;
+
+    [SerializeField]
+    private Color normalSkyColor;
+
+    [SerializeField]
+    private Color hardSkyColor;
+
     /// <summary>
     /// エリアオブジェクト作成
     /// </summary>
     /// <returns>Areaコンポーネント</returns>
-    private Area CreateArea()
+    private Area CreateArea(AREA_LEVEL level)
     {
-        int index = Random.Range(0, areaPrefabs.Count);
-        var area = Instantiate(areaPrefabs[index]).GetComponent<Area>();
+        int index = 0;
+        Area area;
+        switch (level)
+        {
+            case AREA_LEVEL.EASY:
+                index = Random.Range(0, easyAreaPrefabs.Count);
+                area = Instantiate(easyAreaPrefabs[index]).GetComponent<Area>();
+                break;
+            case AREA_LEVEL.NORAML:
+                index = Random.Range(0, normalAreaPrefabs.Count);
+                area = Instantiate(normalAreaPrefabs[index]).GetComponent<Area>();
+                break;
+            case AREA_LEVEL.HARD:
+                index = Random.Range(0, hardAreaPrefabs.Count);
+                area = Instantiate(hardAreaPrefabs[index]).GetComponent<Area>();
+                break;
+            default:
+                index = Random.Range(0, easyAreaPrefabs.Count);
+                area = Instantiate(easyAreaPrefabs[index]).GetComponent<Area>();
+                break;
+        }
+
         return area;
     }
 
@@ -78,6 +132,46 @@ public class AreaController : MonoBehaviour
     }
 
     /// <summary>
+    /// エリアの難易度を上げる
+    /// </summary>
+    private void AreaLevelUp()
+    {
+        switch (currentAreaLevel)
+        {
+            case AREA_LEVEL.EASY:
+                currentAreaLevel = AREA_LEVEL.NORAML;
+                skyboxController.ChangeSkyColor(normalSkyColor);
+                break;
+            case AREA_LEVEL.NORAML:
+                currentAreaLevel = AREA_LEVEL.HARD;
+                skyboxController.ChangeSkyColor(hardSkyColor);
+                break;
+            case AREA_LEVEL.HARD:
+                currentAreaLevel = AREA_LEVEL.HARD;
+                skyboxController.ChangeSkyColor(hardSkyColor);
+                break;
+            default:
+                currentAreaLevel = AREA_LEVEL.EASY;
+                skyboxController.ChangeSkyColor(easySkyColor);
+                break;
+        }
+    }
+
+    /// <summary>
+    /// 走破エリア数カウントアップ
+    /// </summary>
+    public void CountUpRunningArea()
+    {
+        currentLevelChangeAreaCount += 1;
+        // 指定エリア数走破したとき難易度上昇
+        if(currentLevelChangeAreaCount > levelChangeInterval)
+        {
+            currentLevelChangeAreaCount = 0;
+            AreaLevelUp();
+        }
+    }
+    
+    /// <summary>
     /// プレイヤー作成
     /// </summary>
     public Player CreatePlayer(GameObject prefab)
@@ -108,6 +202,10 @@ public class AreaController : MonoBehaviour
     /// </summary>
     public void Initialize()
     {
+        currentLevelChangeAreaCount = 0;
+        currentAreaLevel = AREA_LEVEL.EASY;
+        skyboxController.ChangeSkyColor(easySkyColor);
+
         // スタートエリア初期化
         startArea.Initialize();
 
@@ -144,7 +242,7 @@ public class AreaController : MonoBehaviour
         var latestArea = GetLatestArea();
 
         // 作成
-        var area = CreateArea();
+        var area = CreateArea(currentAreaLevel);
         area.Initialize();
         areaList.Add(area);
         area.transform.parent = transform;

@@ -851,7 +851,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 0}
-  offset: {x: 0, y: 3, z: -5}
+  offset: {x: 0, y: 2, z: -5}
 --- !u!1 &366407872
 GameObject:
   m_ObjectHideFlags: 0
@@ -1151,6 +1151,7 @@ GameObject:
   m_Component:
   - component: {fileID: 475921625}
   - component: {fileID: 475921626}
+  - component: {fileID: 475921624}
   m_Layer: 0
   m_Name: SceneController
   m_TagString: Untagged
@@ -1158,6 +1159,20 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &475921624
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 475921623}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 81c82784bca36294a8f485e1301088b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skyboxMaterial: {fileID: 2100000, guid: 35d11939700fd5249b8d37fc2a83127b, type: 2}
+  startSkyColor: {r: 0, g: 1, b: 0.04085064, a: 1}
 --- !u!4 &475921625
 Transform:
   m_ObjectHideFlags: 0
@@ -2530,13 +2545,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxAreaCount: 3
   maxAreaWidth: 3
-  areaPrefabs:
+  easyAreaPrefabs:
   - {fileID: 1316935726493634787, guid: c214fcf6fcf45894e99cba6a798df857, type: 3}
+  normalAreaPrefabs:
   - {fileID: 7473297622104384131, guid: 40a7de41072dd004e8a5fff6e283701d, type: 3}
+  hardAreaPrefabs:
   - {fileID: 952820235709888942, guid: bfed04a7aeeda4c41a0f6db98e003cb2, type: 3}
   startArea: {fileID: 630905499018846354}
   playerSpawnPoint: {fileID: 1199053963}
   playerSpawnLineIdx: 2
+  skyboxController: {fileID: 475921624}
+  easySkyColor: {r: 0, g: 1, b: 0.09638786, a: 0}
+  normalSkyColor: {r: 1, g: 0.8950032, b: 0, a: 0}
+  hardSkyColor: {r: 1, g: 0, b: 0, a: 0}
 --- !u!4 &1364656264
 Transform:
   m_ObjectHideFlags: 0
