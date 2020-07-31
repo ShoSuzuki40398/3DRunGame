@@ -145,7 +145,7 @@ public class Enemy : MonoBehaviour
             Vector3 result = owner.navPoint[destPointIndex].position;
             destPointIndex = (destPointIndex + 1) % owner.navPoint.Count;
             var enemyHeight = owner.GetComponent<Renderer>().bounds.size.y;
-            result += new Vector3(0, result.y + enemyHeight * 0.75f, 0);
+            result += new Vector3(0, result.y + enemyHeight * 0.25f, 0);
             return result;
         }
     }

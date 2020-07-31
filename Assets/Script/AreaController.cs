@@ -34,6 +34,9 @@ public class AreaController : MonoBehaviour
     [SerializeField]
     private Transform playerSpawnPoint;
 
+    // プレイヤー制御
+    private Player player;
+
     // プレイヤーが生成されるエリアラインのインデックス
     // 左端のラインを１として、右に行くたびに1加算した値にする
     [SerializeField]
@@ -141,26 +144,31 @@ public class AreaController : MonoBehaviour
             case AREA_LEVEL.EASY:
                 currentAreaLevel = AREA_LEVEL.NORAML;
                 skyboxController.ChangeSkyColor(normalSkyColor);
+                player.SetTrailColor(normalSkyColor);
                 break;
             case AREA_LEVEL.NORAML:
                 currentAreaLevel = AREA_LEVEL.HARD;
                 skyboxController.ChangeSkyColor(hardSkyColor);
+                player.SetTrailColor(hardSkyColor);
                 break;
             case AREA_LEVEL.HARD:
                 currentAreaLevel = AREA_LEVEL.HARD;
                 skyboxController.ChangeSkyColor(hardSkyColor);
+                player.SetTrailColor(hardSkyColor);
                 break;
             default:
                 currentAreaLevel = AREA_LEVEL.EASY;
                 skyboxController.ChangeSkyColor(easySkyColor);
+                player.SetTrailColor(easySkyColor);
                 break;
         }
     }
 
     /// <summary>
     /// 走破エリア数カウントアップ
+    /// 難易度上昇があった時はtrueを返す
     /// </summary>
-    public void CountUpRunningArea()
+    public bool CountUpRunningArea()
     {
         currentLevelChangeAreaCount += 1;
         // 指定エリア数走破したとき難易度上昇
@@ -168,7 +176,10 @@ public class AreaController : MonoBehaviour
         {
             currentLevelChangeAreaCount = 0;
             AreaLevelUp();
+            return true;
         }
+
+        return false;
     }
     
     /// <summary>
@@ -185,14 +196,17 @@ public class AreaController : MonoBehaviour
         RaycastHit hit;
         if (Physics.Raycast(ray, out hit, 10.0f))
         {
-            var halfObjHeight = obj.GetComponent<Renderer>().bounds.size.y * 0.5f;
-            obj.transform.position = new Vector3(hit.point.x, hit.point.y + halfObjHeight, hit.point.z);
+            // 軌跡が地面に埋まって見づらかったのでちょっとだけ浮かせる
+            var objPositionOffset = obj.GetComponent<Renderer>().bounds.size.y * 0.05f;
+            obj.transform.position = new Vector3(hit.point.x, hit.point.y + objPositionOffset, hit.point.z);
         }
 
         // 自身をプレイヤーに設定
         var player = obj.ForceGetComponent<Player>();
         player.SetAreaController(this);
         player.SetCurrentAreaLineIndex(playerSpawnLineIdx);
+        player.SetTrailColor(easySkyColor);
+        this.player = player;
         return player;
     }
 

@@ -5,8 +5,8 @@ using UnityEngine;
 public static class EnemyGenerator
 {
     private const string pawnPath = Define.enemyPath + "Enemy1";
-    private const string bishopPath = Define.enemyPath + "Enemy2";
-    private const string rookPath = Define.enemyPath + "Enemy3";
+    private const string rookPath = Define.enemyPath + "Enemy2";
+    private const string bishopPath = Define.enemyPath + "Enemy3";
 
     public static Enemy Create(Enemy.ENEMY_TYPE type, Transform enemyRoot = null)
     {

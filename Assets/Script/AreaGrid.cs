@@ -29,8 +29,7 @@ public class AreaGrid : MonoBehaviour
         if(enemySpawn)
         {
             Enemy enemy = EnemyGenerator.Create(enemyType,enemyRoot);
-            var enemyHeight = enemy.GetComponent<Renderer>().bounds.size.y;
-            enemy.transform.position = new Vector3(gridPosition.x, gridPosition.y + enemyHeight*0.75f, gridPosition.z);
+            enemy.transform.position = new Vector3(gridPosition.x, gridPosition.y + 0.5f, gridPosition.z);
             navPoint.Add(transform);
             enemy.SetNavPoint(navPoint);
         }

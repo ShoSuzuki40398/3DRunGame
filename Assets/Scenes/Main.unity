@@ -838,6 +838,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 136f625fcb54f434dbc25bb960e769b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  speed: 1
 --- !u!114 &350721200
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2555,9 +2556,9 @@ MonoBehaviour:
   playerSpawnPoint: {fileID: 1199053963}
   playerSpawnLineIdx: 2
   skyboxController: {fileID: 475921624}
-  easySkyColor: {r: 0, g: 1, b: 0.09638786, a: 0}
-  normalSkyColor: {r: 1, g: 0.8950032, b: 0, a: 0}
-  hardSkyColor: {r: 1, g: 0, b: 0, a: 0}
+  easySkyColor: {r: 0, g: 1, b: 0.09638786, a: 1}
+  normalSkyColor: {r: 1, g: 0.8950032, b: 0, a: 1}
+  hardSkyColor: {r: 1, g: 0, b: 0, a: 1}
 --- !u!4 &1364656264
 Transform:
   m_ObjectHideFlags: 0

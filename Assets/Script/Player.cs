@@ -54,9 +54,13 @@ public class Player : MonoBehaviour
 
     // 状態制御
     private StateMachine<Player, PLAYER_STATE> stateMachine = new StateMachine<Player, PLAYER_STATE>();
+
+    // 走行軌跡
+    private TrailRenderer trail;
         
     private void Awake()
     {
+        trail = GetComponent<TrailRenderer>();
         stateMachine.AddState(PLAYER_STATE.WALK_OUT, new WalkOutState(this));
         stateMachine.AddState(PLAYER_STATE.RUN, new RunState(this));
         stateMachine.AddState(PLAYER_STATE.SHIFT, new ShiftState(this));
@@ -104,6 +108,7 @@ public class Player : MonoBehaviour
                 areaController.RemoveLeadArea();
                 areaController.AddArea();
                 areaController.CountUpRunningArea();
+
                 break;
             case Define.TagEnemy:
                 if(stateMachine.IsCurrentState(PLAYER_STATE.SHIFT))
@@ -194,6 +199,15 @@ public class Player : MonoBehaviour
     public bool IsDead()
     {
         return stateMachine.IsCurrentState(PLAYER_STATE.DEAD);
+    }
+
+    /// <summary>
+    /// 軌跡の色を設定
+    /// </summary>
+    /// <param name="color"></param>
+    public void SetTrailColor(Color color)
+    {
+        trail.material.color = color;
     }
 
     //----------------------------------------------------------------------------------
