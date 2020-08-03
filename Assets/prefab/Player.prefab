@@ -113,6 +113,8 @@ MonoBehaviour:
   shiftValue: 2
   shiftTime: 0.1
   shiftFrameOffset: 10
+  deadEffectPrefab: {fileID: 4588562022537464200, guid: 25fff87201cb4464d8cb66e4aa6f40a9,
+    type: 3}
 --- !u!54 &6172916707657788362
 Rigidbody:
   m_ObjectHideFlags: 0

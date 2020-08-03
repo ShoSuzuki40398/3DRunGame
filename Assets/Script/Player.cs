@@ -12,6 +12,7 @@ public class Player : MonoBehaviour
         RUN,        // 走る
         SHIFT,      // 横移動
         STOP,       // 停止
+        BURST,      // 爆発
         DEAD        // やられ
     }
 
@@ -57,6 +58,10 @@ public class Player : MonoBehaviour
 
     // 走行軌跡
     private TrailRenderer trail;
+
+    // やられ時のエフェクト
+    [SerializeField]
+    private GameObject deadEffectPrefab;
         
     private void Awake()
     {
@@ -65,6 +70,7 @@ public class Player : MonoBehaviour
         stateMachine.AddState(PLAYER_STATE.RUN, new RunState(this));
         stateMachine.AddState(PLAYER_STATE.SHIFT, new ShiftState(this));
         stateMachine.AddState(PLAYER_STATE.STOP, new StopState(this));
+        stateMachine.AddState(PLAYER_STATE.BURST, new BurstState(this));
         stateMachine.AddState(PLAYER_STATE.DEAD, new DeadState(this));
     }
 
@@ -91,7 +97,8 @@ public class Player : MonoBehaviour
     /// </summary>
     private void Dead()
     {
-        stateMachine.ChangeState(PLAYER_STATE.DEAD);
+        stateMachine.ChangeState(PLAYER_STATE.BURST);
+        //stateMachine.ChangeState(PLAYER_STATE.DEAD);
     }
 
     private void OnTriggerEnter(Collider other)
@@ -393,7 +400,6 @@ public class Player : MonoBehaviour
                     {
                         owner.currentAreaLineIdx -= 1;
                         moveHash.Add("x", -owner.shiftValue);
-                        //moveHash.Add("z", owner.shiftValue * 2);
                     }
                     break;
                 case SHIFT_DIR.RIGHT:
@@ -401,7 +407,6 @@ public class Player : MonoBehaviour
                     {
                         owner.currentAreaLineIdx += 1;
                         moveHash.Add("x", owner.shiftValue);
-                        //moveHash.Add("z", owner.shiftValue * 2);
                     }
                     break;
             }
@@ -432,6 +437,59 @@ public class Player : MonoBehaviour
         /// </summary>
         public override void Execute()
         {
+        }
+
+        /// <summary>
+        /// 状態終了
+        /// </summary>
+        public override void Exit()
+        {
+        }
+    }
+
+
+    /// <summary>
+    /// 爆発状態
+    /// </summary>
+    private class BurstState : State<Player>
+    {
+        GameObject effectBurst;
+
+        // やられ状態に繊維するまでの時間
+        private const float stateChangeTime = 1.0f;
+        private float currentStateChangeTime = 0.0f;
+
+        public BurstState(Player owner) : base(owner)
+        {
+
+        }
+
+        /// <summary>
+        /// 状態開始
+        /// </summary>
+        public override void Enter()
+        {
+            currentStateChangeTime = 0.0f;
+
+            // やられエフェクト作成
+            effectBurst = Instantiate(owner.deadEffectPrefab);
+            effectBurst.transform.position = owner.transform.position;
+            effectBurst.transform.parent = owner.transform;
+
+            owner.GetComponent<Renderer>().enabled = false;
+        }
+
+        /// <summary>
+        /// 状態更新
+        /// </summary>
+        public override void Execute()
+        {
+            currentStateChangeTime += Time.deltaTime;
+            if(currentStateChangeTime >= stateChangeTime)
+            {
+                Destroy(effectBurst);
+                owner.stateMachine.ChangeState(PLAYER_STATE.DEAD);
+            }
         }
 
         /// <summary>
