@@ -47,13 +47,16 @@ public class ResultScoreView : MonoBehaviour
 
         // 順番にスコア表示
         yield return new WaitForSeconds(animationInterval);
-        pawnScoreText.text = " × " + ScorePool.Instance.GetDefeatedEnemy(Enemy.ENEMY_TYPE.PAWN).ToString();
+        StartCoroutine(ScoreAnimation(0, ScorePool.Instance.GetDefeatedEnemy(Enemy.ENEMY_TYPE.PAWN), animationInterval, pawnScoreText));
+        //pawnScoreText.text = "× " + ScorePool.Instance.GetDefeatedEnemy(Enemy.ENEMY_TYPE.PAWN).ToString();
 
         yield return new WaitForSeconds(animationInterval);
-        rookScoreText.text = " × " + ScorePool.Instance.GetDefeatedEnemy(Enemy.ENEMY_TYPE.ROOK).ToString();
+        StartCoroutine(ScoreAnimation(0, ScorePool.Instance.GetDefeatedEnemy(Enemy.ENEMY_TYPE.ROOK), animationInterval, rookScoreText));
+        //rookScoreText.text = "× " + ScorePool.Instance.GetDefeatedEnemy(Enemy.ENEMY_TYPE.ROOK).ToString();
 
         yield return new WaitForSeconds(animationInterval);
-        bishopScoreText.text = " × " + ScorePool.Instance.GetDefeatedEnemy(Enemy.ENEMY_TYPE.BISHOP).ToString();
+        StartCoroutine(ScoreAnimation(0, ScorePool.Instance.GetDefeatedEnemy(Enemy.ENEMY_TYPE.BISHOP), animationInterval, bishopScoreText));
+        //bishopScoreText.text = "× " + ScorePool.Instance.GetDefeatedEnemy(Enemy.ENEMY_TYPE.BISHOP).ToString();
 
         yield return new WaitForSeconds(animationInterval);
         string format = "{0:D}";
@@ -69,9 +72,45 @@ public class ResultScoreView : MonoBehaviour
 
     private void ResetView()
     {
-        pawnScoreText.text = "×";
-        rookScoreText.text = "×";
-        bishopScoreText.text = "×";
+        pawnScoreText.text = "× ";
+        rookScoreText.text = "× ";
+        bishopScoreText.text = "× ";
         resultScoreText.text = "";
+    }
+
+    /// <summary>
+    /// スコアをアニメーションさせる
+    /// </summary>
+    /// <param name="startScore"></param>
+    /// <param name="endScore"></param>
+    /// <param name="duration"></param>
+    /// <param name="text"></param>
+    /// <returns></returns>
+    private IEnumerator ScoreAnimation(float startScore, float endScore, float duration, Text text)
+    {
+        // 開始時間
+        float startTime = Time.time;
+
+        // 終了時間
+        float endTime = startTime + duration;
+
+        do
+        {
+            // 現在の時間の割合
+            float timeRate = (Time.time - startTime) / duration;
+
+            // 数値を更新
+            float updateValue = (float)((endScore - startScore) * timeRate + startScore);
+
+            // テキストの更新
+            text.text = "× " + updateValue.ToString("f0"); // （"f0" の "0" は、小数点以下の桁数指定）
+
+            // 1フレーム待つ
+            yield return null;
+
+        } while (Time.time < endTime);
+
+        // 最終的な着地のスコア
+        text.text = "× " + endScore.ToString();
     }
 }

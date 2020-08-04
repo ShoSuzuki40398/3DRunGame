@@ -124,7 +124,7 @@ public class Player : MonoBehaviour
                     enemy.Dead();
                     ScorePool.Instance.AddDefeatedEnemy(enemy.GetEnemyType());
                 }
-                else
+                else if (stateMachine.IsCurrentState(PLAYER_STATE.RUN))
                 {
                     Dead();
                 }
