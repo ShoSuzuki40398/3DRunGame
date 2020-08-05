@@ -80,6 +80,7 @@ public class MainSceneController : MonoBehaviour
     private void Start()
     {
         stateMachine.ChangeState(MAIN_SCENE_STATE.AWAKE);
+        AudioManager.Instance.PlayBGM(Define.BGM.MAIN);
     }
 
     private void Update()

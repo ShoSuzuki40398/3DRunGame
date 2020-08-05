@@ -37,7 +37,7 @@ public abstract class SingletonMonoBehaviour<T> : MonoBehaviour where T : MonoBe
         }
     }
 
-    protected void Awake()
+    protected virtual void Awake()
     {
     }
 

@@ -123,6 +123,7 @@ public class Player : MonoBehaviour
                     Enemy enemy = other.gameObject.GetComponent<Enemy>();
                     enemy.Dead();
                     ScorePool.Instance.AddDefeatedEnemy(enemy.GetEnemyType());
+                    AudioManager.Instance.PlaySE(Define.SE.PLAYER_ATTACK_HIT);
                 }
                 else if (stateMachine.IsCurrentState(PLAYER_STATE.RUN))
                 {
@@ -361,6 +362,7 @@ public class Player : MonoBehaviour
         public override void Enter()
         {
             Shift(owner.shiftDir);
+            AudioManager.Instance.PlaySE(Define.SE.PLAYER_SHIFT);
         }
 
         /// <summary>
@@ -477,6 +479,8 @@ public class Player : MonoBehaviour
             effectBurst.transform.parent = owner.transform;
 
             owner.GetComponent<Renderer>().enabled = false;
+
+            AudioManager.Instance.PlaySE(Define.SE.PLAYER_BURST);
         }
 
         /// <summary>

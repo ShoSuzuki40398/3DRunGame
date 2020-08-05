@@ -5,11 +5,11 @@ using UnityEngine;
 public class AudioManager : SingletonMonoBehaviour<AudioManager>
 {
     [SerializeField, Range(0, 1), Tooltip("マスタ音量")]
-    private float volume = 1;
+    private float masterVolume = 0.2f;
     [SerializeField, Range(0, 1), Tooltip("BGMの音量")]
-    private float bgmVolume = 1;
+    private float bgmVolume = 0.3f;
     [SerializeField, Range(0, 1), Tooltip("SEの音量")]
-    private float seVolume = 1;
+    private float seVolume = 0.3f;
 
     [SerializeField,Tooltip("SE用AudioSourceを削除する間隔")]
     private float removeInterval = 5;
@@ -27,16 +27,16 @@ public class AudioManager : SingletonMonoBehaviour<AudioManager>
     {
         set
         {
-            volume = Mathf.Clamp01(value);
-            bgmSource.volume = bgmVolume * volume;
+            masterVolume = Mathf.Clamp01(value);
+            bgmSource.volume = bgmVolume * masterVolume;
             foreach(var se in seSources)
             {
-                se.volume = seVolume * volume;
+                se.volume = seVolume * masterVolume;
             }
         }
         get
         {
-            return volume;
+            return masterVolume;
         }
     }
 
@@ -45,7 +45,7 @@ public class AudioManager : SingletonMonoBehaviour<AudioManager>
         set
         {
             bgmVolume = Mathf.Clamp01(value);
-            bgmSource.volume = bgmVolume * volume;
+            bgmSource.volume = bgmVolume * masterVolume;
         }
         get
         {
@@ -60,7 +60,7 @@ public class AudioManager : SingletonMonoBehaviour<AudioManager>
             seVolume = Mathf.Clamp01(value);
             foreach (var se in seSources)
             {
-                se.volume = seVolume * volume;
+                se.volume = seVolume * masterVolume;
             }
         }
         get
@@ -69,13 +69,19 @@ public class AudioManager : SingletonMonoBehaviour<AudioManager>
         }
     }
 
-    private void Awake()
+    protected override void Awake()
     {
-        RegistBGM(Define.BGM.BGM_1, "bgm_maoudamashii_piano41");
+        RegistBGM(Define.BGM.TITLE, "Title");
+        RegistBGM(Define.BGM.MAIN, "Main");
         bgmSource = gameObject.ForceGetComponent<AudioSource>();
-
-        RegistSE(Define.SE.SE_1, "se_maoudamashii_onepoint28");
-        RegistSE(Define.SE.SE_2, "se_maoudamashii_onepoint33");
+        
+        RegistSE(Define.SE.BUTTON_CLICK, "ButtonClick");
+        RegistSE(Define.SE.BUTTON_HIGHLIGHT, "ButtonHighlight");
+        RegistSE(Define.SE.PLAYER_SHIFT, "PlayerShift");
+        RegistSE(Define.SE.PLAYER_ATTACK_HIT, "PlayerAttackHit");
+        RegistSE(Define.SE.PLAYER_BURST, "PlayerBurst");
+        RegistSE(Define.SE.ENEMY_BURST, "EnemyBurst");
+        RegistSE(Define.SE.SCORE_DISPLAY, "ScoreDisplay");
 
         StartCoroutine(RemoveInactiveSESource());
     }
@@ -125,7 +131,7 @@ public class AudioManager : SingletonMonoBehaviour<AudioManager>
         AudioClip clip = bgmKeyValues[key];
         bgmSource.clip = clip;
         bgmSource.loop = true;
-        bgmSource.volume = bgmVolume * volume;
+        bgmSource.volume = bgmVolume * masterVolume;
         bgmSource.Play();
     }
 
@@ -202,7 +208,7 @@ public class AudioManager : SingletonMonoBehaviour<AudioManager>
 
         AudioClip clip = seKeyValues[key];
         AudioSource source = gameObject.AddComponent<AudioSource>();
-        source.PlayOneShot(clip,seVolume * volume);
+        source.PlayOneShot(clip,seVolume * masterVolume);
         seSources.Add(source);
     }
 

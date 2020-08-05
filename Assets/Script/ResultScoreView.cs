@@ -48,15 +48,12 @@ public class ResultScoreView : MonoBehaviour
         // 順番にスコア表示
         yield return new WaitForSeconds(animationInterval);
         StartCoroutine(ScoreAnimation(0, ScorePool.Instance.GetDefeatedEnemy(Enemy.ENEMY_TYPE.PAWN), animationInterval, pawnScoreText));
-        //pawnScoreText.text = "× " + ScorePool.Instance.GetDefeatedEnemy(Enemy.ENEMY_TYPE.PAWN).ToString();
 
         yield return new WaitForSeconds(animationInterval);
         StartCoroutine(ScoreAnimation(0, ScorePool.Instance.GetDefeatedEnemy(Enemy.ENEMY_TYPE.ROOK), animationInterval, rookScoreText));
-        //rookScoreText.text = "× " + ScorePool.Instance.GetDefeatedEnemy(Enemy.ENEMY_TYPE.ROOK).ToString();
 
         yield return new WaitForSeconds(animationInterval);
         StartCoroutine(ScoreAnimation(0, ScorePool.Instance.GetDefeatedEnemy(Enemy.ENEMY_TYPE.BISHOP), animationInterval, bishopScoreText));
-        //bishopScoreText.text = "× " + ScorePool.Instance.GetDefeatedEnemy(Enemy.ENEMY_TYPE.BISHOP).ToString();
 
         yield return new WaitForSeconds(animationInterval);
         string format = "{0:D}";
@@ -112,5 +109,6 @@ public class ResultScoreView : MonoBehaviour
 
         // 最終的な着地のスコア
         text.text = "× " + endScore.ToString();
+        AudioManager.Instance.PlaySE(Define.SE.SCORE_DISPLAY);
     }
 }

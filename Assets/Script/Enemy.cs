@@ -145,7 +145,7 @@ public class Enemy : MonoBehaviour
             Vector3 result = owner.navPoint[destPointIndex].position;
             destPointIndex = (destPointIndex + 1) % owner.navPoint.Count;
             var enemyHeight = owner.GetComponent<Renderer>().bounds.size.y;
-            result += new Vector3(0, result.y + enemyHeight * 0.25f, 0);
+            result += new Vector3(0, result.y + 0.5f, 0);
             return result;
         }
     }
@@ -183,6 +183,7 @@ public class Enemy : MonoBehaviour
                     MyDebug.Log(owner.animator.GetCurrentAnimatorStateInfo(0).nameHash == Animator.StringToHash("Base Layer.EnemyDead"));
                     GameObject eff = Instantiate(owner.deadEffect);
                     eff.transform.position = owner.transform.position;
+                    AudioManager.Instance.PlaySE(Define.SE.ENEMY_BURST);
                     Destroy(owner.gameObject);
                 }
             }            

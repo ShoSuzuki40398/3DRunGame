@@ -41,14 +41,20 @@ public static class Define
     // BGM定義
     public enum BGM
     {
-        BGM_1
+        TITLE,
+        MAIN
     }
 
     // SE定義
     public enum SE
     {
-        SE_1,
-        SE_2
+        PLAYER_SHIFT,
+        PLAYER_ATTACK_HIT,
+        PLAYER_BURST,
+        ENEMY_BURST,
+        BUTTON_CLICK,
+        BUTTON_HIGHLIGHT,
+        SCORE_DISPLAY
     }
 
     // マウスボタン定義
