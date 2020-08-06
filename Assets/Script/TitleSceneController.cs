@@ -5,10 +5,15 @@ using UnityEngine.SceneManagement;
 
 public class TitleSceneController : MonoBehaviour
 {
+    [SerializeField]
+    GameObject volumeUI;
+
     // Start is called before the first frame update
     void Start()
     {
         FadeController.Instance.FadeIn(1.0f);
+        volumeUI.SetActive(false);
+        AudioManager.Instance.PlayBGM(Define.BGM.TITLE);
     }
 
     /// <summary>
@@ -25,5 +30,21 @@ public class TitleSceneController : MonoBehaviour
     public void OnClickExit()
     {
         Define.EndGame();
+    }
+
+    /// <summary>
+    /// 音量調節ボタン
+    /// </summary>
+    public void OnClickVolumeButton()
+    {
+        volumeUI.SetActive(true);
+    }
+
+    /// <summary>
+    /// 音量調節閉じる
+    /// </summary>
+    public void OnClickReturnVolumeUIButton()
+    {
+        volumeUI.SetActive(false);
     }
 }

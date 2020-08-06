@@ -5,14 +5,17 @@ using UnityEngine;
 public class AudioManager : SingletonMonoBehaviour<AudioManager>
 {
     [SerializeField, Range(0, 1), Tooltip("マスタ音量")]
-    private float masterVolume = 0.2f;
+    private float masterVolume = 0.5f;
     [SerializeField, Range(0, 1), Tooltip("BGMの音量")]
-    private float bgmVolume = 0.3f;
+    private float bgmVolume = 0.5f;
     [SerializeField, Range(0, 1), Tooltip("SEの音量")]
-    private float seVolume = 0.3f;
+    private float seVolume = 0.5f;
 
-    [SerializeField,Tooltip("SE用AudioSourceを削除する間隔")]
-    private float removeInterval = 5;
+    // SE最大再生個数
+    [SerializeField]
+    private int maxSeCount = 2;
+
+    private int currentSeSourceIndex = 0;
 
     // BGNリスト
     private Dictionary<Define.BGM, AudioClip> bgmKeyValues = new Dictionary<Define.BGM, AudioClip>();
@@ -29,7 +32,7 @@ public class AudioManager : SingletonMonoBehaviour<AudioManager>
         {
             masterVolume = Mathf.Clamp01(value);
             bgmSource.volume = bgmVolume * masterVolume;
-            foreach(var se in seSources)
+            foreach (var se in seSources)
             {
                 se.volume = seVolume * masterVolume;
             }
@@ -71,6 +74,8 @@ public class AudioManager : SingletonMonoBehaviour<AudioManager>
 
     protected override void Awake()
     {
+        base.Awake();
+
         RegistBGM(Define.BGM.TITLE, "Title");
         RegistBGM(Define.BGM.MAIN, "Main");
         bgmSource = gameObject.ForceGetComponent<AudioSource>();
@@ -82,25 +87,12 @@ public class AudioManager : SingletonMonoBehaviour<AudioManager>
         RegistSE(Define.SE.PLAYER_BURST, "PlayerBurst");
         RegistSE(Define.SE.ENEMY_BURST, "EnemyBurst");
         RegistSE(Define.SE.SCORE_DISPLAY, "ScoreDisplay");
-
-        StartCoroutine(RemoveInactiveSESource());
-    }
-
-    /// <summary>
-    /// 使用していないSE用AudioSourceを削除
-    /// </summary>
-    /// <returns></returns>
-    private IEnumerator RemoveInactiveSESource()
-    {
-        while (true)
+        
+        for(int i = 0; i < maxSeCount; ++i)
         {
-            foreach(var source in seSources)
-            {
-                Destroy(source);
-            }
-            seSources.RemoveAll(source => source == null);
-
-            yield return new WaitForSeconds(removeInterval);
+            var source = gameObject.AddComponent<AudioSource>();
+            source.volume = masterVolume * seVolume;
+            seSources.Add(source);
         }
     }
 
@@ -207,9 +199,10 @@ public class AudioManager : SingletonMonoBehaviour<AudioManager>
         }
 
         AudioClip clip = seKeyValues[key];
-        AudioSource source = gameObject.AddComponent<AudioSource>();
+        AudioSource source = seSources[currentSeSourceIndex];
+
         source.PlayOneShot(clip,seVolume * masterVolume);
-        seSources.Add(source);
+        currentSeSourceIndex = Mathf.Clamp(currentSeSourceIndex + 1, 0, maxSeCount - 1);
     }
 
     /// <summary>
