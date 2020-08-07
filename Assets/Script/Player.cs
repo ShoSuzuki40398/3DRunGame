@@ -62,7 +62,11 @@ public class Player : MonoBehaviour
     // やられ時のエフェクト
     [SerializeField]
     private GameObject deadEffectPrefab;
-        
+
+    // 衝突時のエフェクト
+    [SerializeField]
+    private GameObject hitEffectPrefab;
+
     private void Awake()
     {
         trail = GetComponent<TrailRenderer>();
@@ -124,6 +128,9 @@ public class Player : MonoBehaviour
                     enemy.Dead();
                     ScorePool.Instance.AddDefeatedEnemy(enemy.GetEnemyType());
                     AudioManager.Instance.PlaySE(Define.SE.PLAYER_ATTACK_HIT);
+
+                    Vector3 hitPos = other.ClosestPointOnBounds(transform.position);
+                    GameObject hitEff = Instantiate(hitEffectPrefab,hitPos,Quaternion.identity);
                 }
                 else if (stateMachine.IsCurrentState(PLAYER_STATE.RUN))
                 {
