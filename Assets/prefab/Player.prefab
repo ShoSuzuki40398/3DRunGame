@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 3339101083329879026}
   - component: {fileID: 6172916707657788362}
   - component: {fileID: 7173910399207491837}
+  - component: {fileID: 6542114626443634864}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -240,6 +241,25 @@ TrailRenderer:
   m_MinVertexDistance: 0
   m_Autodestruct: 0
   m_Emitting: 1
+--- !u!114 &6542114626443634864
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5304303170461752203}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8db0bf38b5024f04d99671f407860a03, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  clonePrefab: {fileID: 7769197293401271523, guid: 5283e85e7b6eb5843b0f1764a1439c8a,
+    type: 3}
+  targetRenderer: {fileID: 5304303170461752201}
+  afterImageMaterial: {fileID: 2100000, guid: 8f523d168a9eb954e80258a54bac68d7, type: 2}
+  cloneCount: 4
+  updateCount: 2
+  ghostingWeight: 0.4
 --- !u!1001 &92038233
 PrefabInstance:
   m_ObjectHideFlags: 0

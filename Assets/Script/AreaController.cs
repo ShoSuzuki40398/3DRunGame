@@ -144,22 +144,22 @@ public class AreaController : MonoBehaviour
             case AREA_LEVEL.EASY:
                 currentAreaLevel = AREA_LEVEL.NORAML;
                 skyboxController.ChangeSkyColor(normalSkyColor);
-                player.SetTrailColor(normalSkyColor);
+                player.ChangeEffectColor(normalSkyColor);
                 break;
             case AREA_LEVEL.NORAML:
                 currentAreaLevel = AREA_LEVEL.HARD;
                 skyboxController.ChangeSkyColor(hardSkyColor);
-                player.SetTrailColor(hardSkyColor);
+                player.ChangeEffectColor(hardSkyColor);
                 break;
             case AREA_LEVEL.HARD:
                 currentAreaLevel = AREA_LEVEL.HARD;
                 skyboxController.ChangeSkyColor(hardSkyColor);
-                player.SetTrailColor(hardSkyColor);
+                player.ChangeEffectColor(easySkyColor);
                 break;
             default:
                 currentAreaLevel = AREA_LEVEL.EASY;
                 skyboxController.ChangeSkyColor(easySkyColor);
-                player.SetTrailColor(easySkyColor);
+                player.ChangeEffectColor(easySkyColor);
                 break;
         }
     }
@@ -205,7 +205,7 @@ public class AreaController : MonoBehaviour
         var player = obj.ForceGetComponent<Player>();
         player.SetAreaController(this);
         player.SetCurrentAreaLineIndex(playerSpawnLineIdx);
-        player.SetTrailColor(easySkyColor);
+        player.ChangeEffectColor(easySkyColor);
         this.player = player;
         return player;
     }

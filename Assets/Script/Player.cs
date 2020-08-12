@@ -67,9 +67,14 @@ public class Player : MonoBehaviour
     [SerializeField]
     private GameObject hitEffectPrefab;
 
+    // 残像制御
+    private AfterImageBake afterImageBake;
+
     private void Awake()
     {
         trail = GetComponent<TrailRenderer>();
+        afterImageBake = GetComponent<AfterImageBake>();
+
         stateMachine.AddState(PLAYER_STATE.WALK_OUT, new WalkOutState(this));
         stateMachine.AddState(PLAYER_STATE.RUN, new RunState(this));
         stateMachine.AddState(PLAYER_STATE.SHIFT, new ShiftState(this));
@@ -172,6 +177,7 @@ public class Player : MonoBehaviour
     public void Initialize()
     {
         stateMachine.ChangeState(PLAYER_STATE.STOP);
+        afterImageBake.Bake(false);
     }
 
     /// <summary>
@@ -223,6 +229,24 @@ public class Player : MonoBehaviour
     public void SetTrailColor(Color color)
     {
         trail.material.color = color;
+    }
+
+    /// <summary>
+    /// 残像の色を変更
+    /// </summary>
+    /// <param name="color"></param>
+    public void SetAfterImageColor(Color color)
+    {
+        afterImageBake.ChangeColor(color);
+    }
+
+    /// <summary>
+    /// プレイヤー周囲のエフェクト色を変更
+    /// </summary>
+    public void ChangeEffectColor(Color color)
+    {
+        SetTrailColor(color);
+        SetAfterImageColor(color);
     }
 
     //----------------------------------------------------------------------------------
@@ -370,6 +394,9 @@ public class Player : MonoBehaviour
         {
             Shift(owner.shiftDir);
             AudioManager.Instance.PlaySE(Define.SE.PLAYER_SHIFT);
+
+            // 残像表示
+            owner.afterImageBake.SetRenderEnable(true);
         }
 
         /// <summary>
@@ -387,6 +414,9 @@ public class Player : MonoBehaviour
         public override void Exit()
         {
             owner.shiftDir = SHIFT_DIR.NONE;
+
+            // 残像非表示
+            owner.afterImageBake.SetRenderEnable(false);
         }
 
         /// <summary>
@@ -526,6 +556,9 @@ public class Player : MonoBehaviour
         /// </summary>
         public override void Enter()
         {
+            // 残像削除
+            owner.afterImageBake.DestoryAfterImage();
+
             var components = owner.gameObject.GetComponents<MonoBehaviour>();
             foreach(var comp in components)
             {

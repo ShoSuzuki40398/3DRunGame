@@ -2028,6 +2028,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0286c6cfb483bea4b82380c1f17e72da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  animationInterval: 0.5
   pawnScoreText: {fileID: 1325342686}
   rookScoreText: {fileID: 295617501}
   bishopScoreText: {fileID: 413694248}

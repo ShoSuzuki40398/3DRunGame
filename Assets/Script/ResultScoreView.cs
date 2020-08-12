@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class ResultScoreView : MonoBehaviour
 {
     // スコア表示の時間間隔
+    [SerializeField]
     private float animationInterval = 1.0f;
 
     [SerializeField]

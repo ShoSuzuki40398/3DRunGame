@@ -42,6 +42,7 @@ GameObject:
   - component: {fileID: 6869689848858504693}
   - component: {fileID: 6869689848858504695}
   - component: {fileID: 6869689848858504694}
+  - component: {fileID: 585850943660752065}
   m_Layer: 0
   m_Name: Ring1Add
   m_TagString: Untagged
@@ -73,7 +74,7 @@ ParticleSystem:
   serializedVersion: 6
   lengthInSec: 2
   simulationSpeed: 1
-  stopAction: 0
+  stopAction: 3
   cullingMode: 0
   ringBufferMode: 0
   ringBufferLoopRange: {x: 0, y: 1}
@@ -4843,6 +4844,19 @@ ParticleSystemRenderer:
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
   m_MaskInteraction: 0
+--- !u!114 &585850943660752065
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6869689848858504692}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b60be246ec301944999f8a3d9a437773, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  destroyTarget: {fileID: 6869689847993785520}
 --- !u!1 &6869689849123304778
 GameObject:
   m_ObjectHideFlags: 0
@@ -4854,6 +4868,7 @@ GameObject:
   - component: {fileID: 6869689849123304779}
   - component: {fileID: 6869689849123304629}
   - component: {fileID: 6869689849123304628}
+  - component: {fileID: 6755559054448037361}
   m_Layer: 0
   m_Name: Parline1Add
   m_TagString: Untagged
@@ -4885,7 +4900,7 @@ ParticleSystem:
   serializedVersion: 6
   lengthInSec: 2
   simulationSpeed: 1
-  stopAction: 0
+  stopAction: 3
   cullingMode: 0
   ringBufferMode: 0
   ringBufferLoopRange: {x: 0, y: 1}
@@ -9655,6 +9670,19 @@ ParticleSystemRenderer:
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
   m_MaskInteraction: 0
+--- !u!114 &6755559054448037361
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6869689849123304778}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b60be246ec301944999f8a3d9a437773, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  destroyTarget: {fileID: 6869689847993785520}
 --- !u!1 &6869689849298720828
 GameObject:
   m_ObjectHideFlags: 0
@@ -9666,6 +9694,7 @@ GameObject:
   - component: {fileID: 6869689849298720829}
   - component: {fileID: 6869689849298720831}
   - component: {fileID: 6869689849298720830}
+  - component: {fileID: 2021084929777822}
   m_Layer: 0
   m_Name: Par1Alpha
   m_TagString: Untagged
@@ -9699,7 +9728,7 @@ ParticleSystem:
   serializedVersion: 6
   lengthInSec: 2
   simulationSpeed: 1
-  stopAction: 2
+  stopAction: 3
   cullingMode: 0
   ringBufferMode: 0
   ringBufferLoopRange: {x: 0, y: 1}
@@ -14469,3 +14498,16 @@ ParticleSystemRenderer:
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
   m_MaskInteraction: 0
+--- !u!114 &2021084929777822
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6869689849298720828}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b60be246ec301944999f8a3d9a437773, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  destroyTarget: {fileID: 6869689847993785520}
