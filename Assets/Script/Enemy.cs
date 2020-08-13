@@ -18,7 +18,7 @@ public class Enemy : MonoBehaviour
         ALIVE,
         DEAD
     }
-    
+
     // 敵タイプ
     [SerializeField]
     private ENEMY_TYPE type = ENEMY_TYPE.PAWN;
@@ -115,7 +115,7 @@ public class Enemy : MonoBehaviour
         public override void Execute()
         {
             // 移動先が初期位置しかない場合は移動しない
-            if(owner.navPoint.Count <= 1)
+            if (owner.navPoint.Count <= 1)
             {
                 return;
             }
@@ -123,7 +123,7 @@ public class Enemy : MonoBehaviour
             float step = owner.moveSpeed * Time.unscaledDeltaTime;
             owner.transform.position = Vector3.MoveTowards(owner.transform.position, destination, step);
 
-            if(Vector3.Distance(owner.transform.position, destination) < remainingDistance)
+            if (Vector3.Distance(owner.transform.position, destination) < remainingDistance)
             {
                 destination = GetNextPoint();
             }
@@ -143,7 +143,9 @@ public class Enemy : MonoBehaviour
         private Vector3 GetNextPoint()
         {
             Vector3 result = owner.navPoint[destPointIndex].position;
+
             destPointIndex = (destPointIndex + 1) % owner.navPoint.Count;
+            
             var enemyHeight = owner.GetComponent<Renderer>().bounds.size.y;
             result += new Vector3(0, result.y + 0.5f, 0);
             return result;
@@ -169,6 +171,7 @@ public class Enemy : MonoBehaviour
         {
             owner.animator.SetTrigger("Dead");
             animInfo = owner.animator.GetCurrentAnimatorStateInfo(0);
+            owner.transform.parent = null;
         }
 
         /// <summary>
@@ -176,7 +179,7 @@ public class Enemy : MonoBehaviour
         /// </summary>
         public override void Execute()
         {
-            if(owner.animator.GetCurrentAnimatorStateInfo(0).nameHash == Animator.StringToHash("Base Layer.EnemyDead"))
+            if (owner.animator.GetCurrentAnimatorStateInfo(0).nameHash == Animator.StringToHash("Base Layer.EnemyDead"))
             {
                 if (owner.animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1.0f)
                 {
@@ -186,7 +189,7 @@ public class Enemy : MonoBehaviour
                     AudioManager.Instance.PlaySE(Define.SE.ENEMY_BURST);
                     Destroy(owner.gameObject);
                 }
-            }            
+            }
         }
 
         /// <summary>

@@ -127,7 +127,7 @@ public class Player : MonoBehaviour
 
                 break;
             case Define.TagEnemy:
-                if(stateMachine.IsCurrentState(PLAYER_STATE.SHIFT))
+                if (stateMachine.IsCurrentState(PLAYER_STATE.SHIFT))
                 {
                     Enemy enemy = other.gameObject.GetComponent<Enemy>();
                     enemy.Dead();
@@ -268,7 +268,6 @@ public class Player : MonoBehaviour
         /// </summary>
         public override void Enter()
         {
-            MyDebug.Log("Player WalkOutState Enter");
         }
 
         /// <summary>

@@ -108,7 +108,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 0
-  deadEffect: {fileID: 4745841721140147271, guid: 636552ecd8187ee41aa1d0913ee3a7ed,
+  deadEffect: {fileID: 7098554504802585095, guid: ef1880cc82e8fe54ab478f62e0b148b9,
     type: 3}
 --- !u!95 &40690530
 Animator:

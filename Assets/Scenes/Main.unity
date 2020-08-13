@@ -890,7 +890,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 0}
-  offset: {x: 0, y: 2, z: -5}
+  offset: {x: 0, y: 2.5, z: -6}
 --- !u!1 &366407872
 GameObject:
   m_ObjectHideFlags: 0
@@ -2587,13 +2587,26 @@ MonoBehaviour:
   maxAreaWidth: 3
   easyAreaPrefabs:
   - {fileID: 1316935726493634787, guid: c214fcf6fcf45894e99cba6a798df857, type: 3}
-  normalAreaPrefabs:
   - {fileID: 7473297622104384131, guid: 40a7de41072dd004e8a5fff6e283701d, type: 3}
-  hardAreaPrefabs:
   - {fileID: 952820235709888942, guid: bfed04a7aeeda4c41a0f6db98e003cb2, type: 3}
+  - {fileID: 1316935726493634787, guid: 3af9724fdd4dc834daa3c41f669c75f7, type: 3}
+  - {fileID: 1316935726493634787, guid: b694fdf1757261a4aa4eeebee1b71348, type: 3}
+  normalAreaPrefabs:
+  - {fileID: 1316935726493634787, guid: 7d576c2d2a84f414fbe306dae8a0498b, type: 3}
+  - {fileID: 1316935726493634787, guid: 572622daa97b4eb4c9e6bb20c5641586, type: 3}
+  - {fileID: 1316935726493634787, guid: f5d7bfab87beb364d856b981418d43fc, type: 3}
+  - {fileID: 1316935726493634787, guid: 19c6b3c33fa127e4a83fd33048fe2dbc, type: 3}
+  - {fileID: 1316935726493634787, guid: f24c5270b0e7076448b411c111ecb4c8, type: 3}
+  hardAreaPrefabs:
+  - {fileID: 1316935726493634787, guid: 99d1948f84531a3458fa0fd02b597096, type: 3}
+  - {fileID: 1316935726493634787, guid: 2c8a277a3995d1742adb3f3497d18d50, type: 3}
+  - {fileID: 1316935726493634787, guid: 7bb237b5bce6cb04fab3c467a5084ca0, type: 3}
+  - {fileID: 1316935726493634787, guid: a168177176c2cf4409ac040590f03ffa, type: 3}
+  - {fileID: 1316935726493634787, guid: 2c643d08d0d9d1146aae9bafc861a8e2, type: 3}
   startArea: {fileID: 630905499018846354}
   playerSpawnPoint: {fileID: 1199053963}
   playerSpawnLineIdx: 2
+  levelChangeInterval: 10
   skyboxController: {fileID: 475921624}
   easySkyColor: {r: 0, g: 1, b: 0.09638786, a: 1}
   normalSkyColor: {r: 1, g: 0.8950032, b: 0, a: 1}

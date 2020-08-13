@@ -45,7 +45,7 @@ public class AreaController : MonoBehaviour
     // エリアの難易度が変わるエリア数
     // プレイヤーが指定数走破した後でエリアの難易度を変える
     [SerializeField]
-    private const int levelChangeInterval = 2;
+    private int levelChangeInterval = 2;
 
     // プレイヤーが走破したエリア数
     private int currentLevelChangeAreaCount = 0;
@@ -85,6 +85,12 @@ public class AreaController : MonoBehaviour
             case AREA_LEVEL.EASY:
                 index = Random.Range(0, easyAreaPrefabs.Count);
                 area = Instantiate(easyAreaPrefabs[index]).GetComponent<Area>();
+
+                //index = Random.Range(0, normalAreaPrefabs.Count);
+                //area = Instantiate(normalAreaPrefabs[index]).GetComponent<Area>();
+
+                //index = Random.Range(0, hardAreaPrefabs.Count);
+                //area = Instantiate(hardAreaPrefabs[index]).GetComponent<Area>();
                 break;
             case AREA_LEVEL.NORAML:
                 index = Random.Range(0, normalAreaPrefabs.Count);
@@ -154,7 +160,7 @@ public class AreaController : MonoBehaviour
             case AREA_LEVEL.HARD:
                 currentAreaLevel = AREA_LEVEL.HARD;
                 skyboxController.ChangeSkyColor(hardSkyColor);
-                player.ChangeEffectColor(easySkyColor);
+                player.ChangeEffectColor(hardSkyColor);
                 break;
             default:
                 currentAreaLevel = AREA_LEVEL.EASY;
