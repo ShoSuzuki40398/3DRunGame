@@ -2,6 +2,9 @@
 
 public static class Define
 {
+    // ScriptableObject
+    public const string scriptablePath = "MyScriptable/";
+
     /// <summary>
     /// シーン名定義
     /// </summary>
@@ -73,4 +76,8 @@ public static class Define
     public const float pawnScore = 100;
     public const float rookScore = 200;
     public const float bishopScore = 400;
+
+    // スキン用シェーダー名
+    public const string shaderPathStandard = "Standard";
+    public const string shaderPathClearIce = "Custom/ClearIce";
 }

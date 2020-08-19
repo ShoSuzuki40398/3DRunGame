@@ -172,12 +172,25 @@ public class Player : MonoBehaviour
     }
 
     /// <summary>
+    /// シェーダー変更
+    /// </summary>
+    /// <param name="name"></param>
+    private void SetShader(string name)
+    {
+        if(gameObject.HasComponent<Renderer>())
+        {
+            GetComponent<Renderer>().material.shader = Shader.Find(name);
+        }
+    }
+
+    /// <summary>
     /// 初期化
     /// </summary>
-    public void Initialize()
+    public void Initialize(string shaderName = Define.shaderPathStandard)
     {
         stateMachine.ChangeState(PLAYER_STATE.STOP);
         afterImageBake.Bake(false);
+        SetShader(shaderName);
     }
 
     /// <summary>

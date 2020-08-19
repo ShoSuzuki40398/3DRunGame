@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using DG.Tweening;
 
 public class MainSceneController : MonoBehaviour
 {
@@ -61,6 +62,9 @@ public class MainSceneController : MonoBehaviour
     // ポーズ前の状態
     private MAIN_SCENE_STATE latestState = MAIN_SCENE_STATE.NONE;
 
+    [SerializeField]
+    private GameData gameData;
+
     private void Awake()
     {
         stateMachine.AddState(MAIN_SCENE_STATE.AWAKE, new AwakeState(this));
@@ -110,7 +114,9 @@ public class MainSceneController : MonoBehaviour
     /// </summary>
     public void TitleBack()
     {
-        FadeController.Instance.FadeOut(0.5f, () => SceneManager.LoadScene(Define.GetSceneName(Define.SCENE_NAME.TITLE)));
+
+        FadeController.Instance.FadeOut(0.5f, () => { Pauser.Instance.Resume(); SceneManager.LoadScene(Define.GetSceneName(Define.SCENE_NAME.TITLE)); }
+            );
     }
 
     /// <summary>
@@ -141,7 +147,7 @@ public class MainSceneController : MonoBehaviour
         {
             // プレイヤーをスタート位置に作成
             owner.player = owner.areaController.CreatePlayer(owner.playerPrefab);
-            owner.player.Initialize();
+            owner.player.Initialize(owner.gameData.playerSkinName);
 
             // カメラでプレイヤーの追従開始
             owner.followCamera.SetTarget(owner.player.transform);
@@ -415,6 +421,7 @@ public class MainSceneController : MonoBehaviour
         {
             // コンフィグボタン非表示
             owner.configButton.enabled = false;
+            
             // ポーズメニュー表示
             owner.pauseUI.SetActive(true);
 

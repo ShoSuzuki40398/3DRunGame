@@ -2,17 +2,28 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using DG.Tweening;
 
 public class TitleSceneController : MonoBehaviour
 {
+    // 音量調節UI
     [SerializeField]
-    GameObject volumeUI;
+    private GameObject volumeUI;
 
+    // スキン変更UI
+    [SerializeField]
+    private GameObject skinUI;
+
+    [SerializeField]
+    private Canvas mainCanvas;
+    
     // Start is called before the first frame update
     void Start()
     {
         FadeController.Instance.FadeIn(1.0f);
         volumeUI.SetActive(false);
+        skinUI.SetActive(false);
+        DOTween.Clear(true);
         AudioManager.Instance.PlayBGM(Define.BGM.TITLE);
     }
 
@@ -46,5 +57,23 @@ public class TitleSceneController : MonoBehaviour
     public void OnClickReturnVolumeUIButton()
     {
         volumeUI.SetActive(false);
+    }
+
+    /// <summary>
+    /// スキンコンフィグボタン
+    /// </summary>
+    public void OnClickSkinConfigButton()
+    {
+        skinUI.SetActive(true);
+        mainCanvas.renderMode = RenderMode.ScreenSpaceCamera;
+    }
+
+    /// <summary>
+    /// スキンUI閉じる
+    /// </summary>
+    public void OnClickReturnSkinUIButton()
+    {
+        skinUI.SetActive(false);
+        mainCanvas.renderMode = RenderMode.ScreenSpaceOverlay;
     }
 }

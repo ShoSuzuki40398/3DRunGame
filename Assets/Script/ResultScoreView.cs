@@ -24,6 +24,9 @@ public class ResultScoreView : MonoBehaviour
     [SerializeField]
     private List<Button> footerButtons;
 
+    [SerializeField]
+    private GameData gameData;
+
     /// <summary>
     /// スコア表示開始
     /// </summary>
@@ -58,7 +61,14 @@ public class ResultScoreView : MonoBehaviour
 
         yield return new WaitForSeconds(animationInterval);
         string format = "{0:D}";
-        resultScoreText.text = string.Format(format, (int)ScorePool.Instance.GetResultScore());
+        int resultScore = (int)ScorePool.Instance.GetResultScore();
+
+        // ハイスコアの更新
+        if (resultScore > gameData.currentHighScore)
+        {
+            gameData.currentHighScore = resultScore;
+        }
+        resultScoreText.text = string.Format(format, resultScore);
 
         // フッターボタンアクティブ
         yield return new WaitForSeconds(animationInterval);

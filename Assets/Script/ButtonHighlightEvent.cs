@@ -5,7 +5,6 @@ using UnityEngine.EventSystems;
 using DG.Tweening;
 using UnityEngine.UI;
 
-[RequireComponent(typeof(Button))]
 public class ButtonHighlightEvent : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     private Button button;
@@ -13,6 +12,7 @@ public class ButtonHighlightEvent : MonoBehaviour, IPointerEnterHandler, IPointe
     private void Start()
     {
         button = GetComponent<Button>();
+        transform.localScale = Vector3.one;
     }
 
     public void OnPointerEnter(PointerEventData eventData)
@@ -23,8 +23,13 @@ public class ButtonHighlightEvent : MonoBehaviour, IPointerEnterHandler, IPointe
         }
 
         AudioManager.Instance.PlaySE(Define.SE.BUTTON_HIGHLIGHT);
-        var tween = transform.DOScale(1.2f, 0.1f);
-        tween.Play();
+
+        if(Pauser.Instance.GetState() == Pauser.STATE.RESUME)
+        {
+            var tween = transform.DOScale(1.2f, 0.1f);
+            tween.Play();
+        }
+
     }
 
     public void OnPointerExit(PointerEventData eventData)
@@ -34,7 +39,10 @@ public class ButtonHighlightEvent : MonoBehaviour, IPointerEnterHandler, IPointe
             return;
         }
 
-        var tween = transform.DOScale(1.0f, 0.1f);
-        tween.Play();
+        if (Pauser.Instance.GetState() == Pauser.STATE.RESUME)
+        {
+            var tween = transform.DOScale(1.0f, 0.1f);
+            tween.Play();
+        }
     }
 }
