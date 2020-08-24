@@ -16,6 +16,15 @@ public class TitleSceneController : MonoBehaviour
 
     [SerializeField]
     private Canvas mainCanvas;
+
+    [SerializeField]
+    private GameObject messageUI;
+
+    [SerializeField]
+    private GameObject messageButton;
+
+    [SerializeField]
+    private GameData gameData;
     
     // Start is called before the first frame update
     void Start()
@@ -23,6 +32,8 @@ public class TitleSceneController : MonoBehaviour
         FadeController.Instance.FadeIn(1.0f);
         volumeUI.SetActive(false);
         skinUI.SetActive(false);
+        messageUI.SetActive(false);
+        CheckActiveMessage();
         DOTween.Clear(true);
         AudioManager.Instance.PlayBGM(Define.BGM.TITLE);
     }
@@ -41,6 +52,21 @@ public class TitleSceneController : MonoBehaviour
     public void OnClickExit()
     {
         Define.EndGame();
+    }
+
+    /// <summary>
+    /// メッセージボタン表示確認
+    /// </summary>
+    private void CheckActiveMessage()
+    {
+        if(gameData.currentHighScore >= gameData.releaseMessageScoreBorder)
+        {
+            messageButton.SetActive(true);
+        }
+        else
+        {
+            messageButton.SetActive(false);
+        }
     }
 
     /// <summary>
@@ -75,5 +101,21 @@ public class TitleSceneController : MonoBehaviour
     {
         skinUI.SetActive(false);
         mainCanvas.renderMode = RenderMode.ScreenSpaceOverlay;
+    }
+
+    /// <summary>
+    /// メッセージUIボタン
+    /// </summary>
+    public void OnClickMessageUIButton()
+    {
+        messageUI.SetActive(true);
+    }
+
+    /// <summary>
+    /// メッセージUI閉じる
+    /// </summary>
+    public void OnClickReturnMessageUIButton()
+    {
+        messageUI.SetActive(false);
     }
 }

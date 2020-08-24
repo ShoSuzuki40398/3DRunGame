@@ -14,4 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerSkinName: Standard
   currentHighScore: 0
-  releaseSkinScoreBorder: 00000000c8000000e8030000d0070000
+  releaseSkinScoreBorder: 00000000f4010000d007000088130000
+  releaseMessageScoreBorder: 20000

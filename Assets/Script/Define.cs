@@ -73,11 +73,15 @@ public static class Define
     public const string enemyPath = "Enemy/";
 
     // 敵の点数
-    public const float pawnScore = 100;
-    public const float rookScore = 200;
-    public const float bishopScore = 400;
+    public const float pawnScore = 10;
+    public const float rookScore = 20;
+    public const float bishopScore = 30;
 
     // スキン用シェーダー名
     public const string shaderPathStandard = "Standard";
     public const string shaderPathClearIce = "Custom/ClearIce";
+    public const string shaderPathBlockNoise = "Custom/BlockNoise";
+    public const string shaderPathRimLighting = "Custom/RimLighting";
+    public const string shaderPathCircleAnimation = "Custom/CircleAnimation";
+    public const string shaderPathToon = "Custom/Toon";
 }

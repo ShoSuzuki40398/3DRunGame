@@ -10,4 +10,6 @@ public class GameData : ScriptableObject
     public int currentHighScore = 0;
     
     public List<int> releaseSkinScoreBorder = new List<int>();
+
+    public int releaseMessageScoreBorder = 99999;
 }

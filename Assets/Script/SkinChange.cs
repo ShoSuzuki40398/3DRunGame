@@ -9,7 +9,9 @@ public class SkinChange : MonoBehaviour
     public enum SKIN_TYPE
     {
         NORMAL,
-        CLEAR
+        RIM,
+        NOISE,
+        CLEAR,
     }
 
     // スキン変更対象
@@ -39,10 +41,11 @@ public class SkinChange : MonoBehaviour
     {
         SKIN_TYPE enumCast = (SKIN_TYPE)type;
 
-        
         switch (enumCast)
         {
             case SKIN_TYPE.NORMAL: SetSkinName(Define.shaderPathStandard); break;
+            case SKIN_TYPE.RIM: SetSkinName(Define.shaderPathRimLighting); break;
+            case SKIN_TYPE.NOISE: SetSkinName(Define.shaderPathBlockNoise); break;
             case SKIN_TYPE.CLEAR: SetSkinName(Define.shaderPathClearIce); break;
             default:break;
         }
