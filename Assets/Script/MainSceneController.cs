@@ -244,7 +244,6 @@ public class MainSceneController : MonoBehaviour
         /// </summary>
         public override void Enter()
         {
-            MyDebug.Log("Scene RunningState Enter");
             score = ScorePool.Instance.score;
         }
 

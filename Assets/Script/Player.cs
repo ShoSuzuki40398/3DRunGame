@@ -17,7 +17,7 @@ public class Player : MonoBehaviour
     }
 
     // 横移動方向定義
-    enum SHIFT_DIR
+    public enum SHIFT_DIR
     {
         NONE,
         LEFT,
@@ -107,7 +107,6 @@ public class Player : MonoBehaviour
     private void Dead()
     {
         stateMachine.ChangeState(PLAYER_STATE.BURST);
-        //stateMachine.ChangeState(PLAYER_STATE.DEAD);
     }
 
     private void OnTriggerEnter(Collider other)
@@ -130,7 +129,7 @@ public class Player : MonoBehaviour
                 if (stateMachine.IsCurrentState(PLAYER_STATE.SHIFT))
                 {
                     Enemy enemy = other.gameObject.GetComponent<Enemy>();
-                    enemy.Dead();
+                    enemy.Dead(shiftDir);
                     ScorePool.Instance.AddDefeatedEnemy(enemy.GetEnemyType());
                     AudioManager.Instance.PlaySE(Define.SE.PLAYER_ATTACK_HIT);
 

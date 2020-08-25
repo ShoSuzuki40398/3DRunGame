@@ -39,6 +39,9 @@ public class Enemy : MonoBehaviour
     // 移動速度
     private float moveSpeed = 3.0f;
 
+    // プレイヤーの横移動方向
+    private Player.SHIFT_DIR playerShiftDir = Player.SHIFT_DIR.NONE;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -65,8 +68,9 @@ public class Enemy : MonoBehaviour
     /// <summary>
     /// やられた
     /// </summary>
-    public void Dead()
+    public void Dead(Player.SHIFT_DIR dir)
     {
+        playerShiftDir = dir;
         stateMachine.ChangeState(ENEMY_STATE.DEAD);
     }
 
@@ -169,7 +173,8 @@ public class Enemy : MonoBehaviour
         /// </summary>
         public override void Enter()
         {
-            owner.animator.SetTrigger("Dead");
+            MyDebug.Log(owner.playerShiftDir);
+            owner.animator.SetTrigger("DeadLeft");
             animInfo = owner.animator.GetCurrentAnimatorStateInfo(0);
             owner.transform.parent = null;
         }
@@ -179,11 +184,10 @@ public class Enemy : MonoBehaviour
         /// </summary>
         public override void Execute()
         {
-            if (owner.animator.GetCurrentAnimatorStateInfo(0).nameHash == Animator.StringToHash("Base Layer.EnemyDead"))
+            if (owner.animator.GetCurrentAnimatorStateInfo(0).nameHash == Animator.StringToHash("Base Layer.EnemyDeadLeft"))
             {
                 if (owner.animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1.0f)
                 {
-                    MyDebug.Log(owner.animator.GetCurrentAnimatorStateInfo(0).nameHash == Animator.StringToHash("Base Layer.EnemyDead"));
                     GameObject eff = Instantiate(owner.deadEffect);
                     eff.transform.position = owner.transform.position;
                     AudioManager.Instance.PlaySE(Define.SE.ENEMY_BURST);
