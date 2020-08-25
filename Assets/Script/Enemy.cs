@@ -164,6 +164,8 @@ public class Enemy : MonoBehaviour
         // やられ状態のアニメーション
         private AnimatorStateInfo animInfo;
 
+        private string animName;
+
         public DeadState(Enemy owner) : base(owner)
         {
         }
@@ -173,8 +175,23 @@ public class Enemy : MonoBehaviour
         /// </summary>
         public override void Enter()
         {
-            MyDebug.Log(owner.playerShiftDir);
-            owner.animator.SetTrigger("DeadLeft");
+            // プレイヤーの横移動の方向に飛ばすアニメーションを設定
+            switch (owner.playerShiftDir)
+            {
+                case Player.SHIFT_DIR.LEFT:
+                    owner.animator.SetTrigger("DeadLeft");
+                    animName = "Base Layer.EnemyDeadLeft";
+                    break;
+                case Player.SHIFT_DIR.RIGHT:
+                    owner.animator.SetTrigger("DeadRight");
+                    animName = "Base Layer.EnemyDeadRight";
+                    break;
+                default:
+                    owner.animator.SetTrigger("DeadLeft");
+                    animName = "Base Layer.EnemyDeadLeft";
+                    break;
+            }
+
             animInfo = owner.animator.GetCurrentAnimatorStateInfo(0);
             owner.transform.parent = null;
         }
@@ -184,7 +201,7 @@ public class Enemy : MonoBehaviour
         /// </summary>
         public override void Execute()
         {
-            if (owner.animator.GetCurrentAnimatorStateInfo(0).nameHash == Animator.StringToHash("Base Layer.EnemyDeadLeft"))
+            if (owner.animator.GetCurrentAnimatorStateInfo(0).nameHash == Animator.StringToHash(animName))
             {
                 if (owner.animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1.0f)
                 {

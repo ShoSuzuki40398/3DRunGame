@@ -2592,7 +2592,7 @@ MonoBehaviour:
   - {fileID: 7473297622104384131, guid: 40a7de41072dd004e8a5fff6e283701d, type: 3}
   - {fileID: 952820235709888942, guid: bfed04a7aeeda4c41a0f6db98e003cb2, type: 3}
   - {fileID: 1316935726493634787, guid: 3af9724fdd4dc834daa3c41f669c75f7, type: 3}
-  - {fileID: 1316935726493634787, guid: b694fdf1757261a4aa4eeebee1b71348, type: 3}
+  - {fileID: 1316935726493634787, guid: 0337ccae56e3bea4eb5277205e46bceb, type: 3}
   normalAreaPrefabs:
   - {fileID: 1316935726493634787, guid: 7d576c2d2a84f414fbe306dae8a0498b, type: 3}
   - {fileID: 1316935726493634787, guid: 572622daa97b4eb4c9e6bb20c5641586, type: 3}
