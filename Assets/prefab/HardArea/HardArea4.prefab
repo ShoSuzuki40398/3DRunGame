@@ -187,7 +187,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de90d1f12301fe7499a2fc9d5b75645b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemySpawn: 1
+  enemySpawn: 0
   enemyType: 0
   navPoint: []
 --- !u!1 &420953490
@@ -377,7 +377,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de90d1f12301fe7499a2fc9d5b75645b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemySpawn: 1
+  enemySpawn: 0
   enemyType: 0
   navPoint: []
 --- !u!1 &530872656
@@ -1232,7 +1232,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de90d1f12301fe7499a2fc9d5b75645b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemySpawn: 1
+  enemySpawn: 0
   enemyType: 0
   navPoint: []
 --- !u!1 &1223808241
@@ -1517,7 +1517,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de90d1f12301fe7499a2fc9d5b75645b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemySpawn: 1
+  enemySpawn: 0
   enemyType: 0
   navPoint: []
 --- !u!1 &1304514465
@@ -1992,7 +1992,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de90d1f12301fe7499a2fc9d5b75645b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemySpawn: 1
+  enemySpawn: 0
   enemyType: 0
   navPoint: []
 --- !u!1 &1687828604
@@ -2087,7 +2087,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de90d1f12301fe7499a2fc9d5b75645b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemySpawn: 0
+  enemySpawn: 1
   enemyType: 0
   navPoint: []
 --- !u!1 &1722539966
@@ -2182,7 +2182,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de90d1f12301fe7499a2fc9d5b75645b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemySpawn: 0
+  enemySpawn: 1
   enemyType: 0
   navPoint: []
 --- !u!1 &1738878365
@@ -2372,7 +2372,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de90d1f12301fe7499a2fc9d5b75645b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemySpawn: 0
+  enemySpawn: 1
   enemyType: 0
   navPoint: []
 --- !u!1 &1762581347
@@ -2467,7 +2467,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de90d1f12301fe7499a2fc9d5b75645b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemySpawn: 1
+  enemySpawn: 0
   enemyType: 0
   navPoint: []
 --- !u!1 &1807607021
@@ -2986,7 +2986,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de90d1f12301fe7499a2fc9d5b75645b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemySpawn: 0
+  enemySpawn: 1
   enemyType: 0
   navPoint: []
 --- !u!1 &606968883721149909
@@ -3081,7 +3081,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de90d1f12301fe7499a2fc9d5b75645b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemySpawn: 1
+  enemySpawn: 0
   enemyType: 0
   navPoint: []
 --- !u!1 &704804065230417457
@@ -3461,7 +3461,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de90d1f12301fe7499a2fc9d5b75645b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemySpawn: 0
+  enemySpawn: 1
   enemyType: 0
   navPoint: []
 --- !u!1 &1316935725719448273
@@ -3988,7 +3988,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de90d1f12301fe7499a2fc9d5b75645b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemySpawn: 1
+  enemySpawn: 0
   enemyType: 0
   navPoint: []
 --- !u!1 &1316935726791186559
@@ -4178,7 +4178,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de90d1f12301fe7499a2fc9d5b75645b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemySpawn: 1
+  enemySpawn: 0
   enemyType: 0
   navPoint: []
 --- !u!1 &1316935727111852308
@@ -4339,7 +4339,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de90d1f12301fe7499a2fc9d5b75645b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemySpawn: 0
+  enemySpawn: 1
   enemyType: 0
   navPoint: []
 --- !u!1 &1596963441524223034
@@ -4434,12 +4434,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de90d1f12301fe7499a2fc9d5b75645b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemySpawn: 1
-  enemyType: 1
-  navPoint:
-  - {fileID: 1316935725697836141}
-  - {fileID: 6399346153940685541}
-  - {fileID: 575541975503485261}
+  enemySpawn: 0
+  enemyType: 0
+  navPoint: []
 --- !u!1 &2116529979412884566
 GameObject:
   m_ObjectHideFlags: 0
@@ -4627,7 +4624,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de90d1f12301fe7499a2fc9d5b75645b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemySpawn: 0
+  enemySpawn: 1
   enemyType: 0
   navPoint: []
 --- !u!1 &2727213073689303611
@@ -5073,7 +5070,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de90d1f12301fe7499a2fc9d5b75645b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemySpawn: 0
+  enemySpawn: 1
   enemyType: 0
   navPoint: []
 --- !u!1 &6567709117676048855
@@ -5424,7 +5421,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de90d1f12301fe7499a2fc9d5b75645b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemySpawn: 0
+  enemySpawn: 1
   enemyType: 0
   navPoint: []
 --- !u!1 &7329490062497296076
@@ -5519,7 +5516,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de90d1f12301fe7499a2fc9d5b75645b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemySpawn: 1
+  enemySpawn: 0
   enemyType: 0
   navPoint: []
 --- !u!1 &7626732439663209340
@@ -5994,6 +5991,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de90d1f12301fe7499a2fc9d5b75645b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemySpawn: 1
+  enemySpawn: 0
   enemyType: 0
   navPoint: []

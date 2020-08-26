@@ -15,4 +15,4 @@ MonoBehaviour:
   playerSkinName: Standard
   currentHighScore: 0
   releaseSkinScoreBorder: 00000000f4010000d007000088130000
-  releaseMessageScoreBorder: 20000
+  releaseMessageScoreBorder: 10000

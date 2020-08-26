@@ -1329,7 +1329,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de90d1f12301fe7499a2fc9d5b75645b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemySpawn: 1
+  enemySpawn: 0
   enemyType: 2
   navPoint:
   - {fileID: 1687828605}
@@ -2662,7 +2662,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de90d1f12301fe7499a2fc9d5b75645b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemySpawn: 1
+  enemySpawn: 0
   enemyType: 2
   navPoint:
   - {fileID: 1738878366}
@@ -3182,7 +3182,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de90d1f12301fe7499a2fc9d5b75645b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemySpawn: 1
+  enemySpawn: 0
   enemyType: 2
   navPoint:
   - {fileID: 1316935725287317089}
@@ -3805,7 +3805,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de90d1f12301fe7499a2fc9d5b75645b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemySpawn: 1
+  enemySpawn: 0
   enemyType: 2
   navPoint:
   - {fileID: 132555514758314595}

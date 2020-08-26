@@ -890,7 +890,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 0}
-  offset: {x: 0, y: 2.5, z: -6}
+  offset: {x: 0, y: 5, z: -8}
 --- !u!1 &366407872
 GameObject:
   m_ObjectHideFlags: 0
@@ -1246,6 +1246,7 @@ MonoBehaviour:
   pauseUI: {fileID: 2014157196}
   scoreView: {fileID: 1921200136}
   timeScoreValue: 1
+  timeScoreInterval: 0.1
   resultScoreView: {fileID: 1134215675}
   gameData: {fileID: 11400000, guid: 2e11a2b777e3a1f43a174d7d59a6c715, type: 2}
 --- !u!1 &476981414
@@ -2605,10 +2606,12 @@ MonoBehaviour:
   - {fileID: 1316935726493634787, guid: 7bb237b5bce6cb04fab3c467a5084ca0, type: 3}
   - {fileID: 1316935726493634787, guid: a168177176c2cf4409ac040590f03ffa, type: 3}
   - {fileID: 1316935726493634787, guid: 2c643d08d0d9d1146aae9bafc861a8e2, type: 3}
+  - {fileID: 1316935726493634787, guid: 0ab017c5dd15c5a49b6edd7ba2fc4cf2, type: 3}
+  - {fileID: 1316935726493634787, guid: 880d96fe863f8ed44a6e760d1997b7aa, type: 3}
   startArea: {fileID: 630905499018846354}
   playerSpawnPoint: {fileID: 1199053963}
   playerSpawnLineIdx: 2
-  levelChangeInterval: 10
+  levelChangeInterval: 7
   skyboxController: {fileID: 475921624}
   easySkyColor: {r: 0, g: 1, b: 0.09638786, a: 1}
   normalSkyColor: {r: 1, g: 0.8950032, b: 0, a: 1}
@@ -2780,7 +2783,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1536457301}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c598b98508a2ecf488556bf3929fe848, type: 3}
+  m_Script: {fileID: 11500000, guid: 81ac143780d49d94397b4805c79de790, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1576636009
@@ -2797,6 +2800,7 @@ GameObject:
   - component: {fileID: 1576636012}
   - component: {fileID: 1576636011}
   - component: {fileID: 1576636015}
+  - component: {fileID: 1576636016}
   m_Layer: 5
   m_Name: RetryButton
   m_TagString: Untagged
@@ -2945,6 +2949,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c598b98508a2ecf488556bf3929fe848, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1576636016
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1576636009}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 81ac143780d49d94397b4805c79de790, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1586110061
@@ -3162,6 +3178,7 @@ GameObject:
   - component: {fileID: 1747178016}
   - component: {fileID: 1747178015}
   - component: {fileID: 1747178019}
+  - component: {fileID: 1747178020}
   m_Layer: 5
   m_Name: TitleBackButton
   m_TagString: Untagged
@@ -3310,6 +3327,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c598b98508a2ecf488556bf3929fe848, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1747178020
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1747178013}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 81ac143780d49d94397b4805c79de790, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1777480565

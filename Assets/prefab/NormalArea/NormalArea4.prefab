@@ -567,12 +567,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de90d1f12301fe7499a2fc9d5b75645b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemySpawn: 1
-  enemyType: 2
-  navPoint:
-  - {fileID: 1807607022}
-  - {fileID: 954924022}
-  - {fileID: 1025597337}
+  enemySpawn: 0
+  enemyType: 0
+  navPoint: []
 --- !u!1 &655220123
 GameObject:
   m_ObjectHideFlags: 0
@@ -1048,9 +1045,7 @@ MonoBehaviour:
   enemySpawn: 1
   enemyType: 2
   navPoint:
-  - {fileID: 1025597337}
-  - {fileID: 554402333}
-  - {fileID: 1807607022}
+  - {fileID: 2083857345}
 --- !u!1 &1025597336
 GameObject:
   m_ObjectHideFlags: 0
@@ -1143,12 +1138,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de90d1f12301fe7499a2fc9d5b75645b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemySpawn: 1
-  enemyType: 2
-  navPoint:
-  - {fileID: 554402333}
-  - {fileID: 1807607022}
-  - {fileID: 954924022}
+  enemySpawn: 0
+  enemyType: 0
+  navPoint: []
 --- !u!1 &1097673255
 GameObject:
   m_ObjectHideFlags: 0
@@ -1241,9 +1233,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de90d1f12301fe7499a2fc9d5b75645b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemySpawn: 0
-  enemyType: 0
-  navPoint: []
+  enemySpawn: 1
+  enemyType: 2
+  navPoint:
+  - {fileID: 5545927533058588723}
 --- !u!1 &1223808241
 GameObject:
   m_ObjectHideFlags: 0
@@ -2381,9 +2374,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de90d1f12301fe7499a2fc9d5b75645b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemySpawn: 0
-  enemyType: 0
-  navPoint: []
+  enemySpawn: 1
+  enemyType: 2
+  navPoint:
+  - {fileID: 1469352507}
 --- !u!1 &1762581347
 GameObject:
   m_ObjectHideFlags: 0
@@ -2574,9 +2568,7 @@ MonoBehaviour:
   enemySpawn: 1
   enemyType: 2
   navPoint:
-  - {fileID: 954924022}
-  - {fileID: 1025597337}
-  - {fileID: 554402333}
+  - {fileID: 420953491}
 --- !u!1 &1813779680
 GameObject:
   m_ObjectHideFlags: 0
@@ -3001,10 +2993,7 @@ MonoBehaviour:
   enemySpawn: 1
   enemyType: 2
   navPoint:
-  - {fileID: 14586503789876882}
-  - {fileID: 1316935725719448272}
-  - {fileID: 1316935726791186558}
-  - {fileID: 3622339023210336614}
+  - {fileID: 1762581348}
 --- !u!1 &606968883721149909
 GameObject:
   m_ObjectHideFlags: 0
@@ -3572,12 +3561,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de90d1f12301fe7499a2fc9d5b75645b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemySpawn: 1
-  enemyType: 2
-  navPoint:
-  - {fileID: 1316935726791186558}
-  - {fileID: 3622339023210336614}
-  - {fileID: 14586503789876882}
+  enemySpawn: 0
+  enemyType: 0
+  navPoint: []
 --- !u!1 &1316935726279651981
 GameObject:
   m_ObjectHideFlags: 0
@@ -3820,10 +3806,7 @@ MonoBehaviour:
   enemySpawn: 1
   enemyType: 2
   navPoint:
-  - {fileID: 1316935726791186558}
-  - {fileID: 3622339023210336614}
-  - {fileID: 14586503789876882}
-  - {fileID: 1316935725719448272}
+  - {fileID: 1316935725287317089}
 --- !u!1 &1316935726580306446
 GameObject:
   m_ObjectHideFlags: 0
@@ -3916,9 +3899,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de90d1f12301fe7499a2fc9d5b75645b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemySpawn: 0
-  enemyType: 0
-  navPoint: []
+  enemySpawn: 1
+  enemyType: 2
+  navPoint:
+  - {fileID: 1966632523}
 --- !u!1 &1316935726599611861
 GameObject:
   m_ObjectHideFlags: 0
@@ -4011,13 +3995,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de90d1f12301fe7499a2fc9d5b75645b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemySpawn: 1
-  enemyType: 2
-  navPoint:
-  - {fileID: 1316935726791186558}
-  - {fileID: 3622339023210336614}
-  - {fileID: 14586503789876882}
-  - {fileID: 1316935725719448272}
+  enemySpawn: 0
+  enemyType: 0
+  navPoint: []
 --- !u!1 &1316935726791186559
 GameObject:
   m_ObjectHideFlags: 0
@@ -4651,12 +4631,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de90d1f12301fe7499a2fc9d5b75645b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemySpawn: 1
-  enemyType: 2
-  navPoint:
-  - {fileID: 14586503789876882}
-  - {fileID: 1316935725719448272}
-  - {fileID: 1316935726791186558}
+  enemySpawn: 0
+  enemyType: 0
+  navPoint: []
 --- !u!1 &2727213073689303611
 GameObject:
   m_ObjectHideFlags: 0
@@ -4749,9 +4726,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de90d1f12301fe7499a2fc9d5b75645b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemySpawn: 0
-  enemyType: 0
-  navPoint: []
+  enemySpawn: 1
+  enemyType: 2
+  navPoint:
+  - {fileID: 5820680651675675924}
 --- !u!1 &3048962977018516103
 GameObject:
   m_ObjectHideFlags: 0
@@ -5195,13 +5173,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de90d1f12301fe7499a2fc9d5b75645b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemySpawn: 1
-  enemyType: 2
-  navPoint:
-  - {fileID: 14586503789876882}
-  - {fileID: 1316935725719448272}
-  - {fileID: 1316935726791186558}
-  - {fileID: 3622339023210336614}
+  enemySpawn: 0
+  enemyType: 0
+  navPoint: []
 --- !u!1 &7037940339710592020
 GameObject:
   m_ObjectHideFlags: 0
@@ -5645,10 +5619,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de90d1f12301fe7499a2fc9d5b75645b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemySpawn: 1
-  enemyType: 2
-  navPoint:
-  - {fileID: 5545927533058588723}
+  enemySpawn: 0
+  enemyType: 0
+  navPoint: []
 --- !u!1 &8157215425846279228
 GameObject:
   m_ObjectHideFlags: 0
@@ -5931,9 +5904,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de90d1f12301fe7499a2fc9d5b75645b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemySpawn: 0
-  enemyType: 0
-  navPoint: []
+  enemySpawn: 1
+  enemyType: 2
+  navPoint:
+  - {fileID: 857102974774107705}
 --- !u!1 &9095414695517090648
 GameObject:
   m_ObjectHideFlags: 0

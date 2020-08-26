@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using DG.Tweening;
+using System;
 
 public class MainSceneController : MonoBehaviour
 {
@@ -55,6 +56,10 @@ public class MainSceneController : MonoBehaviour
     [SerializeField]
     private float timeScoreValue = 1;
 
+    // スコアを加算する間隔
+    [SerializeField]
+    private float timeScoreInterval = 1;
+
     // リザルトスコアUI
     [SerializeField]
     private ResultScoreView resultScoreView;
@@ -79,6 +84,7 @@ public class MainSceneController : MonoBehaviour
         configButton.gameObject.SetActive(true);
         pauseUI.SetActive(false);
         resultScoreView.gameObject.SetActive(false);
+        UnityEngine.Random.InitState((int)DateTime.Now.Ticks);
     }
 
     private void Start()
@@ -230,7 +236,6 @@ public class MainSceneController : MonoBehaviour
     {
         // スコア算出用の経過時間
         private float currentTime = 0.0f;
-        private const float intervalTime = 1.0f;
 
         private Score score;
 
@@ -253,7 +258,7 @@ public class MainSceneController : MonoBehaviour
         public override void Execute()
         {
             currentTime += Time.deltaTime;
-            if(currentTime >= intervalTime)
+            if(currentTime >= owner.timeScoreInterval)
             {
                 currentTime = 0;
                 score.Add(owner.timeScoreValue);

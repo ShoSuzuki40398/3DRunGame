@@ -282,7 +282,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de90d1f12301fe7499a2fc9d5b75645b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemySpawn: 0
+  enemySpawn: 1
   enemyType: 0
   navPoint: []
 --- !u!1 &498378888
@@ -377,7 +377,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de90d1f12301fe7499a2fc9d5b75645b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemySpawn: 0
+  enemySpawn: 1
   enemyType: 0
   navPoint: []
 --- !u!1 &530872656
@@ -757,7 +757,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de90d1f12301fe7499a2fc9d5b75645b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemySpawn: 0
+  enemySpawn: 1
   enemyType: 0
   navPoint: []
 --- !u!1 &693443510
@@ -1042,7 +1042,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de90d1f12301fe7499a2fc9d5b75645b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemySpawn: 0
+  enemySpawn: 1
   enemyType: 0
   navPoint: []
 --- !u!1 &1025597336
@@ -1327,7 +1327,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de90d1f12301fe7499a2fc9d5b75645b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemySpawn: 0
+  enemySpawn: 1
   enemyType: 0
   navPoint: []
 --- !u!1 &1231589918
@@ -1422,9 +1422,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de90d1f12301fe7499a2fc9d5b75645b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemySpawn: 0
-  enemyType: 0
-  navPoint: []
+  enemySpawn: 1
+  enemyType: 2
+  navPoint:
+  - {fileID: 104881137}
 --- !u!1 &1281401300
 GameObject:
   m_ObjectHideFlags: 0
@@ -1802,7 +1803,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de90d1f12301fe7499a2fc9d5b75645b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemySpawn: 0
+  enemySpawn: 1
   enemyType: 0
   navPoint: []
 --- !u!1 &1419913148
@@ -2088,11 +2089,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemySpawn: 1
-  enemyType: 2
-  navPoint:
-  - {fileID: 2083857345}
-  - {fileID: 1758020275}
-  - {fileID: 1722539967}
+  enemyType: 0
+  navPoint: []
 --- !u!1 &1722539966
 GameObject:
   m_ObjectHideFlags: 0
@@ -2375,12 +2373,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de90d1f12301fe7499a2fc9d5b75645b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemySpawn: 1
-  enemyType: 2
-  navPoint:
-  - {fileID: 1722539967}
-  - {fileID: 1687828605}
-  - {fileID: 2083857345}
+  enemySpawn: 0
+  enemyType: 0
+  navPoint: []
 --- !u!1 &1762581347
 GameObject:
   m_ObjectHideFlags: 0
@@ -2473,12 +2468,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de90d1f12301fe7499a2fc9d5b75645b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemySpawn: 1
-  enemyType: 2
-  navPoint:
-  - {fileID: 3622339023210336614}
-  - {fileID: 8950535849267064125}
-  - {fileID: 1097673256}
+  enemySpawn: 0
+  enemyType: 0
+  navPoint: []
 --- !u!1 &1807607021
 GameObject:
   m_ObjectHideFlags: 0
@@ -2571,7 +2563,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de90d1f12301fe7499a2fc9d5b75645b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemySpawn: 0
+  enemySpawn: 1
   enemyType: 0
   navPoint: []
 --- !u!1 &1813779680
@@ -2856,7 +2848,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de90d1f12301fe7499a2fc9d5b75645b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemySpawn: 0
+  enemySpawn: 1
   enemyType: 0
   navPoint: []
 --- !u!1 &2104773291
@@ -3375,12 +3367,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de90d1f12301fe7499a2fc9d5b75645b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemySpawn: 1
-  enemyType: 2
-  navPoint:
-  - {fileID: 1316935725697836141}
-  - {fileID: 2858079892854388130}
-  - {fileID: 6399346153940685541}
+  enemySpawn: 0
+  enemyType: 0
+  navPoint: []
 --- !u!1 &1316935725697836130
 GameObject:
   m_ObjectHideFlags: 0
@@ -3473,9 +3462,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de90d1f12301fe7499a2fc9d5b75645b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemySpawn: 0
-  enemyType: 0
-  navPoint: []
+  enemySpawn: 1
+  enemyType: 2
+  navPoint:
+  - {fileID: 2858079892854388130}
 --- !u!1 &1316935725719448273
 GameObject:
   m_ObjectHideFlags: 0
@@ -3663,7 +3653,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de90d1f12301fe7499a2fc9d5b75645b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemySpawn: 0
+  enemySpawn: 1
   enemyType: 0
   navPoint: []
 --- !u!1 &1316935726493634787
@@ -3677,7 +3667,7 @@ GameObject:
   - component: {fileID: 1316935726493634786}
   - component: {fileID: 3273154062216506956}
   m_Layer: 0
-  m_Name: NormalArea5
+  m_Name: HardArea6
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4826,12 +4816,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de90d1f12301fe7499a2fc9d5b75645b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemySpawn: 1
-  enemyType: 2
-  navPoint:
-  - {fileID: 6399346153940685541}
-  - {fileID: 1316935725446292030}
-  - {fileID: 1316935725697836141}
+  enemySpawn: 0
+  enemyType: 0
+  navPoint: []
 --- !u!1 &3307145541906481886
 GameObject:
   m_ObjectHideFlags: 0
@@ -5085,12 +5072,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de90d1f12301fe7499a2fc9d5b75645b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemySpawn: 1
-  enemyType: 2
-  navPoint:
-  - {fileID: 1097673256}
-  - {fileID: 1762581348}
-  - {fileID: 3622339023210336614}
+  enemySpawn: 0
+  enemyType: 0
+  navPoint: []
 --- !u!1 &6567709117676048855
 GameObject:
   m_ObjectHideFlags: 0
@@ -5183,9 +5167,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de90d1f12301fe7499a2fc9d5b75645b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemySpawn: 0
-  enemyType: 0
-  navPoint: []
+  enemySpawn: 1
+  enemyType: 2
+  navPoint:
+  - {fileID: 7643359474165052696}
 --- !u!1 &7037940339710592020
 GameObject:
   m_ObjectHideFlags: 0
@@ -5724,7 +5709,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de90d1f12301fe7499a2fc9d5b75645b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemySpawn: 0
+  enemySpawn: 1
   enemyType: 0
   navPoint: []
 --- !u!1 &8585206735086004354
