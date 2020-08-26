@@ -30,9 +30,9 @@ public static class Define
 #if UNITY_EDITOR
         UnityEditor.EditorApplication.isPlaying = false;
 #elif UNITY_WEBPLAYER
-		Application.OpenURL("http://www.yahoo.co.jp/");
+		UnityEngine.Application.OpenURL("https://unityroom.com/");
 #else
-		Application.Quit();
+		UnityEngine.Application.Quit();
 #endif
     }
 
