@@ -37,8 +37,9 @@ public abstract class SingletonMonoBehaviour<T> : MonoBehaviour where T : MonoBe
         }
     }
 
-    protected void Awake()
+    protected virtual void Awake()
     {
+        DontDestroyOnLoad(gameObject);
     }
 
     public void OnApplicationQuit()
@@ -49,15 +50,5 @@ public abstract class SingletonMonoBehaviour<T> : MonoBehaviour where T : MonoBe
     public void Destroy()
     {
         Destroy(this);
-    }
-
-    private bool CheckInstance()
-    {
-        if(instance == null)
-        {
-            return false;
-        }
-
-        return true;
     }
 }
