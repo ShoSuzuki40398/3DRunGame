@@ -675,11 +675,7 @@ MonoBehaviour:
   m_FontData:
     m_Font: {fileID: 12800000, guid: 384fe9ea67b44de46ba643d1ef6fe55a, type: 3}
     m_FontSize: 14
-<<<<<<< HEAD
-    m_FontStyle: 1
-=======
     m_FontStyle: 0
->>>>>>> develop
     m_BestFit: 0
     m_MinSize: 0
     m_MaxSize: 46
@@ -689,11 +685,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-<<<<<<< HEAD
-  m_Text: "\u30B2\u30FC\u30E0\u306B\n\u623B\u308B\n"
-=======
   m_Text: "\u30B2\u30FC\u30E0\u306B\n\u623B\u308B"
->>>>>>> develop
 --- !u!222 &170485668
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1318,11 +1310,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-<<<<<<< HEAD
-    m_Font: {fileID: 12800000, guid: 2d8227454f48a1244a6246b45b081f1b, type: 3}
-=======
     m_Font: {fileID: 12800000, guid: 384fe9ea67b44de46ba643d1ef6fe55a, type: 3}
->>>>>>> develop
     m_FontSize: 14
     m_FontStyle: 0
     m_BestFit: 0
