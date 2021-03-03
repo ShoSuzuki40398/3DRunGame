@@ -18,4 +18,10 @@ public class ButtonClickEvent : MonoBehaviour, IPointerClickHandler
         AudioManager.Instance.PlaySE(Define.SE.BUTTON_CLICK);
         transform.localScale = initScale;
     }
+
+    public void OnPointerClick()
+    {
+        AudioManager.Instance.PlaySE(Define.SE.BUTTON_CLICK);
+        transform.localScale = initScale;
+    }
 }

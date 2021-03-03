@@ -32,7 +32,38 @@ public class ButtonHighlightEvent : MonoBehaviour, IPointerEnterHandler, IPointe
 
     }
 
+    public void OnPointerEnter()
+    {
+        if (!button.interactable)
+        {
+            return;
+        }
+
+        AudioManager.Instance.PlaySE(Define.SE.BUTTON_HIGHLIGHT);
+
+        if (Pauser.Instance.GetState() == Pauser.STATE.RESUME)
+        {
+            var tween = transform.DOScale(1.2f, 0.1f);
+            tween.Play();
+        }
+
+    }
+
     public void OnPointerExit(PointerEventData eventData)
+    {
+        if (!button.interactable)
+        {
+            return;
+        }
+
+        if (Pauser.Instance.GetState() == Pauser.STATE.RESUME)
+        {
+            var tween = transform.DOScale(1.0f, 0.1f);
+            tween.Play();
+        }
+    }
+
+    public void OnPointerExit()
     {
         if (!button.interactable)
         {

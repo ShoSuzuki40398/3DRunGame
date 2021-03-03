@@ -25,7 +25,15 @@ public class TitleSceneController : MonoBehaviour
 
     [SerializeField]
     private GameData gameData;
-    
+
+    private int selectButtonIdx = 0;
+
+    [SerializeField]
+    private GameObject startButton;
+
+    [SerializeField]
+    private GameObject exitButton;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -36,6 +44,88 @@ public class TitleSceneController : MonoBehaviour
         CheckActiveMessage();
         DOTween.Clear(true);
         AudioManager.Instance.PlayBGM(Define.BGM.TITLE);
+        selectButtonIdx = 0;
+        OnSelected();
+    }
+
+    private void Update()
+    {
+        if (InputUpButton())
+        {
+            selectButtonIdx = 0;
+            OnSelected();
+        }
+        else if (InputDownButton())
+        {
+            selectButtonIdx = 1;
+            OnSelected();
+        }
+        else if (InputEnterButton())
+        {
+            OnDecided();
+        }
+    }
+
+    private bool InputUpButton()
+    {
+        if(Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.W))
+        {
+            return true;
+        }
+        return false;
+    }
+
+    private bool InputDownButton()
+    {
+        if (Input.GetKeyDown(KeyCode.DownArrow) || Input.GetKeyDown(KeyCode.S))
+        {
+            return true;
+        }
+        return false;
+    }
+
+    private bool InputEnterButton()
+    {
+        if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.Return))
+        {
+            return true;
+        }
+        return false;
+    }
+
+
+    private void OnSelected()
+    {
+        ButtonHighlightEvent start = startButton.GetComponent<ButtonHighlightEvent>();
+        ButtonHighlightEvent exit = exitButton.GetComponent<ButtonHighlightEvent>();
+        switch (selectButtonIdx)
+        {
+            case 0:
+                exit.OnPointerExit();
+                start.OnPointerEnter();
+                break;
+            case 1:
+                start.OnPointerExit();
+                exit.OnPointerEnter();
+                break;
+        }
+    }
+
+    private void OnDecided()
+    {
+        switch (selectButtonIdx)
+        {
+            case 0:
+                ButtonClickEvent start = startButton.GetComponent<ButtonClickEvent>();
+                start.OnPointerClick();
+                OnClickStart();
+                break;
+            case 1:
+                ButtonClickEvent exit = exitButton.GetComponent<ButtonClickEvent>();
+                exit.OnPointerClick();
+                OnClickExit();
+                break;
+        }
     }
 
     /// <summary>
