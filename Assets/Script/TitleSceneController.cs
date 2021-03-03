@@ -68,29 +68,17 @@ public class TitleSceneController : MonoBehaviour
 
     private bool InputUpButton()
     {
-        if(Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.W))
-        {
-            return true;
-        }
-        return false;
+        return Define.InputUpButton();
     }
 
     private bool InputDownButton()
     {
-        if (Input.GetKeyDown(KeyCode.DownArrow) || Input.GetKeyDown(KeyCode.S))
-        {
-            return true;
-        }
-        return false;
+        return Define.InputDownButton();
     }
 
     private bool InputEnterButton()
     {
-        if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.Return))
-        {
-            return true;
-        }
-        return false;
+        return Define.InputEnterButton();
     }
 
 
