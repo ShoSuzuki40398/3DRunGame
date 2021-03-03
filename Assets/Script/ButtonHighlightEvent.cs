@@ -42,11 +42,7 @@ public class ButtonHighlightEvent : MonoBehaviour, IPointerEnterHandler, IPointe
 
     public void OnPointerEnter()
     {
-<<<<<<< HEAD
         if (button == null)
-=======
-        if(button == null)
->>>>>>> develop
         {
             return;
         }
@@ -63,11 +59,7 @@ public class ButtonHighlightEvent : MonoBehaviour, IPointerEnterHandler, IPointe
             var tween = transform.DOScale(1.2f, 0.1f);
             tween.Play();
         }
-<<<<<<< HEAD
         else if (Pauser.Instance.GetState() == Pauser.STATE.PAUSE)
-=======
-        else if(Pauser.Instance.GetState() == Pauser.STATE.PAUSE)
->>>>>>> develop
         {
             transform.localScale = new Vector3(1.2f, 1.2f, 0.0f);
         }
