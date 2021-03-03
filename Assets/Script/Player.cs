@@ -331,11 +331,11 @@ public class Player : MonoBehaviour
             }
 
             // 横移動方向の決定
-            if (Input.GetMouseButtonDown(Define.leftButton))
+            if (InputShiftLeft())
             {
                 owner.shiftDir = SHIFT_DIR.LEFT;
             }
-            else if (Input.GetMouseButtonDown(Define.rightButton))
+            else if (InputShiftRight())
             {
                 owner.shiftDir = SHIFT_DIR.RIGHT;
             }
@@ -352,6 +352,28 @@ public class Player : MonoBehaviour
         /// </summary>
         public override void Exit()
         {
+        }
+
+        private bool InputShiftLeft()
+        {
+            if (Input.GetMouseButtonDown(Define.leftButton) || 
+                Input.GetKeyDown(KeyCode.LeftArrow) ||
+                Input.GetKeyDown(KeyCode.A))
+            {
+                return true;
+            }
+            return false;
+        }
+
+        private bool InputShiftRight()
+        {
+            if (Input.GetMouseButtonDown(Define.rightButton) || 
+                Input.GetKeyDown(KeyCode.RightArrow) ||
+                Input.GetKeyDown(KeyCode.D))
+            {
+                return true;
+            }
+            return false;
         }
 
         /// <summary>
