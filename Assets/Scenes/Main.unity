@@ -1244,10 +1244,14 @@ MonoBehaviour:
   followCamera: {fileID: 350721200}
   configButton: {fileID: 1536457303}
   pauseUI: {fileID: 2014157196}
+  pauseResumeButton: {fileID: 143184409}
+  pauseTitleBackButton: {fileID: 109316754}
   scoreView: {fileID: 1921200136}
   timeScoreValue: 1
   timeScoreInterval: 0.1
   resultScoreView: {fileID: 1134215675}
+  resultRetryButton: {fileID: 1576636009}
+  resultTitleBackButton: {fileID: 1747178013}
   gameData: {fileID: 11400000, guid: 2e11a2b777e3a1f43a174d7d59a6c715, type: 2}
 --- !u!1 &476981414
 GameObject:

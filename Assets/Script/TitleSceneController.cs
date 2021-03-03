@@ -25,7 +25,15 @@ public class TitleSceneController : MonoBehaviour
 
     [SerializeField]
     private GameData gameData;
-    
+
+    private int selectButtonIdx = 0;
+
+    [SerializeField]
+    private GameObject startButton;
+
+    [SerializeField]
+    private GameObject exitButton;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -36,6 +44,76 @@ public class TitleSceneController : MonoBehaviour
         CheckActiveMessage();
         DOTween.Clear(true);
         AudioManager.Instance.PlayBGM(Define.BGM.TITLE);
+        selectButtonIdx = 0;
+        OnSelected();
+    }
+
+    private void Update()
+    {
+        if (InputUpButton())
+        {
+            selectButtonIdx = 0;
+            OnSelected();
+        }
+        else if (InputDownButton())
+        {
+            selectButtonIdx = 1;
+            OnSelected();
+        }
+        else if (InputEnterButton())
+        {
+            OnDecided();
+        }
+    }
+
+    private bool InputUpButton()
+    {
+        return Define.InputUpButton();
+    }
+
+    private bool InputDownButton()
+    {
+        return Define.InputDownButton();
+    }
+
+    private bool InputEnterButton()
+    {
+        return Define.InputEnterButton();
+    }
+
+
+    private void OnSelected()
+    {
+        ButtonHighlightEvent start = startButton.GetComponent<ButtonHighlightEvent>();
+        ButtonHighlightEvent exit = exitButton.GetComponent<ButtonHighlightEvent>();
+        switch (selectButtonIdx)
+        {
+            case 0:
+                exit.OnPointerExit();
+                start.OnPointerEnter();
+                break;
+            case 1:
+                start.OnPointerExit();
+                exit.OnPointerEnter();
+                break;
+        }
+    }
+
+    private void OnDecided()
+    {
+        switch (selectButtonIdx)
+        {
+            case 0:
+                ButtonClickEvent start = startButton.GetComponent<ButtonClickEvent>();
+                start.OnPointerClick();
+                OnClickStart();
+                break;
+            case 1:
+                ButtonClickEvent exit = exitButton.GetComponent<ButtonClickEvent>();
+                exit.OnPointerClick();
+                OnClickExit();
+                break;
+        }
     }
 
     /// <summary>
@@ -43,7 +121,7 @@ public class TitleSceneController : MonoBehaviour
     /// </summary>
     public void OnClickStart()
     {
-        FadeController.Instance.FadeOut(0.5f,()=> SceneManager.LoadScene(Define.GetSceneName(Define.SCENE_NAME.MAIN)));
+        FadeController.Instance.FadeOut(0.5f, () => SceneManager.LoadScene(Define.GetSceneName(Define.SCENE_NAME.MAIN)));
     }
 
     /// <summary>
@@ -59,7 +137,7 @@ public class TitleSceneController : MonoBehaviour
     /// </summary>
     private void CheckActiveMessage()
     {
-        if(gameData.currentHighScore >= gameData.releaseMessageScoreBorder)
+        if (gameData.currentHighScore >= gameData.releaseMessageScoreBorder)
         {
             messageButton.SetActive(true);
         }

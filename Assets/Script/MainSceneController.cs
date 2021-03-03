@@ -48,10 +48,16 @@ public class MainSceneController : MonoBehaviour
     [SerializeField]
     private GameObject pauseUI;
 
+    [SerializeField]
+    private GameObject pauseResumeButton;
+
+    [SerializeField]
+    private GameObject pauseTitleBackButton;
+
     // スコアテキスト
     [SerializeField]
     private ScoreView scoreView;
-    
+
     // 一定時間経過毎に加算される点数
     [SerializeField]
     private float timeScoreValue = 1;
@@ -63,6 +69,12 @@ public class MainSceneController : MonoBehaviour
     // リザルトスコアUI
     [SerializeField]
     private ResultScoreView resultScoreView;
+
+    [SerializeField]
+    private GameObject resultRetryButton;
+
+    [SerializeField]
+    private GameObject resultTitleBackButton;
 
     // ポーズ前の状態
     private MAIN_SCENE_STATE latestState = MAIN_SCENE_STATE.NONE;
@@ -96,6 +108,30 @@ public class MainSceneController : MonoBehaviour
     private void Update()
     {
         stateMachine.Update();
+
+        if (InputPauseButton())
+        {
+            if (stateMachine.IsCurrentState(MAIN_SCENE_STATE.PAUSE))
+            {
+                Resume();
+            }
+            else
+            {
+                if (stateMachine.IsCurrentState(MAIN_SCENE_STATE.STANBY) || stateMachine.IsCurrentState(MAIN_SCENE_STATE.RUNNING))
+                {
+                    Pause();
+                }
+            }
+        }
+    }
+
+    private bool InputPauseButton()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            return true;
+        }
+        return false;
     }
 
     /// <summary>
@@ -258,7 +294,7 @@ public class MainSceneController : MonoBehaviour
         public override void Execute()
         {
             currentTime += Time.deltaTime;
-            if(currentTime >= owner.timeScoreInterval)
+            if (currentTime >= owner.timeScoreInterval)
             {
                 currentTime = 0;
                 score.Add(owner.timeScoreValue);
@@ -322,9 +358,11 @@ public class MainSceneController : MonoBehaviour
     /// </summary>
     private class ResultState : State<MainSceneController>
     {
+        private int selectButtonIdx = 0;
+
         public ResultState(MainSceneController owner) : base(owner)
         {
-
+            owner.resultScoreView.SetCompleteHandle(OnSelected);
         }
 
         /// <summary>
@@ -335,12 +373,11 @@ public class MainSceneController : MonoBehaviour
             // コンフィグボタン非表示
             owner.configButton.enabled = false;
 
-            // ポーズ
-            //Pauser.Instance.Pause();
-
             // スコア表示
             owner.resultScoreView.gameObject.SetActive(true);
             owner.resultScoreView.DisplayScore();
+
+            selectButtonIdx = 0;
         }
 
         /// <summary>
@@ -348,6 +385,20 @@ public class MainSceneController : MonoBehaviour
         /// </summary>
         public override void Execute()
         {
+            if (Define.InputLeftButton())
+            {
+                selectButtonIdx = 0;
+                OnSelected();
+            }
+            else if (Define.InputRightButton())
+            {
+                selectButtonIdx = 1;
+                OnSelected();
+            }
+            else if (Define.InputEnterButton())
+            {
+                OnDecided();
+            }
         }
 
         /// <summary>
@@ -357,9 +408,40 @@ public class MainSceneController : MonoBehaviour
         {
             // コンフィグボタン非表示
             owner.configButton.enabled = true;
+        }
 
-            // ポーズ解除
-            //Pauser.Instance.Resume();
+        private void OnSelected()
+        {
+            ButtonHighlightEvent retry = owner.resultRetryButton.GetComponent<ButtonHighlightEvent>();
+            ButtonHighlightEvent back = owner.resultTitleBackButton.GetComponent<ButtonHighlightEvent>();
+            switch (selectButtonIdx)
+            {
+                case 0:
+                    back.OnPointerEnter();
+                    retry.OnPointerExit();
+                    break;
+                case 1:
+                    back.OnPointerExit();
+                    retry.OnPointerEnter();
+                    break;
+            }
+        }
+
+        private void OnDecided()
+        {
+            switch (selectButtonIdx)
+            {
+                case 0:
+                    ButtonClickEvent back = owner.resultTitleBackButton.GetComponent<ButtonClickEvent>();
+                    back.OnPointerClick();
+                    owner.TitleBack();
+                    break;
+                case 1:
+                    ButtonClickEvent retry = owner.resultRetryButton.GetComponent<ButtonClickEvent>();
+                    retry.OnPointerClick();
+                    owner.Retry();
+                    break;
+            }
         }
     }
 
@@ -390,7 +472,7 @@ public class MainSceneController : MonoBehaviour
 
             // フェード後ステージをリセットする
             // フェード後のコールバックの中にフェード処理が入っているとフェード出来ない不具合があるので、遅延をかけています。
-            FadeController.Instance.FadeOut(0.5f, () => owner.Delay(0.5f,()=> owner.stateMachine.ChangeState(MAIN_SCENE_STATE.AWAKE)) );
+            FadeController.Instance.FadeOut(0.5f, () => owner.Delay(0.5f, () => owner.stateMachine.ChangeState(MAIN_SCENE_STATE.AWAKE)));
         }
 
         /// <summary>
@@ -413,6 +495,8 @@ public class MainSceneController : MonoBehaviour
     /// </summary>
     private class PauseState : State<MainSceneController>
     {
+        private int selectButtonIdx = 0;
+
         public PauseState(MainSceneController owner) : base(owner)
         {
 
@@ -425,12 +509,16 @@ public class MainSceneController : MonoBehaviour
         {
             // コンフィグボタン非表示
             owner.configButton.enabled = false;
-            
+
             // ポーズメニュー表示
             owner.pauseUI.SetActive(true);
 
             // ポーズ
             Pauser.Instance.Pause();
+
+            selectButtonIdx = 0;
+
+            OnSelected();
         }
 
         /// <summary>
@@ -438,6 +526,20 @@ public class MainSceneController : MonoBehaviour
         /// </summary>
         public override void Execute()
         {
+            if (Define.InputUpButton())
+            {
+                selectButtonIdx = 0;
+                OnSelected();
+            }
+            else if (Define.InputDownButton())
+            {
+                selectButtonIdx = 1;
+                OnSelected();
+            }
+            else if (Define.InputEnterButton())
+            {
+                OnDecided();
+            }
         }
 
         /// <summary>
@@ -452,6 +554,40 @@ public class MainSceneController : MonoBehaviour
 
             // ポーズ解除
             Pauser.Instance.Resume();
+        }
+
+        private void OnSelected()
+        {
+            ButtonHighlightEvent resume = owner.pauseResumeButton.GetComponent<ButtonHighlightEvent>();
+            ButtonHighlightEvent back = owner.pauseTitleBackButton.GetComponent<ButtonHighlightEvent>();
+            switch (selectButtonIdx)
+            {
+                case 0:
+                    resume.OnPointerEnter();
+                    back.OnPointerExit();
+                    break;
+                case 1:
+                    resume.OnPointerExit();
+                    back.OnPointerEnter();
+                    break;
+            }
+        }
+
+        private void OnDecided()
+        {
+            switch (selectButtonIdx)
+            {
+                case 0:
+                    ButtonClickEvent resume = owner.pauseResumeButton.GetComponent<ButtonClickEvent>();
+                    resume.OnPointerClick();
+                    owner.Resume();
+                    break;
+                case 1:
+                    ButtonClickEvent back = owner.pauseTitleBackButton.GetComponent<ButtonClickEvent>();
+                    back.OnPointerClick();
+                    owner.TitleBack();
+                    break;
+            }
         }
     }
 

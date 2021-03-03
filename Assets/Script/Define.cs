@@ -1,4 +1,5 @@
 ﻿using System;
+using UnityEngine;
 
 public static class Define
 {
@@ -84,4 +85,50 @@ public static class Define
     public const string shaderPathRimLighting = "Custom/RimLighting";
     public const string shaderPathCircleAnimation = "Custom/CircleAnimation";
     public const string shaderPathToon = "Custom/Toon";
+
+    public static bool InputUpButton()
+    {
+        if (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.W))
+        {
+            return true;
+        }
+        return false;
+    }
+
+    public static bool InputDownButton()
+    {
+        if (Input.GetKeyDown(KeyCode.DownArrow) || Input.GetKeyDown(KeyCode.S))
+        {
+            return true;
+        }
+        return false;
+    }
+
+    public static bool InputRightButton()
+    {
+        if (Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.D))
+        {
+            return true;
+        }
+        return false;
+    }
+
+    public static bool InputLeftButton()
+    {
+        if (Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.A))
+        {
+            return true;
+        }
+        return false;
+    }
+
+    public static bool InputEnterButton()
+    {
+        if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.Return))
+        {
+            return true;
+        }
+        return false;
+    }
+
 }

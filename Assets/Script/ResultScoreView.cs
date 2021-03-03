@@ -27,6 +27,9 @@ public class ResultScoreView : MonoBehaviour
     [SerializeField]
     private GameData gameData;
 
+    public delegate void OnCompleteDelegate();
+    private OnCompleteDelegate completeHandler;
+
     /// <summary>
     /// スコア表示開始
     /// </summary>
@@ -76,6 +79,11 @@ public class ResultScoreView : MonoBehaviour
         {
             button.interactable = true;
         }
+
+        if(completeHandler != null)
+        {
+            completeHandler();
+        }
     }
 
     private void ResetView()
@@ -121,5 +129,10 @@ public class ResultScoreView : MonoBehaviour
         // 最終的な着地のスコア
         text.text = "× " + endScore.ToString();
         AudioManager.Instance.PlaySE(Define.SE.SCORE_DISPLAY);
+    }
+
+    public void SetCompleteHandle(OnCompleteDelegate handler)
+    {
+        completeHandler = handler;
     }
 }

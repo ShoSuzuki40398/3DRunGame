@@ -7635,6 +7635,8 @@ MonoBehaviour:
   messageUI: {fileID: 1229828974}
   messageButton: {fileID: 1768222930}
   gameData: {fileID: 11400000, guid: 2e11a2b777e3a1f43a174d7d59a6c715, type: 2}
+  startButton: {fileID: 374084854}
+  exitButton: {fileID: 1666644949}
 --- !u!4 &1774447493
 Transform:
   m_ObjectHideFlags: 0
